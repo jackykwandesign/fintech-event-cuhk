@@ -111,12 +111,17 @@ if (window.innerWidth <= 960) { setButton(false); } else { setButton(true); } };
         {
             button &&
             <>
-              <ColorButton variant="outlined" className={classes.margin} href="/register">
-                Sign Up
-              </ColorButton>
-              <ColorButton variant="outlined" className={classes.margin} href="/login">
-                Login
-              </ColorButton>
+              <Link to="/register" className="nav-buttons">
+                <ColorButton variant="outlined" className={classes.margin} >
+                  Sign Up
+                </ColorButton>
+              </Link>
+              <Link to="/login" className="nav-buttons">
+                <ColorButton variant="outlined" className={classes.margin} >
+                  Login
+                </ColorButton>
+              </Link>
+
             </>
           }
       </nav>
