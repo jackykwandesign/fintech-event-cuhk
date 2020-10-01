@@ -53,7 +53,7 @@ const handleClick = () => setClick(!click);
 const closeMobileMenu = () => setClick(false);
 
 const showButton = () => {
-if (window.innerWidth <= 960) { setButton(false); } else { setButton(true); } }; useEffect(()=> {
+if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }; useEffect(()=> {
   showButton();
   }, []);
 
