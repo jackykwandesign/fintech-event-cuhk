@@ -1,16 +1,53 @@
 import * as React from 'react';
 // import { Component } from 'react';
 import { useEffect, useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { useHistory } from 'react-router-dom';
+// import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
+// import { Link, useHistory } from 'react-router-dom';
 import firebase from '../../config/firebaseConfig';
-
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import './register.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import './firebaseui-styling.global.css'; // Import globally.
+import { StyledFirebaseAuth } from 'react-firebaseui';
 const SignInScreen = (props:any) => {
+  const useStyles = makeStyles((theme) => ({
+  paper: {
+    // marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  grid: {
+    // marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: "300px"
+    // justifyContent: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+const classes = useStyles();
   const successUrl = '/'
   const [isSignedIn, setSignin] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<any>(undefined)
-  // const [jsonResult, setJsonResult] = useState(undefined)
-  let history = useHistory();
   useEffect(()=>{
 
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
@@ -49,27 +86,15 @@ const SignInScreen = (props:any) => {
 
   const uiConfig = {
     signInFlow: firebase.auth().isSignInWithEmailLink(window.location.href) ? 'redirect' : 'popup',
-    // signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult,
     callbacks: {
-      // Avoid redirects after sign-in.
       signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
     },
-    // signInSuccess: checkLoginOrSignin,
-    // callbacks:{
-    //   // signInSuccess: checkLoginOrSignin,
-    //   signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
-    // },
-    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    // signInSuccessUrl: 'http://localhost:8080/api/v1/auth/login',
-    // We will display Google and Facebook as auth providers.
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       {
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-        // requireDisplayName:true,
       }
-      // firebase.auth.PhoneAuthProvider.PROVIDER_ID,
     ],
   };
   function handleSignout(){
@@ -79,15 +104,67 @@ const SignInScreen = (props:any) => {
   }
   if(!isSignedIn){
     return (
-      <div>
-        <h1>My App</h1>
-        <p>Please sign-in:</p>
+      <div className="register_container">
+      <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+         <LockOutlinedIcon />
+        </Avatar>
+       <Typography component="h1" variant="h5">
+         Sign up
+      </Typography>
+        {/* <form className={classes.form} noValidate>
+         <Grid container spacing={1} className={classes.grid} >
+           <Grid item xs={8}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="displayName"
+                label="Display Name"
+                name="displayName"
+                autoComplete="displayName"
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={8}>
+            <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            // onClick={handleRegister}
+          >
+            Sign Up
+          </Button>
+            </Grid>
+          </Grid>
+    
+          <Grid container >
+            <Grid item>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+        </form> */}
+      </div>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
     )
   }else{
     return (
-      <div>
+      <div className="register_container">
         <h1>My App</h1>
         <p>Welcome {currentUser?.displayName}! You are now signed-in!</p>
         {/* <p>CurrentUser: {this.state.currentUser}</p> */}
