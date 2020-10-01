@@ -68,8 +68,9 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          CUHK FinTech
-          <i className='fab fa-typo3' />
+          {/* 2020 CUHK CONFERENCE ON FINANCIAL TECHNOLOGY */}
+          CUHK FINTECH CONFERENCE 2020
+          {/* <i className='fab fa-typo3' /> */}
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars' } />
@@ -107,10 +108,9 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               </Link>
             </li>
           </ul>
-        </div>
-        {
+          {
             button &&
-            <>
+            <div className="nav-button-container">
               <Link to="/register" className="nav-buttons">
                 <ColorButton variant="outlined" className={classes.margin} >
                   Sign Up
@@ -122,8 +122,10 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                 </ColorButton>
               </Link>
 
-            </>
+            </div>
           }
+        </div>
+
       </nav>
     {/* </MuiThemeProvider> */}
   </>

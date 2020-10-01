@@ -3,7 +3,7 @@ import {
 BrowserRouter as Router,
 Switch,
 Route,
-useLocation 
+// useLocation 
 } from "react-router-dom";
 import HomePage from '../HomePage/home'
 import Register from '../Register'
@@ -15,15 +15,14 @@ function App() {
   // const location = useLocation();
   const [isRoot, setIsRoot] = useState<boolean>(false)
 return (
-<>
+<div className="app-container">
 
   <Router>
-    <Navbar />
+  <Navbar />
+    
     {/* load backdrop only when mainpage, else load banner */}
     <Switch>
-      <Route exact path="/">
-
-      </Route>
+      <Route exact path="/"></Route>
       <Route>
         <Banner />
       </Route>
@@ -42,7 +41,7 @@ return (
       </Route>
     </Switch>
   </Router>
-</>
+</div>
 
 );
 }
