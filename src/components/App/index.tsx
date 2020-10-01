@@ -11,16 +11,28 @@ import Login from '../Login'
 import {Navbar} from "../NavBar/navbar";
 import './app.css'
 import { Banner } from "../Banner/banner";
+import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 function App() {
   // const location = useLocation();
   const [isRoot, setIsRoot] = useState<boolean>(false)
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#000',
+        
+      },
+      
+    },
+    
+  });
+
 return (
 <div className="app-container">
-
+{/* <StylesProvider injectFirst> */}
+{/* <MuiThemeProvider theme={theme}> */}
   <Router>
   <Navbar />
-    
-    {/* load backdrop only when mainpage, else load banner */}
     <Switch>
       <Route exact path="/"></Route>
       <Route>
@@ -41,6 +53,10 @@ return (
       </Route>
     </Switch>
   </Router>
+ 
+  {/* </MuiThemeProvider> */}
+  {/* </StylesProvider> */}
+  
 </div>
 
 );
