@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 BrowserRouter as Router,
 Switch,
@@ -15,12 +15,37 @@ import firebase from '../../config/firebaseConfig';
 import { AppContext, useAppContext } from "../../contexts/firebaseContext/firebaseContext";
 import Webinar from "../Webinar/webinar";
 
+const WithContextApp =() =>{
+  const appContext = useAppContext()
+  return (
+  <AppContext.Provider value={appContext}>
+    <App></App>
+  </AppContext.Provider>
+  )
+}
 
 function App() {
-  const appContext = useAppContext()
+  const { setCurrentGlobalUser, setSignin} = useContext(AppContext)
+  useEffect(()=>{
+
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      
+      async(user) => {
+        if(user){
+          user.getIdToken(/* forceRefresh */ true)
+          .then(async function(idToken) {
+            setCurrentGlobalUser(user)
+            setSignin(true)
+          }).catch(async function(error) {
+          });
+        }
+      }
+    );
+    return unregisterAuthObserver;
+  },[1])
 return (
 <div className="app-container">
-<AppContext.Provider value={appContext}>
+
   <Router>
   <Navbar />
     <Switch>
@@ -43,12 +68,9 @@ return (
 
     </Switch>
   </Router>
-  </AppContext.Provider>
-
-  
 </div>
 
 );
 }
 
-export default App;
+export default WithContextApp;

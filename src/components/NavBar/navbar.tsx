@@ -107,7 +107,8 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           {
             button && isSignin &&
             <div className="nav-button-container active">
-              <Avatar src={currentGlobalUser?.photoURL ? currentGlobalUser?.photoURL : "/images/avatar.png"} /><span>{currentGlobalUser?.displayName}</span>
+              <Avatar src={currentGlobalUser?.photoURL ? currentGlobalUser?.photoURL : "/images/avatar.png"} />
+              <span>{currentGlobalUser?.displayName ? currentGlobalUser.displayName : "Guest"}</span>
               <Link to="/" className="nav-buttons">
                 <ColorButton variant="outlined" className={classes.margin} onClick={signOut}>
                   SignOut
