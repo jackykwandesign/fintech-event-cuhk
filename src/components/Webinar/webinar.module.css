@@ -1,0 +1,19 @@
+.webinarContainer{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    justify-content: flex-start;
+    align-items: center;
+    height: 700px;  
+    overflow-y: scroll;
+
+}
+
+/* .webinarContainer{
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    width: 100%;
+    overflow-y: scroll;
+} */

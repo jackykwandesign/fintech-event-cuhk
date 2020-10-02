@@ -8,13 +8,13 @@ Route,
 import HomePage from '../HomePage/home'
 import Register from '../Register'
 import {Navbar} from "../NavBar/navbar";
-import './app.css'
 import { Banner } from "../Banner/banner";
-import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import firebase from '../../config/firebaseConfig';
 import { AppContext, useAppContext } from "../../contexts/firebaseContext/firebaseContext";
 import Webinar from "../Webinar/webinar";
 import LandingPage from "../LandingPage/landingPage";
+import './app.css'
+import { Information } from "../Information/information";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -64,7 +64,10 @@ return (
       </Route>
       <Route path="/home">
         <HomePage />
-      </Route>      
+      </Route>     
+      <Route path="/information">
+        <Information />
+      </Route>  
       <Route path="/register">
         <Register />
       </Route>

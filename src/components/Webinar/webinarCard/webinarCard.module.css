@@ -1,0 +1,9 @@
+.webinarCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: lightgrey; */
+    /* max-width: 300px; */
+    margin-top: 20px;
+}
