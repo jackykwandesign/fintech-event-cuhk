@@ -10,12 +10,7 @@ import styles from './landingPage.module.css'
 const LandingPage = () =>{
   const StyledButton = withStyles({
     root: {
-      // borderColor:'white',
       color:'white',
-      // maxWidth: '30px', 
-      // maxHeight: '30px', 
-      // minWidth: '250px', 
-      // minHeight: '100px',
       fontSize:"2rem",
       border:'3px solid white',
       transition:'all 0.3s ease-out',

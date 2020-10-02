@@ -12,21 +12,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: '#fff',
-    borderColor:'#fff',
-    // fontSize:'1rem',
-    backgroundColor: 'transparent',
-    transition:'all 0.3s ease-out',
-    '&:hover': {
-      backgroundColor:'#fff',
-      color: 'black'
-    },
-  },
-}))(Button);
+
 
 export function Navbar() {
+  const ColorButton = withStyles((theme) => ({
+    root: {
+      color: '#fff',
+      borderColor:'#fff',
+      // fontSize:'1rem',
+      backgroundColor: 'transparent',
+      transition:'all 0.3s ease-out',
+      '&:hover': {
+        backgroundColor:'#fff',
+        color: 'black'
+      },
+    },
+  }))(Button);
 const [click, setClick] = useState(false);
 const [button, setButton] = useState(true);
 
