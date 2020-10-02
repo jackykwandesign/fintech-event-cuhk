@@ -1,10 +1,9 @@
-import { makeStyles, MuiThemeProvider, withStyles } from '@material-ui/core';
+import { Avatar, makeStyles, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button/Button';
-import { purple } from '@material-ui/core/colors';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
 import './navbar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,26 +11,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-// const theme = createMuiTheme({
-//   palette: {
-//     // primary: {
-//     //   main: '#fff',
-//     //   contrastText: "#fff"
-//     // },
-    
-//   },
-//   // overrides:{
-//   //   MuiButton:{
-//   //     outlinedPrimary:{
-//   //       // main:'#fff',
-//   //       color:'#fff',
-//   //       borderColor:'#fff',
-//   //       // contrastText: "#fff"
-//   //     }
-//   //   }
-//   // }
-// });
-export const ColorButton = withStyles((theme) => ({
+
+const ColorButton = withStyles((theme) => ({
   root: {
     color: '#fff',
     borderColor:'#fff',
@@ -51,6 +32,8 @@ const [button, setButton] = useState(true);
 
 const handleClick = () => setClick(!click);
 const closeMobileMenu = () => setClick(false);
+
+const { signOut, isSignin, currentGlobalUser} = useContext(AppContext)
 
 const showButton = () => {
 if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }; useEffect(()=> {
@@ -104,24 +87,37 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
 
             <li>
               <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                Login / Sign Up
+              Login / Sign Up
               </Link>
             </li>
+
           </ul>
-          {
-            button &&
-            <div className="nav-button-container">
+          
+            {
+              button && !isSignin &&
+              <div className="nav-button-container">
               <Link to="/register" className="nav-buttons">
-                <ColorButton variant="outlined" className={classes.margin} >
+                <ColorButton variant="outlined" className={classes.margin}>
                   Login / Sign Up
                 </ColorButton>
               </Link>
+              </div>
+            }
+          
+          {
+            button && isSignin &&
+            <div className="nav-button-container active">
+              <Avatar src={currentGlobalUser?.photoURL ? currentGlobalUser?.photoURL : "/images/avatar.png"} /><span>{currentGlobalUser?.displayName}</span>
+              <Link to="/" className="nav-buttons">
+                <ColorButton variant="outlined" className={classes.margin} onClick={signOut}>
+                  SignOut
+                </ColorButton>
+              </Link>
             </div>
-          }
+            }
         </div>
 
       </nav>
-    {/* </MuiThemeProvider> */}
   </>
   );
   }

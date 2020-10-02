@@ -16,10 +16,8 @@ import Link from '@material-ui/core/Link';
 import './firebaseui-styling.global.css'; // Import globally.
 import { StyledFirebaseAuth } from 'react-firebaseui';
 import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
-import { Redirect, useHistory } from 'react-router-dom';
-
 const SignInScreen = (props:any) => {
-const { setCurrentGlobalUser, setSignin, isSignin} = useContext(AppContext)
+const { setCurrentGlobalUser, currentGlobalUser} = useContext(AppContext)
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -37,20 +35,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles();
   const successUrl = '/'
+  const [isSignedIn, setSignin] = useState<boolean>(false)
+  const [currentUser, setCurrentUser] = useState<any>(undefined)
   useEffect(()=>{
 
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
       async(user) => {
         if(user){
-          // console.log("registerAuthObserver")
+          console.log("registerAuthObserver")
           user.getIdToken(/* forceRefresh */ true)
           .then(async function(idToken) {
-            // console.log("set firebaseToken")
-            // localStorage.setItem('firebaseToken',idToken);
+            console.log("set firebaseToken")
+            localStorage.setItem('firebaseToken',idToken);
+            setCurrentUser(user)
             setCurrentGlobalUser(user)
+            setSignin(true)
           }).catch(async function(error) {
-            // console.error(error)
+            console.error(error)
           });
         }
       }
@@ -58,18 +60,22 @@ const classes = useStyles();
     return unregisterAuthObserver;
   },[1])
 
-  let history = useHistory()
   function checkLoginOrSigninWithAuthResult(authResult: any, redirectUrl: any):boolean{
     console.log("signin success With Auth callback", authResult)
-    setSignin(true)
     // window.location.href = "/dashboard"
-    history.push(successUrl)
     return false
   }
 
+  useEffect(()=>{
+    if(isSignedIn === true){
+      console.log("IS signin useEffect, can redirect here if user enter /signin link")
+      // return history.push(successUrl)
+      console.log("currentUser",currentUser)
+    }
+  },[isSignedIn])
+
   const uiConfig = {
     signInFlow: firebase.auth().isSignInWithEmailLink(window.location.href) ? 'redirect' : 'popup',
-    
     callbacks: {
       signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
     },
@@ -82,7 +88,12 @@ const classes = useStyles();
 
     ],
   };
-  if(!isSignin){
+  function handleSignout(){
+    localStorage.clear()
+    firebase.auth().signOut()
+    setSignin(false)
+  }
+  if(!isSignedIn){
     return (
       <div className="register_container">
         
@@ -99,11 +110,14 @@ const classes = useStyles();
       </div>
     )
   }else{
-    return <Redirect to={successUrl} />
+    return (
+      <div className="register_container">
+        <h1>My App</h1>
+        <p>Welcome {currentUser?.displayName}! You are now signed-in!</p>
+        <button onClick={() => handleSignout()}>Sign-out</button><br/>
+      </div>
+    )
   }
-
-
-
 }
   export default  SignInScreen
 

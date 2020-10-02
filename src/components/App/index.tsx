@@ -12,36 +12,15 @@ import './app.css'
 import { Banner } from "../Banner/banner";
 import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import firebase from '../../config/firebaseConfig';
+import { AppContext, useAppContext } from "../../contexts/firebaseContext/firebaseContext";
+import Webinar from "../Webinar/webinar";
+
+
 function App() {
-
-  // const [isSignedIn, setSignin] = useState<boolean>(false)
-  // const [currentUser, setCurrentUser] = useState<any>(undefined)
-  // useEffect(()=>{
-
-  //   const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-      
-  //     async(user) => {
-  //       if(user){
-  //         console.log("registerAuthObserver")
-  //         user.getIdToken(/* forceRefresh */ true)
-  //         .then(async function(idToken) {
-  //           console.log("set firebaseToken")
-  //           localStorage.setItem('firebaseToken',idToken);
-  //           setCurrentUser(user)
-  //           setSignin(true)
-  //         }).catch(async function(error) {
-  //           console.error(error)
-  //         });
-  //       }
-  //     }
-  //   );
-  //   return unregisterAuthObserver;
-  // },[1])
-  
+  const appContext = useAppContext()
 return (
 <div className="app-container">
-{/* <StylesProvider injectFirst> */}
-{/* <MuiThemeProvider theme={theme}> */}
+<AppContext.Provider value={appContext}>
   <Router>
   <Navbar />
     <Switch>
@@ -58,12 +37,14 @@ return (
       <Route path="/register">
         <Register />
       </Route>
+      <Route path="/webinar">
+        <Webinar />
+      </Route>
 
     </Switch>
   </Router>
- 
-  {/* </MuiThemeProvider> */}
-  {/* </StylesProvider> */}
+  </AppContext.Provider>
+
   
 </div>
 
