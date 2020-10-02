@@ -1,0 +1,27 @@
+
+
+.backdrop {
+
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+}
+
+.hero_container {
+  /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
+  background: url('/images/backdrop.png') center center/cover no-repeat;
+  height: 92vh;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); */
+  object-fit: contain;
+  /* overflow: hidden; */
+}
+.hero_btns{
+  margin-top: 700px;
+}

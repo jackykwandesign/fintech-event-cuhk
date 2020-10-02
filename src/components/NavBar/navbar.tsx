@@ -60,7 +60,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu' }>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
               Home
               </Link>
             </li>

@@ -14,6 +14,7 @@ import { createMuiTheme, MuiThemeProvider, StylesProvider } from "@material-ui/c
 import firebase from '../../config/firebaseConfig';
 import { AppContext, useAppContext } from "../../contexts/firebaseContext/firebaseContext";
 import Webinar from "../Webinar/webinar";
+import LandingPage from "../LandingPage/landingPage";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -25,6 +26,8 @@ const WithContextApp =() =>{
 }
 
 function App() {
+
+  // auto login if token valid
   const { setCurrentGlobalUser, setSignin} = useContext(AppContext)
   useEffect(()=>{
 
@@ -57,8 +60,11 @@ return (
 
     <Switch>
       <Route exact path="/">
-        <HomePage />
+        <LandingPage />
       </Route>
+      <Route path="/home">
+        <HomePage />
+      </Route>      
       <Route path="/register">
         <Register />
       </Route>
