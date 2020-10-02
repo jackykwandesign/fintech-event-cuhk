@@ -7,7 +7,6 @@ Route,
 } from "react-router-dom";
 import HomePage from '../HomePage/home'
 import Register from '../Register'
-import Login from '../Login'
 import {Navbar} from "../NavBar/navbar";
 import './app.css'
 import { Banner } from "../Banner/banner";
@@ -60,9 +59,6 @@ return (
         <Register />
       </Route>
 
-      <Route path="/login">
-        <Login />
-      </Route>
     </Switch>
   </Router>
  

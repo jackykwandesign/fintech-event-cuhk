@@ -104,7 +104,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
 
             <li>
               <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-              Sign Up
+                Login / Sign Up
               </Link>
             </li>
           </ul>
@@ -113,15 +113,9 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
             <div className="nav-button-container">
               <Link to="/register" className="nav-buttons">
                 <ColorButton variant="outlined" className={classes.margin} >
-                  Sign Up
+                  Login / Sign Up
                 </ColorButton>
               </Link>
-              <Link to="/login" className="nav-buttons">
-                <ColorButton variant="outlined" className={classes.margin} >
-                  Login
-                </ColorButton>
-              </Link>
-
             </div>
           }
         </div>

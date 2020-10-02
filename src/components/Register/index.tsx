@@ -16,19 +16,46 @@ import Link from '@material-ui/core/Link';
 import './firebaseui-styling.global.css'; // Import globally.
 import { StyledFirebaseAuth } from 'react-firebaseui';
 const SignInScreen = (props:any) => {
-  const useStyles = makeStyles((theme) => ({
+//   const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     // marginTop: theme.spacing(8),
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     justifyContent: 'center'
+//   },
+//   grid: {
+//     // marginTop: theme.spacing(8),
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     width: "300px"
+//     // justifyContent: 'center'
+//   },
+//   avatar: {
+//     margin: theme.spacing(1),
+//     backgroundColor: theme.palette.secondary.main,
+//   },
+//   form: {
+//     width: '100%', // Fix IE 11 issue.
+//     marginTop: theme.spacing(2),
+//   },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
+//   },
+// }));
+const useStyles = makeStyles((theme) => ({
   paper: {
-    // marginTop: theme.spacing(8),
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
   },
-  grid: {
+    grid: {
     // marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
     width: "300px"
     // justifyContent: 'center'
   },
@@ -38,7 +65,7 @@ const SignInScreen = (props:any) => {
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -90,11 +117,12 @@ const classes = useStyles();
       signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
     },
     signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       {
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-      }
+      },
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+
     ],
   };
   function handleSignout(){
@@ -105,59 +133,14 @@ const classes = useStyles();
   if(!isSignedIn){
     return (
       <div className="register_container">
+        
       <div className={classes.paper}>
       <Avatar className={classes.avatar}>
          <LockOutlinedIcon />
         </Avatar>
        <Typography component="h1" variant="h5">
-         Sign up
+        Login / Sign up
       </Typography>
-        {/* <form className={classes.form} noValidate>
-         <Grid container spacing={1} className={classes.grid} >
-           <Grid item xs={8}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="displayName"
-                label="Display Name"
-                name="displayName"
-                autoComplete="displayName"
-              />
-            </Grid>
-            <Grid item xs={8}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={8}>
-            <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            // onClick={handleRegister}
-          >
-            Sign Up
-          </Button>
-            </Grid>
-          </Grid>
-    
-          <Grid container >
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form> */}
       </div>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
@@ -167,13 +150,7 @@ const classes = useStyles();
       <div className="register_container">
         <h1>My App</h1>
         <p>Welcome {currentUser?.displayName}! You are now signed-in!</p>
-        {/* <p>CurrentUser: {this.state.currentUser}</p> */}
         <button onClick={() => handleSignout()}>Sign-out</button><br/>
-        {/* <button onClick={() => handleGetUserInfo()}>Get User Info</button><br/>
-        <button onClick={() => handleGetUserSettings()}>Get User Settings</button><br/>
-        <button onClick={() => handleGetUser()}>Get Current User</button><br/>
-        <button onClick={() => handleCreateBitGoAddress()}>Creaet BitGo Address</button> */}
-        {/* <ReactJson src={jsonResult} collapsed={false}/> */}
       </div>
     )
   }
