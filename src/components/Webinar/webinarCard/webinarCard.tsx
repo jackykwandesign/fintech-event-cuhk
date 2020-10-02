@@ -36,12 +36,12 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
         },
       });
       const classes = useStyles();
-      if(currentTime >= webinarInfo.startTime && currentTime <= webinarInfo.endTime){
-          console.log("name: ", webinarInfo.name)
-        console.log("currentTime: ",currentTime)
-        console.log("startTime: ",webinarInfo.startTime)
-        console.log("endTime: ",webinarInfo.endTime)
-      }
+    //   if(currentTime >= webinarInfo.startTime && currentTime <= webinarInfo.endTime){
+    //       console.log("name: ", webinarInfo.name)
+    //     console.log("currentTime: ",currentTime)
+    //     console.log("startTime: ",webinarInfo.startTime)
+    //     console.log("endTime: ",webinarInfo.endTime)
+    //   }
 
     return (
         
