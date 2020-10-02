@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from './webinarCard.module.css'
 import moment from 'moment';
+import { AppContext } from '../../../contexts/firebaseContext/firebaseContext';
 export interface WebinarInfo{
     name: string; 
     description?: string;
@@ -21,6 +22,7 @@ export interface WebinarInfo{
     // status:string ;
 }
 export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:WebinarInfo, replay:boolean, currentTime:Date}) =>{
+    const { isSignin } = useContext(AppContext)
     const useStyles = makeStyles({
         root: {
         //   minWidth: 4,
@@ -86,18 +88,28 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
         <CardActions>
             {
                 !replay ? 
-                <Button size="small" variant="contained" color="primary" href={webinarInfo.zoomURL} target="_black" rel="noopener noreferrer">
-                    Enter Webinar
-                </Button>
+                    isSignin ? 
+                    <Button size="small" variant="contained" color="primary" href={webinarInfo.zoomURL} target="_black" rel="noopener noreferrer">
+                        Enter Webinar
+                    </Button>
+                    :
+                    <Button size="small" variant="contained" color="primary" href="/register">
+                        Login in to Enter Webinar
+                    </Button>
                 :
                 webinarInfo.replayURL ? 
-                <Button size="small" variant="contained" color="secondary" href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
-                    Replay
-                </Button>
-                :
-                <Button size="small" variant="contained" color="secondary" disabled href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
-                    Uploading Replay 
-                </Button>
+                    isSignin ? 
+                        <Button size="small" variant="contained" color="secondary" href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
+                            Replay
+                        </Button>
+                        :
+                        <Button size="small" variant="contained" color="secondary" href="/register">
+                            Login in to watch Replay
+                        </Button>
+                    :
+                    <Button size="small" variant="contained" color="secondary" disabled href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
+                        Uploading Replay 
+                    </Button>
             }
 
 
