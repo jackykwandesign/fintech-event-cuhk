@@ -1,12 +1,38 @@
 .webinarContainer{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    /* align-items: center; */
+    align-content: center;
+    flex-wrap: wrap;
+    /* height: 100%; */
+    /* justify-content: center; */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    /* height: 700px;   */
+    /* overflow-y: scroll; */
+
+}
+
+.webinarSubContainer{
+    flex: 1;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     justify-content: flex-start;
     align-items: center;
-    height: 700px;  
-    overflow-y: scroll;
-
+    /* height: 700px;  */
+    height: 100%;
+    /* overflow-y: scroll; */
+}
+.sameRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 /* .webinarContainer{

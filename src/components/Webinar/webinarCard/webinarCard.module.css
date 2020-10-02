@@ -3,7 +3,31 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* background-color: lightgrey; */
-    /* max-width: 300px; */
     margin-top: 20px;
+    /* width:100%, */
+    width:70%;
+}
+.titleContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.timeContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.sameRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+@media screen and (max-width: 600px) {
+.webinarCard{
+    width:300px;
+}
 }
