@@ -23,14 +23,25 @@ export const registerUser = async() =>{
     }
 }
 
-export const validateUserByToken = async( token:string) =>{
+export const FillUserInfo = async(values:any) =>{
     try {
-        const res = await ConfigAxio.post('/api/auth/loginByToken',{
-            accessToken:token
+        const res = await ConfigAxio.post('/api/auth/fillInfo',{
+            formData:values
         })
-        let user = <DBUser>res.data
-        return user
+        return res
     } catch (error) {
-        return undefined
+        return false
     }
 }
+
+// export const validateUserByToken = async( token:string) =>{
+//     try {
+//         const res = await ConfigAxio.post('/api/auth/loginByToken',{
+//             accessToken:token
+//         })
+//         let user = <DBUser>res.data
+//         return user
+//     } catch (error) {
+//         return undefined
+//     }
+// }

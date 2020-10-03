@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import firebase from '../../config/firebaseConfig';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import './register.css'
@@ -11,9 +11,14 @@ import { StyledFirebaseAuth } from 'react-firebaseui';
 import { AppContext, UserRole } from '../../contexts/firebaseContext/firebaseContext';
 import { Redirect, useHistory } from 'react-router-dom';
 import { validateUser, registerUser} from '../../service/auth';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const SignInScreen = (props:any) => {
+  useEffect(()=>{
+    localStorage.clear()
+  },[1])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { isSignin} = useContext(AppContext)
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -84,9 +89,10 @@ const SignInScreen = (props:any) => {
 
   function checkLoginOrSigninWithAuthResult(authResult: any, redirectUrl: any):boolean{
     console.log("signin success With Auth callback", authResult)
-    // if(authResult){
-    //   checkUserRedirect(authResult)
-    // }
+    setIsLoading(true)
+    if(authResult){
+      checkUserRedirect(authResult)
+    }
     console.log("Pass check")
     return false
   }
@@ -96,8 +102,8 @@ const SignInScreen = (props:any) => {
     signInFlow : 'popup',
     
     callbacks: {
-      // signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
-      signInSuccessWithAuthResult: ()=> false
+      signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
+      // signInSuccessWithAuthResult: ()=> false
     },
     signInOptions: [
       {
@@ -118,7 +124,10 @@ const SignInScreen = (props:any) => {
        <Typography component="h1" variant="h5">
         Login / Sign up
       </Typography>
-
+      <br/>
+      {
+        isLoading && <CircularProgress />
+      }
       </div>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
       </div>

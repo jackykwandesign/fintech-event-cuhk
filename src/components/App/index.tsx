@@ -19,13 +19,14 @@ import { ProjectDemo } from "../ProjectDemo/projectDemo";
 // import ConfigAxio from '../../config/axioConfig'
 import { validateUser } from "../../service/auth";
 import Axios from "axios";
+import { FillInfo } from "../FillInfo/fillInfo";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
   return (
-  <AppContext.Provider value={appContext}>
-    <App></App>
-  </AppContext.Provider>
+    <AppContext.Provider value={appContext}>
+      <App/>
+    </AppContext.Provider>
   )
 }
 
@@ -92,6 +93,9 @@ return (
       </Route>
       <Route path="/projectDemo">
         <ProjectDemo />
+      </Route>
+      <Route path="/fillInfo">
+        <FillInfo />
       </Route>
     </Switch>
   </Router>
