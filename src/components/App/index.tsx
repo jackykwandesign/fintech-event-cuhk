@@ -10,12 +10,15 @@ import Register from '../Register'
 import {Navbar} from "../NavBar/navbar";
 import { Banner } from "../Banner/banner";
 import firebase from '../../config/firebaseConfig';
-import { AppContext, useAppContext } from "../../contexts/firebaseContext/firebaseContext";
+import { AppContext, useAppContext, UserRole } from "../../contexts/firebaseContext/firebaseContext";
 import Webinar from "../Webinar/webinar";
 import LandingPage from "../LandingPage/landingPage";
 import './app.css'
 import { Information } from "../Information/information";
 import { ProjectDemo } from "../ProjectDemo/projectDemo";
+// import ConfigAxio from '../../config/axioConfig'
+import { validateUser } from "../../service/auth";
+import Axios from "axios";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -31,16 +34,27 @@ function App() {
   // auto login if token valid
   const { setCurrentGlobalUser, setSignin} = useContext(AppContext)
   useEffect(()=>{
-
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
       async(user) => {
         if(user){
           user.getIdToken(/* forceRefresh */ true)
           .then(async function(idToken) {
-            localStorage.setItem('firebaseToken', idToken)
-            setCurrentGlobalUser(user)
-            setSignin(true)
+            await localStorage.setItem('firebaseToken', idToken)
+            const res = await validateUser()
+            console.log()
+            if(res){
+              setCurrentGlobalUser(res)
+              if(res.role === UserRole.ADMIN){
+                console.log("IS ADMIN")
+                return setSignin(true)
+              }else if(res.finishInfo){
+                console.log("IS USER, FINISH INFO")
+                return setSignin(true)
+              }else{
+                console.log("IS USER, NOT FINISH INFO")
+              }
+            }
           }).catch(async function(error) {
           });
         }

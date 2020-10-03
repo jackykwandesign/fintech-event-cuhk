@@ -1,8 +1,21 @@
 import * as React from "react";
 import ConfigFirebase from '../../config/firebaseConfig'
+export enum UserRole{
+    ADMIN = 'admin',
+    USER = 'user',
+    PRE_USER = 'preuser'
+}
+export interface DBUser{
+    name: string;
+    email: string;
+    role: UserRole;
+    photoURL: string;
+    interest: string[];
+    finishInfo: boolean;
+}
 export interface AppContextInterface {
-    currentGlobalUser: firebase.User | undefined,
-    setCurrentGlobalUser: (user: firebase.User)=>void,
+    currentGlobalUser: DBUser | undefined,
+    setCurrentGlobalUser: (user: DBUser)=>void,
     isSignin: boolean,
     setSignin: (signin: boolean) => void,
     signOut: ()=>void
@@ -17,7 +30,7 @@ export  const AppContext = React.createContext<AppContextInterface>({
 });
 
 export const useAppContext = ():AppContextInterface =>{
-    const [currentUser, setCurrentUser] = React.useState<firebase.User | undefined>(undefined)
+    const [currentUser, setCurrentUser] = React.useState<DBUser| undefined>(undefined)
     const [isSignin, setSignin] = React.useState<boolean>(false)
     return {
         currentGlobalUser:currentUser,
