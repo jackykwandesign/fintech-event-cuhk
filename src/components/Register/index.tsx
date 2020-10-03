@@ -37,31 +37,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 const classes = useStyles();
   const successUrl = '/'
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+  //   const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
-      async(user) => {
-        if(user){
-          // console.log("registerAuthObserver")
-          user.getIdToken(/* forceRefresh */ true)
-          .then(async function(idToken) {
-            // console.log("set firebaseToken")
-            // localStorage.setItem('firebaseToken',idToken);
-            setCurrentGlobalUser(user)
-          }).catch(async function(error) {
-            // console.error(error)
-          });
-        }
-      }
-    );
-    return unregisterAuthObserver;
-  },[1])
+  //     async(user) => {
+  //       if(user){
+  //         // console.log("registerAuthObserver")
+  //         user.getIdToken(/* forceRefresh */ true)
+  //         .then(async function(idToken) {
+  //           // console.log("set firebaseToken")
+  //           // localStorage.setItem('firebaseToken',idToken);
+  //           setCurrentGlobalUser(user)
+  //         }).catch(async function(error) {
+  //           // console.error(error)
+  //         });
+  //       }
+  //     }
+  //   );
+  //   return unregisterAuthObserver;
+  // },[1])
 
   let history = useHistory()
   function checkLoginOrSigninWithAuthResult(authResult: any, redirectUrl: any):boolean{
     console.log("signin success With Auth callback", authResult)
-    setSignin(true)
+    // setSignin(true)
     // window.location.href = "/dashboard"
     history.push(successUrl)
     return false

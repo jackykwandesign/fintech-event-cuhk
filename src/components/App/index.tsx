@@ -15,6 +15,7 @@ import Webinar from "../Webinar/webinar";
 import LandingPage from "../LandingPage/landingPage";
 import './app.css'
 import { Information } from "../Information/information";
+import { ProjectDemo } from "../ProjectDemo/projectDemo";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -37,6 +38,7 @@ function App() {
         if(user){
           user.getIdToken(/* forceRefresh */ true)
           .then(async function(idToken) {
+            localStorage.setItem('firebaseToken', idToken)
             setCurrentGlobalUser(user)
             setSignin(true)
           }).catch(async function(error) {
@@ -74,7 +76,9 @@ return (
       <Route path="/webinar">
         <Webinar />
       </Route>
-
+      <Route path="/projectDemo">
+        <ProjectDemo />
+      </Route>
     </Switch>
   </Router>
 </div>

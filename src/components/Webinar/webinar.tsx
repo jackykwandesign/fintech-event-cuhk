@@ -5,6 +5,7 @@ import styles from './webinar.module.css'
 import moment from 'moment'
 // var db = firebase.firestore();
 import ConfitFirebase from '../../config/firebaseConfig'
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
 
 
@@ -106,6 +107,7 @@ const Webinar = (props:any)=>{
 
     return (
         <div className={styles.webinarContainer}>
+
             <div className={styles.webinarSubContainer}>
                 {/* <div className={styles.sameRow}><h1>Upcoming Webinar</h1><Divider style={{width:"250px"}}/></div> */}
                 <h1>Upcoming Webinar</h1>

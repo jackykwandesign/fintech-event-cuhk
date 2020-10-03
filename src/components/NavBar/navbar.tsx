@@ -76,7 +76,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/project' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/projectDemo' className='nav-links' onClick={closeMobileMenu}>
               Project Demo
               </Link>
             </li>
