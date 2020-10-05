@@ -1,0 +1,70 @@
+                                {/* <Grid item md={12}>
+                                    <FormControl component="fieldset" required aria-required>
+                                        <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
+                                        <RadioGroup aria-label="knowOfConference" name="knowOfConference" onChange={handleKnowOfConferenceChange} >
+                                            <FormControlLabel value="CUHK Staff Mass Mailing" control={<Radio required />} label="CUHK Staff Mass Mailing"/>
+                                            <FormControlLabel value="CUHK Student Mass Mailing" control={<Radio  required/>} label="CUHK Student Mass Mailing"/>
+                                            <FormControlLabel value="CUHK Alumni Email" control={<Radio required />} label="CUHK Alumni Email"/>
+                                            <FormControlLabel value="Invitation Email from Organizer" control={<Radio required />} label="Invitation Email from Organizer"/>
+                                            <FormControlLabel value="Sponsor - Hang Seng Bank" control={<Radio required />} label="Sponsor - Hang Seng Bank" />
+
+                                            <FormControlLabel value="Supporting Organization" control={<Radio required />} label={
+                                                <>
+                                                    Supporting Organization
+                                                    <Controller
+                                                        as={
+                                                            <Select
+                                                                style={{marginLeft:"10px"}}
+                                                                defaultValue=""
+                                                                displayEmpty
+                                                                required = { knowOfConference === "Supporting Organization" ? true : false}
+                                                            >
+                                                                <MenuItem value="" disabled>None</MenuItem>
+                                                                <MenuItem value={"Organization A"}>Organization A</MenuItem>
+                                                                <MenuItem value={"Organization B"}>Organization B</MenuItem>
+                                                                <MenuItem value={"Organization C"}>Organization C</MenuItem>
+                                                            </Select>
+                                                        }
+                                                        name="knowOfConference"
+                                                        control={control}
+                                                    />
+                                                </>
+                                            }/>
+                                            <FormControlLabel value="Online Ads" control={<Radio />} label={
+                                                <>
+                                                    Online Ads: 
+                                                    <Controller
+                                                        as={
+                                                            <Select
+                                                                style={{marginLeft:"10px"}}
+                                                                defaultValue=""
+                                                                displayEmpty
+                                                                required = { knowOfConference === "Online Ads" ? true : false}
+                                                            >
+                                                                <MenuItem value="" disabled>None</MenuItem>
+                                                                <MenuItem value={"Youtube"}>Youtube</MenuItem>
+                                                                <MenuItem value={"Facebook"}>Facebook</MenuItem>
+                                                                <MenuItem value={"Twitter"}>Twitter</MenuItem>
+                                                            </Select>
+                                                        }
+                                                        name="knowOfConference"
+                                                        control={control}
+                                                    />
+                                                </>
+                                            }/>
+                                            <FormControlLabel value="Others" control={<Radio />} label={
+                                                <>
+                                                Others: 
+                                                <TextField
+                                                    id="others"
+                                                    name="others"
+                                                    inputRef={register({maxLength: 50 })}
+                                                    required = { knowOfConference === "Others" ? true : false}
+                                                    style={{marginLeft:"10px"}}
+                                                />
+                                                </>
+                                            } color="primary"/>
+
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Grid>              */}

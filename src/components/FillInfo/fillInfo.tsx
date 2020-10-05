@@ -1,3 +1,4 @@
+import { Input } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -6,53 +7,71 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Link from '@material-ui/core/Link';
+import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Select from '@material-ui/core/Select/Select';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
 import React, { useState } from 'react'
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
 import { FillUserInfo } from '../../service/auth';
 
 export function FillInfo(props:any) {
     const history = useHistory()
     const [step, setStep] = useState<number>(1)
-    const { register, handleSubmit, watch, errors } = useForm();
-    const [sex, setSex] = useState<string>("other")
+    const defaultValues = {
+        knowOfConference: "",
+        Select: ""
+    }
+    const { register, handleSubmit, watch, errors, control } = useForm({defaultValues});
+    // const [knowOfConference, setKnowOfConference] = useState<string>("other")
     const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
     const onSubmit = async(values:any) =>{
         values.interests = interestCheckbox
-        values.sex = sex
-        // console.log("values", values)
+
+        // console.log("values.knowOfConference", values.knowOfConference)
+        // if(knowOfConference === "Others"){
+        //     values.knowOfConference = "Others-" + values.knowOfConference
+        // }else if(knowOfConference === "Supporting Organization"){
+        //     values.knowOfConference = "Supporting Organization-" + values.knowOfConference
+        // }else if(knowOfConference === "Online Ads"){
+        //     values.knowOfConference = "Online Ads-" + values.knowOfConference
+        // }else{
+        //     values.knowOfConference = knowOfConference
+        // }
+
+        // if(knowOfConference !== "Others" && knowOfConference !== "Supporting Organization"  && knowOfConference !== "Online Ads"){
+        //     values.knowOfConference = knowOfConference
+        // }
         
-        if(values.interests.length < 3){
-            return alert("Please select at least 3 interest")
-        }
+        // if(values.interests.length < 3){
+        //     return alert("Please select at least 3 interest")
+        // }
 
         alert(JSON.stringify(values))
-        try {
-            const res = await FillUserInfo(values)
-            history.push("/")
-            history.go(0);
-        } catch (error) {
-            alert("Server Error")
-        }
+        // try {
+        //     const res = await FillUserInfo(values)
+        //     history.push("/")
+        //     history.go(0);
+        // } catch (error) {
+        //     alert("Server Error")
+        // }
 
 
     }
     // console.log(watch("example")); 
-    const handleSexChange = (e:React.FormEvent<HTMLInputElement>) =>{
-        let valueName = e.currentTarget.name
+    const handleKnowOfConferenceChange = (e:React.FormEvent<HTMLInputElement>) =>{
         let value = e.currentTarget.value
-        console.log("valueName", valueName)
-        console.log("value", value)
-        setSex(value)
+        // setKnowOfConference(value)
     }
     const handleCheckboxChange = (e:React.FormEvent<HTMLInputElement>) =>{
         let newData = interestCheckbox;
@@ -135,31 +154,88 @@ export function FillInfo(props:any) {
                                     inputRef={register({ required: true, maxLength: 20 })}
                                 />
                                 </Grid>
-                                {/* <Grid item md={12}>
+                                <Grid item md={12}>
                                 <TextField
                                     variant="outlined"
                                     required
                                     fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
+                                    id="contactEmail"
+                                    label="Contact Email"
+                                    name="contactEmail"
                                     inputRef={register({ required: true, maxLength: 50 })}
                                 />
-                                </Grid> */}
-                                <Grid item md={12}>
-                                    <FormControl component="fieldset" color="primary" >
-                                        <FormLabel component="legend">Gender</FormLabel>
-                                        <RadioGroup aria-label="gender" name="gender1" onChange={handleSexChange} color="primary">
-                                            {/* row */}
-                                            <FormControlLabel value="female" control={<Radio />} label="Female" color="primary"/>
-                                            <FormControlLabel value="male" control={<Radio />} label="Male" color="primary"/>
-                                            <FormControlLabel value="other" control={<Radio />} label="Other" color="primary"/>
-                                            {/* <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" /> */}
-                                        </RadioGroup>
-                                    </FormControl>
                                 </Grid>
                                 <Grid item md={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="jobTitle"
+                                    label="Job Title"
+                                    name="jobTitle"
+                                    inputRef={register({ required: true, maxLength: 50 })}
+                                />
+                                </Grid>
+                                <Grid item md={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="organization"
+                                    label="Company / Organization"
+                                    name="organization"
+                                    inputRef={register({ required: true, maxLength: 50 })}
+                                />
+                                </Grid>
+                                <Grid item md={12}>
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id="contactNumber"
+                                    label="Contact Number"
+                                    name="contactNumber"
+                                    inputRef={register({maxLength: 50 })}
+                                />
+                                </Grid>
+                                <Grid item md={12}>
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id="areaCode"
+                                    label="Area Code (If you are not in Hong Kong)"
+                                    name="areaCode"
+                                    inputRef={register({maxLength: 50 })}
+                                />
+                                </Grid>
+
+                                <Grid item md={12}>
+                                    <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
+                                    <Controller
+                                        as={
+                                          
+                                            <Select
+                                                // style={{marginLeft:"10px"}}
+                                                defaultValue=""
+                                                displayEmpty
+                                                required
+                                                // variant="outlined"
+                                            >
+                                                <MenuItem value="" disabled>None</MenuItem>
+                                                <MenuItem value={"CUHK Staff Mass Mailing"}>CUHK Staff Mass Mailing</MenuItem>
+                                                <MenuItem value={"CUHK Student Mass Mailing"}>CUHK Student Mass Mailing</MenuItem>
+                                                <MenuItem value={"CUHK Alumni Email"}>CUHK Alumni Email</MenuItem>
+                                                <MenuItem value={"Invitation Email from Organizer"}>Invitation Email from Organizer</MenuItem>
+                                                <MenuItem value={"Sponsor - Hang Seng Bank"}>Sponsor - Hang Seng Bank</MenuItem>
+                                            </Select>
+                                            
+                                        }
+                                        name="knowOfConference"
+                                        control={control}
+                                    />
+                                </Grid>
+
+
+                              <Grid item md={12}>
                                 <FormControl component="fieldset" >
                                     <FormLabel component="legend">Interest (Please select 3 interests)</FormLabel>
                                     <FormGroup row>
