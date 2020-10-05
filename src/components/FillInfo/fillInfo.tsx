@@ -30,7 +30,9 @@ export function FillInfo(props:any) {
         knowOfConference: "",
         supportOrganization: "", 
         onlineAds: "",
-        others: ""
+        others: "",
+        interest: "",
+        agreement: false
     }
     const { register, handleSubmit, watch, errors, control } = useForm({defaultValues});
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
@@ -43,7 +45,7 @@ export function FillInfo(props:any) {
     },[watch("knowOfConference")])
 
     const onSubmit = async(values:any) =>{
-        values.interests = interestCheckbox
+        // values.interests = interestCheckbox
 
         // console.log("values.knowOfConference", values.knowOfConference)
         // if(knowOfConference === "Others"){
@@ -215,6 +217,7 @@ export function FillInfo(props:any) {
                                 />
                                 </Grid>
 
+                                <br/>
                                 <Grid item md={12}>
                                     <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
                                     <Controller
@@ -289,37 +292,66 @@ export function FillInfo(props:any) {
                                         <Controller as={
                                             <TextField 
                                                 required
+                                                style={{marginLeft:"10px"}}
                                             />
                                         } name="others" control={control} />
                                     }
 
                                 </Grid>
 
-
-                              <Grid item md={12}>
-                                <FormControl component="fieldset" >
-                                    <FormLabel component="legend">Interest (Please select 3 interests)</FormLabel>
-                                    <FormGroup row>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={handleCheckboxChange} name="gilad" color="primary"/>}
-                                            label="Gilad Gray"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={handleCheckboxChange} name="jason" color="primary"/>}
-                                            label="Jason Killian"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={handleCheckboxChange} name="antoine" color="primary"/>}
-                                            label="Antoine Llorca"
-                                        />
-                                    </FormGroup>
-                                </FormControl>
-                                </Grid>
                                 <Grid item md={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
+                                    <br/>
+                                    <FormLabel component="legend">Area of Interest * </FormLabel>
+                                    <Controller
+                                        as={
+                                          
+                                            <Select
+                                                // style={{marginLeft:"10px"}}
+                                                defaultValue=""
+                                                displayEmpty
+                                                required
+                                                // variant="outlined"
+                                            >
+                                                <MenuItem value="" disabled>None</MenuItem>
+                                                <MenuItem value={"AI and Machine Learning"}>AI and Machine Learning</MenuItem>
+                                                <MenuItem value={"Cybersecurity / Biometrics"}>Cybersecurity/Biometrics</MenuItem>
+                                                <MenuItem value={"FinTech in the Banking/Investment Banking Industry"}>FinTech in the Banking/Investment Banking Industry</MenuItem>
+                                                <MenuItem value={"ICO/Tokenization / Cryptoasset"}>ICO / Tokenization / Cryptoasset</MenuItem>
+                                                <MenuItem value={"Others"}>Others</MenuItem>
+                                            </Select>
+                                        }
+                                        name="interest"
+                                        control={control}
+                                    />
+                                </Grid>
+
+                                <Grid item md={12}>
+                                <Controller
+                                    name="agreement"
+                                    control={control}
+                                    render={(props) => (
+                                        <>
+                                            <Checkbox
+                                            onChange={(e) => props.onChange(e.target.checked)}
+                                            checked={props.value} />
+                                            
+                                        </>
+
+                                    )}
+                                    />
+                                    {/* <Controller 
+                                    as{
+                                        <Checkbox value="allowExtraEmails" color="primary" />
+                                    }
+                                        name="agreement"
+                                        control={control}
+                                    /> */}
+                                {/* <FormControlLabel
+                                    control={<Checkbox value="agreement" color="primary" inputRef={register}/>}
+                                    label="I want to want to be shown in the Meet the Other Participants page (will show your name and company/organization only."
+                                /> */}
+                                <FormLabel component="legend">I want to want to be shown in the Meet the Other Participants page (will show your name and company/organization only. </FormLabel>
+                                            
                                 </Grid>
                             </Grid>
                             <Button
@@ -331,13 +363,6 @@ export function FillInfo(props:any) {
                             >
                                 Sign Up
                             </Button>
-                            {/* <Grid container justify="flex-end">
-                                <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                                </Grid>
-                            </Grid> */}
                             </form>
                         </div>
                         {/* <Box mt={5}>
