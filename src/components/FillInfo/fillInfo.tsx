@@ -20,21 +20,28 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
 import { FillUserInfo } from '../../service/auth';
 
 export function FillInfo(props:any) {
-    const history = useHistory()
-    const [step, setStep] = useState<number>(1)
     const defaultValues = {
         knowOfConference: "",
-        Select: ""
+        supportOrganization: "", 
+        onlineAds: "",
+        others: ""
     }
     const { register, handleSubmit, watch, errors, control } = useForm({defaultValues});
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
     const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
+    const history = useHistory()
+    const [step, setStep] = useState<number>(1)
+
+    useEffect(()=>{
+        console.log("knowOfConference", watch("knowOfConference"))
+    },[watch("knowOfConference")])
+
     const onSubmit = async(values:any) =>{
         values.interests = interestCheckbox
 
@@ -226,12 +233,66 @@ export function FillInfo(props:any) {
                                                 <MenuItem value={"CUHK Alumni Email"}>CUHK Alumni Email</MenuItem>
                                                 <MenuItem value={"Invitation Email from Organizer"}>Invitation Email from Organizer</MenuItem>
                                                 <MenuItem value={"Sponsor - Hang Seng Bank"}>Sponsor - Hang Seng Bank</MenuItem>
+                                                <MenuItem value={"Supporting Organization"}>Supporting Organization</MenuItem>
+                                                <MenuItem value={"Online Ads"}>Online Ads</MenuItem>
+                                                <MenuItem value={"Others"}>Others</MenuItem>
                                             </Select>
-                                            
                                         }
                                         name="knowOfConference"
                                         control={control}
                                     />
+
+                                    {
+                                        watch("knowOfConference") === "Supporting Organization" &&
+                                        <Controller
+                                            as={
+                                                <Select
+                                                    style={{marginLeft:"10px"}}
+                                                    defaultValue=""
+                                                    displayEmpty
+                                                    required
+                                                >
+                                                    <MenuItem value="" disabled>None</MenuItem>
+                                                    <MenuItem value={"Organization A"}>Organization A</MenuItem>
+                                                    <MenuItem value={"Organization B"}>Organization B</MenuItem>
+                                                    <MenuItem value={"Organization C"}>Organization C</MenuItem>
+                                                </Select>
+                                            }
+                                            name="supportOrganization"
+                                            control={control}
+                                        />
+                                    }
+
+                                    {
+                                        watch("knowOfConference") === "Online Ads" &&
+                                        <Controller
+                                            as={
+                                                <Select
+                                                    defaultValue=""
+                                                    displayEmpty
+                                                    required
+                                                    style={{marginLeft:"10px"}}
+                                                >
+                                                    <MenuItem value="" disabled>None</MenuItem>
+                                                    <MenuItem value={"Youtube"}>Youtube</MenuItem>
+                                                    <MenuItem value={"Facebook"}>Facebook</MenuItem>
+                                                    <MenuItem value={"Twitter"}>Twitter</MenuItem>
+                                                </Select>
+                                            }
+                                            name="onlineAds"
+                                            control={control}
+                                        />
+                                    }
+
+                                    {
+                                        watch("knowOfConference") === "Others" &&
+                                        <Controller as={
+                                            <TextField 
+                                                required
+                                            />
+                                        } name="others" control={control} />
+                                    }
+
                                 </Grid>
 
 
