@@ -5,6 +5,7 @@ import styles from './webinar.module.css'
 import moment from 'moment'
 // var db = firebase.firestore();
 import ConfitFirebase from '../../config/firebaseConfig'
+import { getAllWebinar } from '../../service/webinar'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
 
@@ -71,32 +72,18 @@ const Webinar = (props:any)=>{
     useEffect(()=>{
         
         async function handleGetData(){
-            const tempData: WebinarInfo[] = []
-            db.collection("Webinar").get().then((query)=>{
-                query.forEach((doc)=>{
-                    // console.log("doc",doc.data())
-                    tempData.push({
-                       name: doc.data().name,
-                       zoomURL: doc.data().zoomURL,
-                       replayURL: doc.data().replayURL,
-                       startTime: moment(doc.data().startTime).toDate(),
-                       endTime: moment(doc.data().endTime).toDate(),
-                    })
-                })
+            const webinars = await getAllWebinar()
+            webinars?.map((webinar, index)=>{
+                webinar.startTime = moment(webinar.startTime).toDate()
+                webinar.endTime = moment(webinar.endTime).toDate()
             })
-            .then( async() => {
-                tempData.sort(function(a,b){
-                    let firstTime = new Date(b.startTime).getTime()
-                    let secondTime = new Date(a.startTime).getTime()
-                    // smaller time first
-                    return (secondTime - firstTime)
-                })
-                setWebinarList(tempData)
-                // console.log("Read Success");
+            webinars?.sort(function(a,b){
+                let firstTime = new Date(b.startTime).getTime()
+                let secondTime = new Date(a.startTime).getTime()
+                // smaller time first
+                return (secondTime - firstTime)
             })
-            .catch(function(error) {
-                console.error("Read Fail");
-            });
+            setWebinarList(webinars)
             
         }
         handleGetData()

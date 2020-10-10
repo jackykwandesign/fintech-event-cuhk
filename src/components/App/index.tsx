@@ -50,6 +50,9 @@ function App() {
               if(res.role === UserRole.ADMIN){
                 console.log("IS ADMIN")
                 return setSignin(true)
+              }else if(res.role === UserRole.HELPER){
+                console.log("IS HELPER")
+                return setSignin(true)
               }else if(res.finishInfo){
                 console.log("IS USER, FINISH INFO")
                 return setSignin(true)
@@ -101,7 +104,7 @@ return (
       </Route>
 
       {
-        currentGlobalUser && isSignin && currentGlobalUser.role === UserRole.ADMIN &&
+        currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) &&
         <Route path="/admin/userlist">
           <UserList />
         </Route>

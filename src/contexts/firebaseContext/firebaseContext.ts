@@ -3,7 +3,7 @@ import ConfigFirebase from '../../config/firebaseConfig'
 export enum UserRole{
     ADMIN = 'admin',
     USER = 'user',
-    PRE_USER = 'preuser'
+    HELPER = 'helper'
 }
 export interface DBUser{
     name: string;

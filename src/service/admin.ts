@@ -4,7 +4,7 @@ import { DBUser } from '../contexts/firebaseContext/firebaseContext'
 
 export const adminGetAllUser = async() =>{
     try {
-        const res = await ConfigAxio.get('/api/user/')
+        const res = await ConfigAxio.get('/api/user/participant')
         let users = res.data as DBUser[]
         return users
     } catch (error) {
