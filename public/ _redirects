@@ -1,2 +1,2 @@
-/api/*    https://fintech-event-2020-be.herokuapp.com   200
+/api/*    https://fintech-event-2020-be.herokuapp.com/:splat   200
 /*    /index.html   200
