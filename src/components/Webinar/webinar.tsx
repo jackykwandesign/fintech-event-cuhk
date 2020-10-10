@@ -5,17 +5,14 @@ import styles from './webinar.module.css'
 import moment from 'moment'
 // var db = firebase.firestore();
 import ConfitFirebase from '../../config/firebaseConfig'
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
+// import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
 
 
-
-
-
 let currentTime = new Date()
-function AddMinutes(oldDate:Date, minutes:number){
-    return new Date(oldDate.getTime() + minutes * 60000)
-}
+// function AddMinutes(oldDate:Date, minutes:number){
+//     return new Date(oldDate.getTime() + minutes * 60000)
+// }
 // for(let i = 0; i < 3; i++){
 //     // tempData.push({
 //     //     name:`Hello to webinar # ${i+1}`,
@@ -103,7 +100,7 @@ const Webinar = (props:any)=>{
             
         }
         handleGetData()
-    },[1])
+    },[])
 
     return (
         <div className={styles.webinarContainer}>

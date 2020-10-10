@@ -19,8 +19,8 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
@@ -232,7 +232,8 @@ export default function UserList() {
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState<string[]>([]);
     const [page, setPage] = React.useState(0);
-    const [dense, setDense] = React.useState(true);
+    // const [dense, setDense] = React.useState(true);
+    const dense = true
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const [userList, serUserList] = useState<DBUser[]| undefined>(undefined)
@@ -243,7 +244,7 @@ export default function UserList() {
             serUserList(res)
         }
         getAllUser()
-    },[1])
+    },[])
 
   const handleRequestSort = (_event: any, property: React.SetStateAction<string>) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -375,10 +376,6 @@ export default function UserList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
     </div>
   );
 }

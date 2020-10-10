@@ -1,30 +1,30 @@
-import { Input } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
+// import { Input } from '@material-ui/core';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
+// import FormControl from '@material-ui/core/FormControl/FormControl';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormGroup from '@material-ui/core/FormGroup';
+// import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel/InputLabel';
-import Link from '@material-ui/core/Link';
+// import InputLabel from '@material-ui/core/InputLabel/InputLabel';
+// import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+// import Radio from '@material-ui/core/Radio';
+// import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select/Select';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { Label } from '@material-ui/icons';
-import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import React, { useContext, useEffect, useState } from 'react'
+// import { Label } from '@material-ui/icons';
+// import InfoOutlined from '@material-ui/icons/InfoOutlined';
+import React, {  } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
-import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
+// import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
 import { FillUserInfo } from '../../service/auth';
 import styles from './fillInfo.module.css'
 interface FillInforField {
@@ -44,7 +44,6 @@ interface FillInforField {
 }
 
 export function FillInfo(props:any) {
-    const { isSignin } = useContext(AppContext)
     const defaultValues:FillInforField = {
         knowOfConference: "",
         supportOrganization: "", 
@@ -56,11 +55,11 @@ export function FillInfo(props:any) {
         agreementOfReceiveInformation: true,
         otherInterests: ""
     }
-    const { register, handleSubmit, watch, errors, control } = useForm({defaultValues});
+    const { register, handleSubmit, watch, control } = useForm({defaultValues});
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
     // const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
     const history = useHistory()
-    const [step, setStep] = useState<number>(1)
+    // const [step, setStep] = useState<number>(1)
 
     // useEffect(()=>{
     //     console.log("knowOfConference", watch("knowOfConference"))
@@ -83,7 +82,7 @@ export function FillInfo(props:any) {
 
         alert(JSON.stringify(values))
         try {
-            const res = await FillUserInfo(values)
+            await FillUserInfo(values)
             history.push("/")
             history.go(0);
         } catch (error) {
@@ -118,7 +117,7 @@ export function FillInfo(props:any) {
     return (
         <>
             {
-                step === 1 &&
+                // step === 1 &&
                 <>
                     {/* <h1>Step 1</h1> */}
                     <Container component="main" maxWidth="md">

@@ -8,7 +8,7 @@ import { DBUser } from '../contexts/firebaseContext/firebaseContext'
 export const validateUser = async() =>{
     try {
         const res = await ConfigAxio.post('/api/auth/login')
-        let user = <DBUser>res.data
+        let user = res.data as DBUser
         return user
     } catch (error) {
         return undefined

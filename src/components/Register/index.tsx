@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const SignInScreen = (props:any) => {
   useEffect(()=>{
     localStorage.clear()
-  },[1])
+  },[])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { isSignin, setCurrentGlobalUser} = useContext(AppContext)
   const useStyles = makeStyles((theme) => ({

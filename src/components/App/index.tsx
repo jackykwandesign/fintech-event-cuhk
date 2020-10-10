@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,7 +18,7 @@ import { Information } from "../Information/information";
 import { ProjectDemo } from "../ProjectDemo/projectDemo";
 // import ConfigAxio from '../../config/axioConfig'
 import { validateUser } from "../../service/auth";
-import Axios from "axios";
+// import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
 
@@ -63,7 +63,7 @@ function App() {
       }
     );
     return unregisterAuthObserver;
-  },[1])
+  },[setCurrentGlobalUser,setSignin])
 return (
 <div className="app-container">
 

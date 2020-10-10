@@ -1,5 +1,4 @@
 import { Button, withStyles } from '@material-ui/core';
-import {Link} from 'react-router-dom'
 import React from 'react';
 // import {ColorButton} from '../NavBar/navbar'
 import styles from './landingPage.module.css'
