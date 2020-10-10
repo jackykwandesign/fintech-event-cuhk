@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-BrowserRouter as Router,
-Switch,
-Route,
-// useLocation 
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
 } from "react-router-dom";
 import HomePage from '../HomePage/home'
 import Register from '../Register'
@@ -20,6 +20,7 @@ import { ProjectDemo } from "../ProjectDemo/projectDemo";
 import { validateUser } from "../../service/auth";
 import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
+import UserList from "../Admin/UserList/userList";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -33,7 +34,7 @@ const WithContextApp =() =>{
 function App() {
 
   // auto login if token valid
-  const { setCurrentGlobalUser, setSignin} = useContext(AppContext)
+  const { setCurrentGlobalUser, setSignin, isSignin, currentGlobalUser} = useContext(AppContext)
   useEffect(()=>{
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
@@ -94,9 +95,18 @@ return (
       <Route path="/projectDemo">
         <ProjectDemo />
       </Route>
+      
       <Route path="/fillInfo">
-        <FillInfo />
+          {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> }
       </Route>
+
+      {
+        currentGlobalUser && isSignin && currentGlobalUser.role === UserRole.ADMIN &&
+        <Route path="/admin/userlist">
+          <UserList />
+        </Route>
+      }
+
     </Switch>
   </Router>
 </div>

@@ -19,86 +19,80 @@ import Select from '@material-ui/core/Select/Select';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { Label } from '@material-ui/icons';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
+import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
 import { FillUserInfo } from '../../service/auth';
+import styles from './fillInfo.module.css'
+interface FillInforField {
+
+    knowOfConference: string;
+    supportOrganization: string;
+    onlineAds: string;
+    otherKnowOfConference: string;
+
+    interest: string;
+    otherInterests: string;
+
+    agreementOfCollection: boolean;
+    agreementOfShow: boolean;
+    agreementOfReceiveInformation: boolean;
+    
+}
 
 export function FillInfo(props:any) {
-    const defaultValues = {
+    const { isSignin } = useContext(AppContext)
+    const defaultValues:FillInforField = {
         knowOfConference: "",
         supportOrganization: "", 
         onlineAds: "",
-        others: "",
+        otherKnowOfConference: "",
         interest: "",
-        agreement: false
+        agreementOfCollection: true,
+        agreementOfShow: true,
+        agreementOfReceiveInformation: true,
+        otherInterests: ""
     }
     const { register, handleSubmit, watch, errors, control } = useForm({defaultValues});
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
-    const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
+    // const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
     const history = useHistory()
     const [step, setStep] = useState<number>(1)
 
-    useEffect(()=>{
-        console.log("knowOfConference", watch("knowOfConference"))
-    },[watch("knowOfConference")])
+    // useEffect(()=>{
+    //     console.log("knowOfConference", watch("knowOfConference"))
+    // },[watch("knowOfConference")])
 
-    const onSubmit = async(values:any) =>{
+    const onSubmit = async(values:FillInforField) =>{
         // values.interests = interestCheckbox
 
         // console.log("values.knowOfConference", values.knowOfConference)
-        // if(knowOfConference === "Others"){
-        //     values.knowOfConference = "Others-" + values.knowOfConference
-        // }else if(knowOfConference === "Supporting Organization"){
-        //     values.knowOfConference = "Supporting Organization-" + values.knowOfConference
-        // }else if(knowOfConference === "Online Ads"){
-        //     values.knowOfConference = "Online Ads-" + values.knowOfConference
-        // }else{
-        //     values.knowOfConference = knowOfConference
+        // if(values.knowOfConference === "Others"){
+        //     values.knowOfConference = "Others-" + values.otherKnowOfConference
+        // }else if(values.knowOfConference === "Supporting Organization"){
+        //     values.knowOfConference = "Supporting Organization-" + values.supportOrganization
+        // }else if(values.knowOfConference === "Online Ads"){
+        //     values.knowOfConference = "Online Ads-" + values.onlineAds
         // }
-
-        // if(knowOfConference !== "Others" && knowOfConference !== "Supporting Organization"  && knowOfConference !== "Online Ads"){
-        //     values.knowOfConference = knowOfConference
-        // }
-        
-        // if(values.interests.length < 3){
-        //     return alert("Please select at least 3 interest")
+        // if(values.interest === "Others"){
+        //     values.interest = "Others-" + values.otherInterests
         // }
 
         alert(JSON.stringify(values))
-        // try {
-        //     const res = await FillUserInfo(values)
-        //     history.push("/")
-        //     history.go(0);
-        // } catch (error) {
-        //     alert("Server Error")
-        // }
-
-
-    }
-    // console.log(watch("example")); 
-    const handleKnowOfConferenceChange = (e:React.FormEvent<HTMLInputElement>) =>{
-        let value = e.currentTarget.value
-        // setKnowOfConference(value)
-    }
-    const handleCheckboxChange = (e:React.FormEvent<HTMLInputElement>) =>{
-        let newData = interestCheckbox;
-        let valueName = e.currentTarget.name
-        let valueChecked = e.currentTarget.checked
-        if(valueChecked){
-            if(newData.indexOf(valueName) === -1){
-                newData.push(valueName)
-            }
-        }else{
-            let itemIndex = newData.indexOf(valueName)
-            if(itemIndex != -1){
-                newData.splice(itemIndex, 1)
-            }
+        try {
+            const res = await FillUserInfo(values)
+            history.push("/")
+            history.go(0);
+        } catch (error) {
+            alert("Server Error")
         }
-        console.log("newData", newData)
-        return setInterestCheckbox(newData)
+
+
     }
+
     const useStyles = makeStyles((theme) => ({
         paper: {
         //   marginTop: theme.spacing(8),
@@ -126,7 +120,7 @@ export function FillInfo(props:any) {
             {
                 step === 1 &&
                 <>
-                    <h1>Step 1</h1>
+                    {/* <h1>Step 1</h1> */}
                     <Container component="main" maxWidth="md">
                         <CssBaseline />
                         <div className={classes.paper}>
@@ -137,87 +131,93 @@ export function FillInfo(props:any) {
                             Please fill-in your information
                             </Typography>
                             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+                            <Typography variant="h6">Personal Information</Typography>
                             <Grid container spacing={2}>
                                 <Grid item md={12} sm={6}>
-                                <TextField
-                                    autoComplete="fname"
-                                    name="firstName"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                    inputRef={register({ required: true, maxLength: 20 })}
-                                />
+                                    <TextField
+                                        autoComplete="fname"
+                                        name="firstName"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="First Name"
+                                        autoFocus
+                                        inputRef={register({ required: true, maxLength: 20 })}
+                                    />
                                 </Grid>
                                 <Grid item md={12} sm={6}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="lname"
-                                    inputRef={register({ required: true, maxLength: 20 })}
-                                />
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label="Last Name"
+                                        name="lastName"
+                                        autoComplete="lname"
+                                        inputRef={register({ required: true, maxLength: 20 })}
+                                    />
                                 </Grid>
                                 <Grid item md={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="contactEmail"
-                                    label="Contact Email"
-                                    name="contactEmail"
-                                    inputRef={register({ required: true, maxLength: 50 })}
-                                />
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="contactEmail"
+                                        label="Contact Email"
+                                        name="contactEmail"
+                                        inputRef={register({ required: true, maxLength: 50 })}
+                                    />
                                 </Grid>
                                 <Grid item md={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="jobTitle"
-                                    label="Job Title"
-                                    name="jobTitle"
-                                    inputRef={register({ required: true, maxLength: 50 })}
-                                />
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="jobTitle"
+                                        label="Job Title"
+                                        name="jobTitle"
+                                        inputRef={register({ required: true, maxLength: 50 })}
+                                    />
                                 </Grid>
                                 <Grid item md={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="organization"
-                                    label="Company / Organization"
-                                    name="organization"
-                                    inputRef={register({ required: true, maxLength: 50 })}
-                                />
-                                </Grid>
-                                <Grid item md={12}>
-                                <TextField
-                                    variant="outlined"
-                                    fullWidth
-                                    id="contactNumber"
-                                    label="Contact Number"
-                                    name="contactNumber"
-                                    inputRef={register({maxLength: 50 })}
-                                />
-                                </Grid>
-                                <Grid item md={12}>
-                                <TextField
-                                    variant="outlined"
-                                    fullWidth
-                                    id="areaCode"
-                                    label="Area Code (If you are not in Hong Kong)"
-                                    name="areaCode"
-                                    inputRef={register({maxLength: 50 })}
-                                />
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="organization"
+                                        label="Company / Organization"
+                                        name="organization"
+                                        inputRef={register({ required: true, maxLength: 50 })}
+                                    />
                                 </Grid>
 
-                                <br/>
+                                <Grid item md={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        id="contactNumber"
+                                        label="Contact Number"
+                                        name="contactNumber"
+                                        inputRef={register({maxLength: 50 })}
+                                    />
+                                </Grid>
+
+                                <Grid item md={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        id="areaCode"
+                                        label="Area Code (If you are not in Hong Kong)"
+                                        name="areaCode"
+                                        inputRef={register({maxLength: 50 })}
+                                    />
+                                    <br/>
+                                    <br/>
+                                </Grid>
+
+                                
+                                <Typography variant="h6">Interest</Typography>
                                 <Grid item md={12}>
                                     <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
                                     <Controller
@@ -293,14 +293,14 @@ export function FillInfo(props:any) {
                                             <TextField 
                                                 required
                                                 style={{marginLeft:"10px"}}
+                                                placeholder = "Please specify"
                                             />
-                                        } name="others" control={control} />
+                                        } name="otherKnowOfConference" control={control} />
                                     }
 
                                 </Grid>
 
                                 <Grid item md={12}>
-                                    <br/>
                                     <FormLabel component="legend">Area of Interest * </FormLabel>
                                     <Controller
                                         as={
@@ -323,36 +323,73 @@ export function FillInfo(props:any) {
                                         name="interest"
                                         control={control}
                                     />
-                                </Grid>
-
-                                <Grid item md={12}>
-                                <Controller
-                                    name="agreement"
-                                    control={control}
-                                    render={(props) => (
-                                        <>
-                                            <Checkbox
-                                            onChange={(e) => props.onChange(e.target.checked)}
-                                            checked={props.value} />
-                                            
-                                        </>
-
-                                    )}
-                                    />
-                                    {/* <Controller 
-                                    as{
-                                        <Checkbox value="allowExtraEmails" color="primary" />
+                                    {
+                                        watch("interest") === "Others" &&
+                                        <Controller as={
+                                            <TextField 
+                                                required
+                                                style={{marginLeft:"10px"}}
+                                                placeholder = "Please specify"
+                                            />
+                                        } name="otherInterests" control={control} />
                                     }
-                                        name="agreement"
-                                        control={control}
-                                    /> */}
-                                {/* <FormControlLabel
-                                    control={<Checkbox value="agreement" color="primary" inputRef={register}/>}
-                                    label="I want to want to be shown in the Meet the Other Participants page (will show your name and company/organization only."
-                                /> */}
-                                <FormLabel component="legend">I want to want to be shown in the Meet the Other Participants page (will show your name and company/organization only. </FormLabel>
-                                            
+                                    <br/>
+                                    <br/>
                                 </Grid>
+
+                                <Typography variant="h6">Personal Information Collection Statement</Typography>
+                                <Grid item md={12}>
+{/*                                     
+                                    <FormLabel>Personal Information Collection Statement</FormLabel> */}
+                                    <Typography variant="body2" gutterBottom>The personal data collected will be used by The Chinese University of Hong Kong for processing the captioned event.  The Organizers may send you news and follow-up emails.  All personal data you provided will not be disclosed to any third party unless with your prior consent.</Typography>
+                                    <Controller
+                                        name="agreementOfCollection"
+                                        control={control}
+                                        render={(props) => (
+                                            <>
+                                                <div className={styles.sameLine}>
+                                                <Checkbox
+                                                    onChange={(e) => props.onChange(e.target.checked)}
+                                                    checked={props.value} 
+                                                    required
+                                                />
+                                                <FormLabel component="legend">I agree to the personal information collection statement. *</FormLabel>
+                                                </div>
+                                            </>
+                                        )}
+                                    />  
+                                    <Controller
+                                        name="agreementOfShow"
+                                        control={control}
+                                        render={(props) => (
+                                            <>
+                                                <div className={styles.sameLine}>
+                                                <Checkbox
+                                                    onChange={(e) => props.onChange(e.target.checked)}
+                                                    checked={props.value} 
+                                                />
+                                                <FormLabel component="legend">I would like to show my name and organization in the Meet the Other Participants page.</FormLabel>
+                                                </div>
+                                            </>
+                                        )}
+                                    />  
+                                    <Controller
+                                        name="agreementOfReceiveInformation"
+                                        control={control}
+                                        render={(props) => (
+                                            <>
+                                                <div className={styles.sameLine}>
+                                                <Checkbox
+                                                    onChange={(e) => props.onChange(e.target.checked)}
+                                                    checked={props.value} 
+                                                />
+                                                <FormLabel component="legend">I would like to receive information of the Organizers’ future events.</FormLabel>
+                                                </div>
+                                            </>
+                                        )}
+                                    />  
+                                </Grid>
+
                             </Grid>
                             <Button
                                 type="submit"
@@ -371,7 +408,7 @@ export function FillInfo(props:any) {
                         </Container>
                 </>
             }
-            {
+            {/* {
                 step === 2 &&
                 <>
                     <h1>Step 2</h1>
@@ -382,7 +419,7 @@ export function FillInfo(props:any) {
                 <>
                     <h1>Step 3</h1>
                 </>
-            }
+            } */}
         </>
     )
 }

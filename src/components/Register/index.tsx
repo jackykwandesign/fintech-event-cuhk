@@ -19,7 +19,7 @@ const SignInScreen = (props:any) => {
     localStorage.clear()
   },[1])
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { isSignin} = useContext(AppContext)
+  const { isSignin, setCurrentGlobalUser} = useContext(AppContext)
   const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -53,10 +53,12 @@ const SignInScreen = (props:any) => {
         await registerUser()
         user = await validateUser()
       }
+
       if(user?.role === UserRole.ADMIN){
         history.push(successUrl)
       }else{
         if(user?.finishInfo === false){
+          setCurrentGlobalUser(user)
           history.push('/fillInfo')
         }else{
           history.push(successUrl)
@@ -98,8 +100,8 @@ const SignInScreen = (props:any) => {
   }
 
   const uiConfig = {
-    // signInFlow: firebase.auth().isSignInWithEmailLink(window.location.href) ? 'redirect' : 'popup',
-    signInFlow : 'popup',
+    signInFlow: firebase.auth().isSignInWithEmailLink(window.location.href) ? 'redirect' : 'popup',
+    // signInFlow : 'popup',
     
     callbacks: {
       signInSuccessWithAuthResult: checkLoginOrSigninWithAuthResult
@@ -109,6 +111,7 @@ const SignInScreen = (props:any) => {
       {
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+        // requireDisplayName: true
       },
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],

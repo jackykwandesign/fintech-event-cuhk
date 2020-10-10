@@ -10,8 +10,28 @@ export interface DBUser{
     email: string;
     role: UserRole;
     photoURL: string;
-    interest: string[];
+    // interest: string[];
     finishInfo: boolean;
+    kycData: KYCData;
+}
+export interface KYCData{
+    knowOfConference: string;
+    supportOrganization: string;
+    onlineAds: string;
+    otherKnowOfConference: string;
+    interest: string;
+    otherInterests: string;
+    agreementOfCollection: boolean;
+    agreementOfShow: boolean;
+    agreementOfReceiveInformation: boolean;
+
+    firstName: string;
+    lastName: string;
+    contactEmail: string
+    jobTitle: string;
+    organization: string;
+    contactNumber: string
+    areaCode: string;
 }
 export interface AppContextInterface {
     currentGlobalUser: DBUser | undefined,

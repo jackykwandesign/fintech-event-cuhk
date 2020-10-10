@@ -35,6 +35,10 @@ const handleClick = () => setClick(!click);
 const closeMobileMenu = () => setClick(false);
 
 const { signOut, isSignin, currentGlobalUser} = useContext(AppContext)
+const handleMobileSignOut = () =>{
+  signOut();
+  closeMobileMenu();
+}
 
 const showButton = () => {
 if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }; useEffect(()=> {
@@ -86,11 +90,19 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               </Link>
             </li>
 
-            <li>
-              <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-              Login / Sign Up
+            {
+              !isSignin ? 
+              <li>
+                <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
+                Login / Sign Up
+                </Link>
+              </li>
+              :
+              <Link to="/" className='nav-links-mobile' onClick={handleMobileSignOut}>
+                SignOut
               </Link>
-            </li>
+            }
+
 
           </ul>
           
