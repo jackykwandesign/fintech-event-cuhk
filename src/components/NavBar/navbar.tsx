@@ -90,7 +90,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               </li>
               <li className='nav-item'>
                 <Link to='/chatroom' className='nav-links' onClick={closeMobileMenu}>
-                ChatRoom
+                Meet Other Participants
                 </Link>
               </li>
 
