@@ -1,5 +1,6 @@
 import { Button, withStyles } from '@material-ui/core';
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
 // import {ColorButton} from '../NavBar/navbar'
 import styles from './landingPage.module.css'
@@ -26,18 +27,18 @@ const LandingPage = () =>{
     // },
   })(Button);
   const {isSignin} = useContext(AppContext)
-
+  const history = useHistory()
   return (
     <div className={styles.hero_container + " " + styles.backdrop}>
       <div className={styles.hero_btns}>
        
        {
         isSignin ? 
-          <StyledButton  variant="outlined" size="large"  color="primary" href="/home">
+          <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/home")}>
             GET STARTED
           </StyledButton >  
         :
-          <StyledButton  variant="outlined" size="large"  color="primary" href="/register">
+          <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/register")}>
             LOGIN / SIGNUP
           </StyledButton >   
       }
