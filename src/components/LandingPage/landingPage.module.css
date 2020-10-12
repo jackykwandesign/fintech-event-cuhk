@@ -11,9 +11,10 @@
 
 .hero_container {
   /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
-  background: url('/images/backdrop.png') center center/cover no-repeat;
+  background: url('/images/backdrop.png') center center/cover no-repeat;;
   height: 92vh;
-  /* width: 100%; */
+  /* width: 90vw; */
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

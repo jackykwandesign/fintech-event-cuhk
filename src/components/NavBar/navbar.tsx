@@ -57,65 +57,69 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           {/* 2020 CUHK CONFERENCE ON FINANCIAL TECHNOLOGY */}
-          CUHK FINTECH CONFERENCE 2020
+          2020 CUHK FinTech Conference
           {/* <i className='fab fa-typo3' /> */}
           </Link>
+          
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars' } />
           </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu' }>
-            <li className='nav-item'>
-              <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
-              Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/information' className='nav-links' onClick={closeMobileMenu}>
-              Information
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/webinar' className='nav-links' onClick={closeMobileMenu}>
-              Webinar
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/projectDemo' className='nav-links' onClick={closeMobileMenu}>
-              Project Demo
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/chatroom' className='nav-links' onClick={closeMobileMenu}>
-              ChatRoom
-              </Link>
-            </li>
 
-            {
-              !isSignin ? 
-              <li>
-                <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                Login / Sign Up
+          { 
+            isSignin &&
+            <ul className={click ? 'nav-menu active' : 'nav-menu' }>
+              <li className='nav-item'>
+                <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
+                Home
                 </Link>
               </li>
-              :
-              <Link to="/" className='nav-links-mobile' onClick={handleMobileSignOut}>
-                SignOut
-              </Link>
-            }
+              <li className='nav-item'>
+                <Link to='/information' className='nav-links' onClick={closeMobileMenu}>
+                Information
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='/webinar' className='nav-links' onClick={closeMobileMenu}>
+                Webinar
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='/projectDemo' className='nav-links' onClick={closeMobileMenu}>
+                Project Demo
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='/chatroom' className='nav-links' onClick={closeMobileMenu}>
+                ChatRoom
+                </Link>
+              </li>
 
-
-          </ul>
-          
-            {
-              button && !isSignin &&
-              <div className="nav-button-container">
-              <Link to="/register" className="nav-buttons">
-                <ColorButton variant="outlined" className={classes.margin}>
+              {
+                !isSignin ? 
+                <li>
+                  <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
                   Login / Sign Up
-                </ColorButton>
-              </Link>
-              </div>
-            }
+                  </Link>
+                </li>
+                :
+                <Link to="/" className='nav-links-mobile' onClick={handleMobileSignOut}>
+                  SignOut
+                </Link>
+              }
+
+
+            </ul>
+          }
+          {
+            button && !isSignin &&
+            <div className="nav-button-container">
+            <Link to="/register" className="nav-buttons">
+              <ColorButton variant="outlined" className={classes.margin}>
+                Login / Sign Up
+              </ColorButton>
+            </Link>
+            </div>
+          }
           
           {
             button && isSignin &&
