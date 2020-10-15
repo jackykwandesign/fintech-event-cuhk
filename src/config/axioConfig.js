@@ -11,7 +11,7 @@ axios.interceptors.request.use(async(req) => {
       'Content-Type': 'application/json',
       "Authorization": token ? `Bearer ${token}` : ''
     }
-    console.log(`${req.method} ${req.url}`);
+    // console.log(`${req.method} ${req.url}`);
     // Important: request interceptors **must** return the request.
     return req;
 });
