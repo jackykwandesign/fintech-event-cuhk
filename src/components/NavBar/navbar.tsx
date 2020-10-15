@@ -68,6 +68,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           { 
             isSignin &&
             <ul className={click ? 'nav-menu active' : 'nav-menu' }>
+              {/* 
               <li className='nav-item'>
                 <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
                 Home
@@ -92,7 +93,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                 <Link to='/chatroom' className='nav-links' onClick={closeMobileMenu}>
                 Meet Other Participants
                 </Link>
-              </li>
+              </li> */}
 
               {
                 !isSignin ? 

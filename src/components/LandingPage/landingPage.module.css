@@ -11,18 +11,27 @@
 
 .hero_container {
   /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
-  background: url('/images/backdrop.png') center center/cover no-repeat;;
-  height: 92vh;
-  /* width: 90vw; */
+  /* background: url('/images/backdrop.png') center center/cover no-repeat;; */
+  height: 100%;
+  /* height: 90vw; */
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   /* box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); */
-  object-fit: contain;
+  /* object-fit: contain; */
   /* overflow: hidden; */
 }
 .hero_btns{
   margin-top: 700px;
+  overflow: visible;
+  z-index: 999;
+  position: fixed;
+
+}
+.bgimg{
+  height: 100%;
+  width: 100%;
+  z-index: -1 ;
 }

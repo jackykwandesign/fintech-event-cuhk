@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 // import FormControl from '@material-ui/core/FormControl/FormControl';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import FormGroup from '@material-ui/core/FormGroup';
@@ -22,6 +25,7 @@ import Typography from '@material-ui/core/Typography';
 // import { Label } from '@material-ui/icons';
 // import InfoOutlined from '@material-ui/icons/InfoOutlined';
 import React, {  } from 'react'
+import { useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
 // import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
@@ -34,12 +38,15 @@ interface FillInforField {
     onlineAds: string;
     otherKnowOfConference: string;
 
-    interest: string;
-    otherInterests: string;
+    // interest: string;
+    otherInterest: string;
+    interestCheckbox:string[]
 
     agreementOfCollection: boolean;
     agreementOfShow: boolean;
     agreementOfReceiveInformation: boolean;
+    
+
     
 }
 
@@ -49,22 +56,47 @@ export function FillInfo(props:any) {
         supportOrganization: "", 
         onlineAds: "",
         otherKnowOfConference: "",
-        interest: "",
+        // interest: "",
+        interestCheckbox:[],
         agreementOfCollection: true,
         agreementOfShow: true,
         agreementOfReceiveInformation: true,
-        otherInterests: ""
+        otherInterest: ""
     }
     const { register, handleSubmit, watch, control } = useForm({defaultValues});
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
-    // const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
+    const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
+    const [isOtherInterest, setIsOtherInterest] = useState<boolean>(false)
+    // console.log("isOtherInterest", isOtherInterest)
     const history = useHistory()
     // const [step, setStep] = useState<number>(1)
 
     // useEffect(()=>{
     //     console.log("knowOfConference", watch("knowOfConference"))
     // },[watch("knowOfConference")])
-
+    const handleCheckboxChange = (e:React.FormEvent<HTMLInputElement>) =>{
+        let newData = interestCheckbox;
+        let valueName = e.currentTarget.name
+        let valueChecked = e.currentTarget.checked
+        if(valueChecked){
+            if(newData.indexOf(valueName) === -1){
+                if(valueName === "Others"){
+                    setIsOtherInterest(true)
+                }
+                newData.push(valueName)
+            }
+        }else{
+            let itemIndex = newData.indexOf(valueName)
+            if(itemIndex != -1){
+                if(valueName === "Others"){
+                    setIsOtherInterest(false)
+                }
+                newData.splice(itemIndex, 1)
+            }
+        }
+        console.log("newData", newData)
+        setInterestCheckbox(newData)
+    }
     const onSubmit = async(values:FillInforField) =>{
         // values.interests = interestCheckbox
 
@@ -77,10 +109,16 @@ export function FillInfo(props:any) {
         //     values.knowOfConference = "Online Ads-" + values.onlineAds
         // }
         // if(values.interest === "Others"){
-        //     values.interest = "Others-" + values.otherInterests
+        //     values.interest = "Others-" + values.otherInterest
         // }
+        values.interestCheckbox = interestCheckbox
 
-        alert(JSON.stringify(values))
+        if(values.interestCheckbox.length < 1){
+            return alert("Please select at least 1 interest")
+        }
+
+        alert("Thank you for your registration.")
+        // alert(JSON.stringify(values))
         try {
             await FillUserInfo(values)
             history.push("/")
@@ -299,7 +337,7 @@ export function FillInfo(props:any) {
 
                                 </Grid>
 
-                                <Grid item md={12}>
+                                {/* <Grid item md={12}>
                                     <FormLabel component="legend">Area of Interest * </FormLabel>
                                     <Controller
                                         as={
@@ -330,12 +368,64 @@ export function FillInfo(props:any) {
                                                 style={{marginLeft:"10px"}}
                                                 placeholder = "Please specify"
                                             />
-                                        } name="otherInterests" control={control} />
+                                        } name="otherInterest" control={control} />
                                     }
                                     <br/>
                                     <br/>
-                                </Grid>
+                                </Grid> */}
 
+                                <Grid item md={12}>
+                                    
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">Interest (Please select at least 1 interest)</FormLabel>
+                                    <FormGroup row>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={handleCheckboxChange} name="AI and Machine Learning" color="primary" required = {interestCheckbox === [] ? true : false}/>}
+                                            label="AI and Machine Learning"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={handleCheckboxChange} name="Big Data Analytics" color="primary"/>}
+                                            label="Big Data Analytics"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={handleCheckboxChange} name="Cybersecurity" color="primary"/>}
+                                            label="Cybersecurity"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={handleCheckboxChange} name="STO/Tokenization/Virtual Assets" color="primary"/>}
+                                            label="STO/Tokenization/Virtual Assets"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={handleCheckboxChange} name="FinTech in the Banking/Virtual Banking" color="primary"/>}
+                                            label="FinTech in the Banking/Virtual Banking"
+                                        />
+                                        <FormControlLabel
+                                            label={
+                                                <div className={styles.sameLine}>
+                                                <span className="MuiTypography-body1">Others</span>
+                                                <Controller as={
+                                                    <TextField
+                                                        required = {isOtherInterest}
+                                                        // required = {interestCheckbox.length > 0 ? false : true}
+                                                        style={{ marginLeft: "10px" }}
+                                                        placeholder="Please specify"
+                                                    />
+                                                    } name="otherInterest" control={control} 
+                                                />
+                                                </div>
+                                            }
+                                            control={
+                                                <div className={styles.sameLine}>
+                                                    <Checkbox onChange={handleCheckboxChange} name="Others" color="primary" />
+                                                </div>  
+                                            }
+                                            
+                                        />
+                                    </FormGroup>
+                                </FormControl>
+                                    <br/>
+                                    <br/>
+                                </Grid>
                                 <Typography variant="h6">Personal Information Collection Statement</Typography>
                                 <Grid item md={12}>
 {/*                                     

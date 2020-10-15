@@ -86,18 +86,20 @@ return (
       <Route path="/home">
         <HomePage />
       </Route>     
-      <Route path="/information">
-        <Information />
-      </Route>  
       <Route path="/register">
         <Register />
       </Route>
+      
+      {/* <Route path="/information">
+        <Information />
+      </Route>  
+
       <Route path="/webinar">
         <Webinar />
       </Route>
       <Route path="/projectDemo">
         <ProjectDemo />
-      </Route>
+      </Route> */}
       
       <Route path="/fillInfo">
           {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> }
@@ -109,6 +111,10 @@ return (
           <UserList />
         </Route>
       }
+
+      <Route>
+        <Redirect to="/"></Redirect>
+      </Route>
 
     </Switch>
   </Router>

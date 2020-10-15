@@ -30,13 +30,17 @@ const LandingPage = () =>{
   const history = useHistory()
   return (
     <div className={styles.hero_container + " " + styles.backdrop}>
+      <img className = {styles.bgimg} src = "/images/backdrop.png"></img>
       <div className={styles.hero_btns}>
        
        {
         isSignin ? 
-          <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/home")}>
-            GET STARTED
-          </StyledButton >  
+        <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/")}>
+        COMING SOON
+      </StyledButton >  
+          // <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/home")}>
+          //   GET STARTED
+          // </StyledButton >  
         :
           <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/register")}>
             LOGIN / SIGNUP
