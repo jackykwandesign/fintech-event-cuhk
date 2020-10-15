@@ -44,20 +44,20 @@ function App() {
           .then(async function(idToken) {
             await localStorage.setItem('firebaseToken', idToken)
             const res = await validateUser()
-            console.log()
+            // console.log()
             if(res){
               setCurrentGlobalUser(res)
               if(res.role === UserRole.ADMIN){
-                console.log("IS ADMIN")
+                // console.log("IS ADMIN")
                 return setSignin(true)
               }else if(res.role === UserRole.HELPER){
-                console.log("IS HELPER")
+                // console.log("IS HELPER")
                 return setSignin(true)
               }else if(res.finishInfo){
-                console.log("IS USER, FINISH INFO")
+                // console.log("IS USER, FINISH INFO")
                 return setSignin(true)
               }else{
-                console.log("IS USER, NOT FINISH INFO")
+                // console.log("IS USER, NOT FINISH INFO")
               }
             }
           }).catch(async function(error) {

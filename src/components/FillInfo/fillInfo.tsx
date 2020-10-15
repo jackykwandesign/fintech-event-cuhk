@@ -94,7 +94,7 @@ export function FillInfo(props:any) {
                 newData.splice(itemIndex, 1)
             }
         }
-        console.log("newData", newData)
+        // console.log("newData", newData)
         setInterestCheckbox(newData)
     }
     const onSubmit = async(values:FillInforField) =>{

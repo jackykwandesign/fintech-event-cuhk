@@ -47,9 +47,9 @@ const SignInScreen = (props:any) => {
       await localStorage.setItem('firebaseToken', token)
       let user;
       user = await validateUser()
-      console.log("user", user)
+      // console.log("user", user)
       if(!user){
-        console.log("Register User")
+        // console.log("Register User")
         await registerUser()
         user = await validateUser()
       }
@@ -90,12 +90,12 @@ const SignInScreen = (props:any) => {
   }
 
   function checkLoginOrSigninWithAuthResult(authResult: any, redirectUrl: any):boolean{
-    console.log("signin success With Auth callback", authResult)
+    // console.log("signin success With Auth callback", authResult)
     setIsLoading(true)
     if(authResult){
       checkUserRedirect(authResult)
     }
-    console.log("Pass check")
+    // console.log("Pass check")
     return false
   }
 
