@@ -7,12 +7,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 // import FormControl from '@material-ui/core/FormControl/FormControl';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import FormGroup from '@material-ui/core/FormGroup';
 // import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
 // import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 // import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
@@ -33,6 +35,8 @@ import { FillUserInfo } from '../../service/auth';
 import styles from './fillInfo.module.css'
 interface FillInforField {
 
+    salutation: string;
+
     knowOfConference: string;
     supportOrganization: string;
     onlineAds: string;
@@ -52,6 +56,7 @@ interface FillInforField {
 
 export function FillInfo(props:any) {
     const defaultValues:FillInforField = {
+        salutation: "",
         knowOfConference: "",
         supportOrganization: "", 
         onlineAds: "",
@@ -117,15 +122,15 @@ export function FillInfo(props:any) {
             return alert("Please select at least 1 interest")
         }
 
-        alert("Thank you for your registration.")
-        // alert(JSON.stringify(values))
-        try {
-            await FillUserInfo(values)
-            history.push("/")
-            history.go(0);
-        } catch (error) {
-            alert("Server Error")
-        }
+        // alert("Thank you for your registration.")
+        alert(JSON.stringify(values))
+        // try {
+        //     await FillUserInfo(values)
+        //     history.push("/")
+        //     history.go(0);
+        // } catch (error) {
+        //     alert("Server Error")
+        // }
 
 
     }
@@ -149,6 +154,13 @@ export function FillInfo(props:any) {
         submit: {
           margin: theme.spacing(3, 0, 2),
         },
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
       }));
       const classes = useStyles();
 
@@ -170,7 +182,31 @@ export function FillInfo(props:any) {
                             <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                             <Typography variant="h6">Personal Information</Typography>
                             <Grid container spacing={2}>
-                                <Grid item md={12} sm={6}>
+                                <Grid item md={2}>
+                                    <Controller
+                                        as={
+                                            <TextField
+                                                select
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                label="Salutation"
+                                                inputProps={{ name: "salutation", id: "outlined-age-simple" }}
+                                                defaultValue=""
+                                            >
+                                                <MenuItem value="" disabled>None</MenuItem>
+                                                <MenuItem value={"Prof"}>Prof</MenuItem>
+                                                <MenuItem value={"Dr"}>Dr</MenuItem>
+                                                <MenuItem value={"Mr"}>Mr</MenuItem>
+                                                <MenuItem value={"Ms"}>Ms</MenuItem>
+                                            </TextField>
+                                        }
+                                        name="salutation"
+                                        control={control}
+                                    />
+
+                                </Grid>
+                                <Grid item md={5} sm={6}>
                                     <TextField
                                         autoComplete="fname"
                                         name="firstName"
@@ -183,7 +219,7 @@ export function FillInfo(props:any) {
                                         inputRef={register({ required: true, maxLength: 20 })}
                                     />
                                 </Grid>
-                                <Grid item md={12} sm={6}>
+                                <Grid item md={5} sm={6}>
                                     <TextField
                                         variant="outlined"
                                         required
@@ -195,17 +231,19 @@ export function FillInfo(props:any) {
                                         inputRef={register({ required: true, maxLength: 20 })}
                                     />
                                 </Grid>
+
                                 <Grid item md={12}>
                                     <TextField
                                         variant="outlined"
                                         required
                                         fullWidth
-                                        id="contactEmail"
-                                        label="Contact Email"
-                                        name="contactEmail"
+                                        id="organization"
+                                        label="Company / Organization"
+                                        name="organization"
                                         inputRef={register({ required: true, maxLength: 50 })}
                                     />
                                 </Grid>
+
                                 <Grid item md={12}>
                                     <TextField
                                         variant="outlined"
@@ -217,14 +255,15 @@ export function FillInfo(props:any) {
                                         inputRef={register({ required: true, maxLength: 50 })}
                                     />
                                 </Grid>
+                                
                                 <Grid item md={12}>
                                     <TextField
                                         variant="outlined"
                                         required
                                         fullWidth
-                                        id="organization"
-                                        label="Company / Organization"
-                                        name="organization"
+                                        id="contactEmail"
+                                        label="Contact Email"
+                                        name="contactEmail"
                                         inputRef={register({ required: true, maxLength: 50 })}
                                     />
                                 </Grid>
@@ -254,7 +293,7 @@ export function FillInfo(props:any) {
                                 </Grid>
 
                                 
-                                <Typography variant="h6">Interest</Typography>
+                                {/* <Typography variant="h6">Interest</Typography> */}
                                 <Grid item md={12}>
                                     <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
                                     <Controller
@@ -334,45 +373,9 @@ export function FillInfo(props:any) {
                                             />
                                         } name="otherKnowOfConference" control={control} />
                                     }
-
+                                    <br/>
+                                    <br/>
                                 </Grid>
-
-                                {/* <Grid item md={12}>
-                                    <FormLabel component="legend">Area of Interest * </FormLabel>
-                                    <Controller
-                                        as={
-                                          
-                                            <Select
-                                                // style={{marginLeft:"10px"}}
-                                                defaultValue=""
-                                                displayEmpty
-                                                required
-                                                // variant="outlined"
-                                            >
-                                                <MenuItem value="" disabled>None</MenuItem>
-                                                <MenuItem value={"AI and Machine Learning"}>AI and Machine Learning</MenuItem>
-                                                <MenuItem value={"Cybersecurity / Biometrics"}>Cybersecurity/Biometrics</MenuItem>
-                                                <MenuItem value={"FinTech in the Banking/Investment Banking Industry"}>FinTech in the Banking/Investment Banking Industry</MenuItem>
-                                                <MenuItem value={"ICO/Tokenization / Cryptoasset"}>ICO / Tokenization / Cryptoasset</MenuItem>
-                                                <MenuItem value={"Others"}>Others</MenuItem>
-                                            </Select>
-                                        }
-                                        name="interest"
-                                        control={control}
-                                    />
-                                    {
-                                        watch("interest") === "Others" &&
-                                        <Controller as={
-                                            <TextField 
-                                                required
-                                                style={{marginLeft:"10px"}}
-                                                placeholder = "Please specify"
-                                            />
-                                        } name="otherInterest" control={control} />
-                                    }
-                                    <br/>
-                                    <br/>
-                                </Grid> */}
 
                                 <Grid item md={12}>
                                     
