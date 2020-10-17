@@ -26,7 +26,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 // import { Label } from '@material-ui/icons';
 // import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import React, {  } from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
@@ -39,7 +39,7 @@ interface FillInforField {
 
     knowOfConference: string;
     supportOrganization: string;
-    onlineAds: string;
+    advertisement: string;
     otherKnowOfConference: string;
 
     // interest: string;
@@ -59,7 +59,7 @@ export function FillInfo(props:any) {
         salutation: "",
         knowOfConference: "",
         supportOrganization: "", 
-        onlineAds: "",
+        advertisement: "",
         otherKnowOfConference: "",
         // interest: "",
         interestCheckbox:[],
@@ -72,7 +72,17 @@ export function FillInfo(props:any) {
     // const [knowOfConference, setKnowOfConference] = useState<string>("other")
     const [interestCheckbox, setInterestCheckbox] = useState<string[]>([])
     const [isOtherInterest, setIsOtherInterest] = useState<boolean>(false)
+    const [isSupportKnowOfConference, setIsSupportKnowOfConference] = useState<boolean>(false)
     // console.log("isOtherInterest", isOtherInterest)
+    useEffect(()=>{
+        // console.log(watch("knowOfConference"))
+        let watchValue = watch("knowOfConference")
+        if(watchValue === "Others" || watchValue === "Advertisement" || watchValue === "Supporting Organization"){
+            setIsSupportKnowOfConference(true)
+        }else{
+            setIsSupportKnowOfConference(false)
+        }
+    },[watch("knowOfConference")])
     const history = useHistory()
     // const [step, setStep] = useState<number>(1)
 
@@ -292,19 +302,24 @@ export function FillInfo(props:any) {
                                     <br/>
                                 </Grid>
 
-                                
-                                {/* <Typography variant="h6">Interest</Typography> */}
+                                <Grid item container spacing={2}>
+
                                 <Grid item md={12}>
-                                    <FormLabel component="legend">Where did you know about this conference? * </FormLabel>
+                                    <Typography variant="h6">Where did you know about this conference? * </Typography>
+                                </Grid>
+                                <Grid item md={isSupportKnowOfConference ? 6 : 12}>
+                                    
+                                    {/* <FormLabel component="legend">Where did you know about this conference? * </FormLabel> */}
                                     <Controller
                                         as={
-                                          
-                                            <Select
-                                                // style={{marginLeft:"10px"}}
-                                                defaultValue=""
-                                                displayEmpty
+                                            <TextField
+                                                select
+                                                variant="outlined"
                                                 required
-                                                // variant="outlined"
+                                                fullWidth
+                                                label="Source"
+                                                inputProps={{ name: "knowOfConference", id: "outlined-age-simple" }}
+                                                defaultValue=""
                                             >
                                                 <MenuItem value="" disabled>None</MenuItem>
                                                 <MenuItem value={"CUHK Staff Mass Mailing"}>CUHK Staff Mass Mailing</MenuItem>
@@ -313,29 +328,40 @@ export function FillInfo(props:any) {
                                                 <MenuItem value={"Invitation Email from Organizer"}>Invitation Email from Organizer</MenuItem>
                                                 <MenuItem value={"Sponsor - Hang Seng Bank"}>Sponsor - Hang Seng Bank</MenuItem>
                                                 <MenuItem value={"Supporting Organization"}>Supporting Organization</MenuItem>
-                                                <MenuItem value={"Online Ads"}>Online Ads</MenuItem>
+                                                <MenuItem value={"Advertisement"}>Advertisement</MenuItem>
                                                 <MenuItem value={"Others"}>Others</MenuItem>
-                                            </Select>
+                                            </TextField>
                                         }
                                         name="knowOfConference"
                                         control={control}
                                     />
+                                </Grid>
+                                <Grid item md={6}>
 
                                     {
                                         watch("knowOfConference") === "Supporting Organization" &&
                                         <Controller
                                             as={
-                                                <Select
-                                                    style={{marginLeft:"10px"}}
-                                                    defaultValue=""
-                                                    displayEmpty
+                                                <TextField
+                                                    select
+                                                    // style={{marginLeft:"10px"}}
+                                                    variant="outlined"
                                                     required
+                                                    fullWidth
+                                                    label="Please specify organization"
+                                                    inputProps={{ name: "supportOrganization", id: "outlined-age-simple" }}
+                                                    defaultValue=""
                                                 >
                                                     <MenuItem value="" disabled>None</MenuItem>
-                                                    <MenuItem value={"Organization A"}>Organization A</MenuItem>
-                                                    <MenuItem value={"Organization B"}>Organization B</MenuItem>
-                                                    <MenuItem value={"Organization C"}>Organization C</MenuItem>
-                                                </Select>
+                                                    <MenuItem value={"CFA Society Hong Kong"}>CFA Society Hong Kong</MenuItem>
+                                                    <MenuItem value={"The Chartered Institute of Management Accountants"}>The Chartered Institute of Management Accountants</MenuItem>
+                                                    <MenuItem value={"Finnovasia"}>Finnovasia</MenuItem>
+                                                    <MenuItem value={"Fintech Association of Hong Kong"}>Fintech Association of Hong Kong</MenuItem>
+                                                    <MenuItem value={"The Hong Kong Institute of Bankers"}>The Hong Kong Institute of Bankers</MenuItem>
+                                                    <MenuItem value={"Hong Kong Institute of Certified Public Accountants"}>Hong Kong Institute of Certified Public Accountants</MenuItem>
+                                                    <MenuItem value={"InvestHK FintechHK"}>InvestHK FintechHK</MenuItem>
+                                                    <MenuItem value={"Society of Registered Financial Planners"}>Society of Registered Financial Planners</MenuItem>
+                                                </TextField>
                                             }
                                             name="supportOrganization"
                                             control={control}
@@ -343,44 +369,52 @@ export function FillInfo(props:any) {
                                     }
 
                                     {
-                                        watch("knowOfConference") === "Online Ads" &&
+                                        watch("knowOfConference") === "Advertisement" &&
                                         <Controller
                                             as={
-                                                <Select
-                                                    defaultValue=""
-                                                    displayEmpty
+                                                <TextField
+                                                    select
+                                                    // style={{marginLeft:"10px"}}
+                                                    variant="outlined"
                                                     required
-                                                    style={{marginLeft:"10px"}}
+                                                    fullWidth
+                                                    label="Please specify advertisement"
+                                                    inputProps={{ name: "advertisement", id: "outlined-age-simple" }}
+                                                    defaultValue=""
                                                 >
                                                     <MenuItem value="" disabled>None</MenuItem>
-                                                    <MenuItem value={"Youtube"}>Youtube</MenuItem>
-                                                    <MenuItem value={"Facebook"}>Facebook</MenuItem>
-                                                    <MenuItem value={"Twitter"}>Twitter</MenuItem>
-                                                </Select>
+                                                    <MenuItem value={"Google"}>Google</MenuItem>
+                                                    <MenuItem value={"Linkedin"}>Linkedin</MenuItem>
+                                                    <MenuItem value={"Hong Kong Economic Journal 信報財經新聞有限公司"}>Hong Kong Economic Journal 信報財經新聞有限公司</MenuItem>
+                                                    <MenuItem value={"HKET 香港經濟日報"}>HKET 香港經濟日報</MenuItem>
+                                                </TextField>
                                             }
-                                            name="onlineAds"
+                                            name="advertisement"
                                             control={control}
                                         />
                                     }
 
                                     {
+
                                         watch("knowOfConference") === "Others" &&
                                         <Controller as={
                                             <TextField 
                                                 required
-                                                style={{marginLeft:"10px"}}
-                                                placeholder = "Please specify"
+                                                // style={{marginLeft:"10px"}}
+                                                fullWidth
+                                                label="Please specify"
+                                                // placeholder = "Please specify"
+                                                variant="outlined"
                                             />
                                         } name="otherKnowOfConference" control={control} />
                                     }
-                                    <br/>
-                                    <br/>
+                                </Grid>
                                 </Grid>
 
                                 <Grid item md={12}>
-                                    
+                                <Typography variant="h6">Interest (Please select at least 1 interest) * </Typography>
                                 <FormControl component="fieldset" >
-                                    <FormLabel component="legend">Interest (Please select at least 1 interest)</FormLabel>
+                                    {/* <FormLabel component="legend">Interest (Please select at least 1 interest)</FormLabel> */}
                                     <FormGroup row>
                                         <FormControlLabel
                                             control={<Checkbox onChange={handleCheckboxChange} name="AI and Machine Learning" color="primary" required = {interestCheckbox === [] ? true : false}/>}
@@ -429,10 +463,9 @@ export function FillInfo(props:any) {
                                     <br/>
                                     <br/>
                                 </Grid>
-                                <Typography variant="h6">Personal Information Collection Statement</Typography>
+                                
                                 <Grid item md={12}>
-{/*                                     
-                                    <FormLabel>Personal Information Collection Statement</FormLabel> */}
+                                    <Typography variant="h6">Personal Information Collection Statement</Typography>
                                     <Typography variant="body2" gutterBottom>The personal data collected will be used by The Chinese University of Hong Kong for processing the captioned event.  The Organizers may send you news and follow-up emails.  All personal data you provided will not be disclosed to any third party unless with your prior consent.</Typography>
                                     <Controller
                                         name="agreementOfCollection"
