@@ -15,12 +15,17 @@ export interface DBUser{
     kycData: KYCData;
 }
 export interface KYCData{
+    salutation: string;
     knowOfConference: string;
     supportOrganization: string;
-    onlineAds: string;
+    // onlineAds: string;
+    advertisement: string;
     otherKnowOfConference: string;
-    interest: string;
-    otherInterests: string;
+
+    // interest: string;
+    otherInterest: string;
+    interestCheckbox:string[]
+
     agreementOfCollection: boolean;
     agreementOfShow: boolean;
     agreementOfReceiveInformation: boolean;

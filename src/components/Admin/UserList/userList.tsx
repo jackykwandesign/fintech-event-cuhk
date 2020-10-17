@@ -54,7 +54,7 @@ const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
   { id: 'finishInfo', numeric: false, disablePadding: false, label: 'FinishInfo' },
-
+  { id: 'salutation', numeric: false, disablePadding: false, label: 'Salutation' },
   { id: 'firstName', numeric: false, disablePadding: false, label: 'First Name' },
   { id: 'lastName', numeric: false, disablePadding: false, label: 'Last Name' },
   { id: 'organization', numeric: false, disablePadding: false, label: 'Organization' },
@@ -72,8 +72,8 @@ const handleKnowOfConference = (values:KYCData) =>{
             knowOfConference = "Others-" + values.otherKnowOfConference
         }else if(values.knowOfConference === "Supporting Organization"){
             knowOfConference= "Supporting Organization-" + values.supportOrganization
-        }else if(values.knowOfConference === "Online Ads"){
-            knowOfConference = "Online Ads-" + values.onlineAds
+        }else if(values.knowOfConference === "Advertisement"){
+            knowOfConference = "Advertisement-" + values.advertisement
         }else{
             knowOfConference = values.knowOfConference
         }
@@ -81,11 +81,20 @@ const handleKnowOfConference = (values:KYCData) =>{
 }
 const handleInterest = (values:KYCData) =>{
     let interest = ""
-    if(values.interest === "Others"){
-        interest = "Others-" + values.otherInterests
-    }else{
-        interest = values.interest
+    for(let i = 0; i < values.interestCheckbox.length; i++){
+      if(values.interestCheckbox[i] === "Others"){
+        interest += (interest !== "" ? ", ": "")
+        interest += ("Others-" + values.otherInterest + " ")
+      }else{
+        interest += (interest !== "" ? ", ": "")
+        interest += (values.interestCheckbox[i] + " ")
+      }
     }
+    // if(values.interest === "Others"){
+    //     interest = "Others-" + values.otherInterests
+    // }else{
+    //     interest = values.interest
+    // }
     return interest
 }
 function EnhancedTableHead(props: { classes: any; onSelectAllClick: any; order: any; orderBy: any; numSelected: any; rowCount: any; onRequestSort: any; }) {
@@ -234,7 +243,7 @@ export default function UserList() {
     const [page, setPage] = React.useState(0);
     // const [dense, setDense] = React.useState(true);
     const dense = true
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const [userList, serUserList] = useState<DBUser[]| undefined>(undefined)
     useEffect(()=>{
@@ -346,6 +355,7 @@ export default function UserList() {
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">{row.finishInfo ? "Yes" : "No"}</TableCell>
+                      <TableCell align="left">{row.finishInfo && row.kycData.salutation}</TableCell>
                       <TableCell align="left">{row.finishInfo && row.kycData.firstName}</TableCell>
                       <TableCell align="left">{row.finishInfo && row.kycData.lastName}</TableCell>
                       <TableCell align="left">{row.finishInfo && row.kycData.organization}</TableCell>

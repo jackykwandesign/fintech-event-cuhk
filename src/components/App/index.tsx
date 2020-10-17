@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,11 +36,13 @@ function App() {
 
   // auto login if token valid
   const { setCurrentGlobalUser, setSignin, isSignin, currentGlobalUser} = useContext(AppContext)
+  const [oldLink, setOldLink] = useState<string>("")
   useEffect(()=>{
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
       async(user) => {
         if(user){
+          
           user.getIdToken(/* forceRefresh */ true)
           .then(async function(idToken) {
             await localStorage.setItem('firebaseToken', idToken)
@@ -68,6 +70,11 @@ function App() {
     );
     return unregisterAuthObserver;
   },[setCurrentGlobalUser,setSignin])
+
+  useEffect(()=>{
+    setOldLink(window.location.pathname)
+    console.log("oldLink", oldLink)
+  },[])
 return (
 <div className="app-container">
 
@@ -107,12 +114,12 @@ return (
           {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> }
       </Route>
 
-
+      <Route path="/admin/userlist">
+        {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <UserList /> : <Redirect to="/" />}
+      </Route>
       {
-        currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) &&
-        <Route path="/admin/userlist">
-          <UserList />
-        </Route>
+        
+
       }
 
       <Route>

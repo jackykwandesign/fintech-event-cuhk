@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button/Button';
 import React, { useState, useEffect, useContext } from 'react';
 // import { Button } from './Button';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
+import { AppContext, UserRole } from '../../contexts/firebaseContext/firebaseContext';
 import './navbar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +68,16 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           { 
             isSignin &&
             <ul className={click ? 'nav-menu active' : 'nav-menu' }>
+              {
+                (currentGlobalUser?.role === UserRole.ADMIN || currentGlobalUser?.role === UserRole.HELPER) && 
+                <>
+                  <li className='nav-item'>
+                    <Link to='/admin/userlist' className='nav-links' onClick={closeMobileMenu}>
+                      UserList
+                    </Link>
+                  </li>
+                </>
+              }
               {/* 
               <li className='nav-item'>
                 <Link to='/home' className='nav-links' onClick={closeMobileMenu}>

@@ -106,7 +106,7 @@ export function FillInfo(props:any) {
             return alert("Please select at least 1 interest")
         }
 
-        // alert("Thank you for your registration.")
+        alert("Thank you for your registration.")
         // alert(JSON.stringify(values))
         try {
             await FillUserInfo(values)
