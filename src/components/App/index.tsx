@@ -110,8 +110,8 @@ return (
       </Route> */}
       
       <Route path="/fillInfo">
-      {/* <FillInfo /> */}
-          {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> }
+      <FillInfo />
+          {/* {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> } */}
       </Route>
 
       <Route path="/admin/userlist">
