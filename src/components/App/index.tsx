@@ -21,6 +21,7 @@ import { validateUser } from "../../service/auth";
 // import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
+import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -102,9 +103,10 @@ return (
       </Route> */}
       
       <Route path="/fillInfo">
-      <FillInfo />
-          {/* {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> } */}
+      {/* <FillInfo /> */}
+          {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> }
       </Route>
+
 
       {
         currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) &&
