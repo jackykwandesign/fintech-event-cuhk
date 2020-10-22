@@ -41,6 +41,8 @@ function App() {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
       async(user) => {
+        setOldLink(window.location.pathname)
+        console.log("oldLink", oldLink)
         if(user){
           
           user.getIdToken(/* forceRefresh */ true)
@@ -71,10 +73,10 @@ function App() {
     return unregisterAuthObserver;
   },[setCurrentGlobalUser,setSignin])
 
-  useEffect(()=>{
-    setOldLink(window.location.pathname)
-    console.log("oldLink", oldLink)
-  },[])
+  // useEffect(()=>{
+  //   setOldLink(window.location.pathname)
+  //   console.log("oldLink", oldLink)
+  // },[])
 return (
 <div className="app-container">
 
@@ -101,6 +103,7 @@ return (
       <Route path="/2020fintech/home">
         <HomePage />
       </Route>     
+
       <Route path="/2020fintech/register">
         <Register />
       </Route>
