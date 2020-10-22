@@ -89,9 +89,15 @@ return (
     </Switch>
 
     <Switch>
+
       <Route exact path="/2020fintech/">
         <LandingPage />
       </Route>
+
+      <Route exact path="/2020fintech">
+        <LandingPage />
+      </Route>
+
       <Route path="/2020fintech/home">
         <HomePage />
       </Route>     
@@ -99,16 +105,17 @@ return (
         <Register />
       </Route>
       
-      {/* <Route path="/information">
+      <Route path="/2020fintech/information">
         <Information />
       </Route>  
 
-      <Route path="/webinar">
+      <Route path="/2020fintech/webinar">
         <Webinar />
       </Route>
-      <Route path="/projectDemo">
+
+      <Route path="/2020fintech/projectDemo">
         <ProjectDemo />
-      </Route> */}
+      </Route>
       
       <Route path="/2020fintech/fillInfo">
       {/* <FillInfo /> */}

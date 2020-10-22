@@ -68,8 +68,9 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           { 
             isSignin &&
             <ul className={click ? 'nav-menu active' : 'nav-menu' }>
+
               {
-                (currentGlobalUser?.role === UserRole.ADMIN || currentGlobalUser?.role === UserRole.HELPER) && 
+                (currentGlobalUser?.role === UserRole.ADMIN || currentGlobalUser?.role === UserRole.HELPER) ? 
                 <>
                   <li className='nav-item'>
                     <Link to='/2020fintech/admin/userlist' className='nav-links' onClick={closeMobileMenu}>
@@ -77,34 +78,35 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                     </Link>
                   </li>
                 </>
+              :
+                <>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/home' className='nav-links' onClick={closeMobileMenu}>
+                    Home
+                    </Link>
+                  </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/information' className='nav-links' onClick={closeMobileMenu}>
+                    Information
+                    </Link>
+                  </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/webinar' className='nav-links' onClick={closeMobileMenu}>
+                    Webinar
+                    </Link>
+                  </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/projectDemo' className='nav-links' onClick={closeMobileMenu}>
+                    Project Demo
+                    </Link>
+                  </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/chatroom' className='nav-links' onClick={closeMobileMenu}>
+                    Meet Other Participants
+                    </Link>
+                  </li>
+                </>
               }
-              {/* 
-              <li className='nav-item'>
-                <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
-                Home
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/information' className='nav-links' onClick={closeMobileMenu}>
-                Information
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/webinar' className='nav-links' onClick={closeMobileMenu}>
-                Webinar
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/projectDemo' className='nav-links' onClick={closeMobileMenu}>
-                Project Demo
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='/chatroom' className='nav-links' onClick={closeMobileMenu}>
-                Meet Other Participants
-                </Link>
-              </li> */}
-
               {
                 !isSignin ? 
                 <li>

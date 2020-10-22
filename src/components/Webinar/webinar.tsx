@@ -7,7 +7,7 @@ import moment from 'moment'
 import ConfitFirebase from '../../config/firebaseConfig'
 import { getAllWebinar } from '../../service/webinar'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
-const db = ConfitFirebase.firestore()
+// const db = ConfitFirebase.firestore()
 
 
 let currentTime = new Date()
