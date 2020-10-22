@@ -35,14 +35,14 @@ const LandingPage = () =>{
        
        {
         isSignin ? 
-        <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/")}>
+        <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/2020fintech/")}>
         COMING SOON
       </StyledButton >  
           // <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/home")}>
           //   GET STARTED
           // </StyledButton >  
         :
-          <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/register")}>
+          <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/2020fintech/register")}>
             LOGIN / SIGNUP
           </StyledButton >   
       }

@@ -110,7 +110,7 @@ export function FillInfo(props:any) {
         // alert(JSON.stringify(values))
         try {
             await FillUserInfo(values)
-            history.push("/")
+            history.push("/2020fintech/")
             history.go(0);
         } catch (error) {
             alert("Server Error")

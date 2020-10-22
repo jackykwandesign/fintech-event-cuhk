@@ -55,7 +55,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
     {/* <MuiThemeProvider theme={theme}> */}
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/2020fintech/' className='navbar-logo' onClick={closeMobileMenu}>
           {/* 2020 CUHK CONFERENCE ON FINANCIAL TECHNOLOGY */}
           2020 CUHK FinTech Conference
           {/* <i className='fab fa-typo3' /> */}
@@ -72,7 +72,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                 (currentGlobalUser?.role === UserRole.ADMIN || currentGlobalUser?.role === UserRole.HELPER) && 
                 <>
                   <li className='nav-item'>
-                    <Link to='/admin/userlist' className='nav-links' onClick={closeMobileMenu}>
+                    <Link to='/2020fintech/admin/userlist' className='nav-links' onClick={closeMobileMenu}>
                       UserList
                     </Link>
                   </li>
@@ -108,12 +108,12 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               {
                 !isSignin ? 
                 <li>
-                  <Link to='/register' className='nav-links-mobile' onClick={closeMobileMenu}>
+                  <Link to='/2020fintech/register' className='nav-links-mobile' onClick={closeMobileMenu}>
                   Login / Sign Up
                   </Link>
                 </li>
                 :
-                <Link to="/" className='nav-links-mobile' onClick={handleMobileSignOut}>
+                <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
                   SignOut
                 </Link>
               }
@@ -124,7 +124,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
           {
             button && !isSignin &&
             <div className="nav-button-container">
-            <Link to="/register" className="nav-buttons">
+            <Link to="/2020fintech/register" className="nav-buttons">
               <ColorButton variant="outlined" className={classes.margin}>
                 Login / Sign Up
               </ColorButton>
@@ -137,7 +137,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
             <div className="nav-button-container active">
               <Avatar src={currentGlobalUser?.photoURL ? currentGlobalUser?.photoURL : "/images/avatar.png"} />
               <span>{currentGlobalUser?.name ? currentGlobalUser.name : "Guest"}</span>
-              <Link to="/" className="nav-buttons">
+              <Link to="/2020fintech/" className="nav-buttons">
                 <ColorButton variant="outlined" className={classes.margin} onClick={signOut}>
                   SignOut
                 </ColorButton>

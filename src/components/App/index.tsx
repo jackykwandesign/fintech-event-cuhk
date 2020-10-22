@@ -21,7 +21,7 @@ import { validateUser } from "../../service/auth";
 // import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
-import { FillinfoResult } from "../FillInfo/fillInfo-result";
+// import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
   const appContext = useAppContext()
@@ -81,20 +81,21 @@ return (
   <Router>
   <Navbar />
     <Switch>
-      <Route exact path="/"></Route>
+      <Route exact path="/2020fintech/"></Route>
+      <Route path="/2020fintech/admin/"></Route>
       <Route>
         <Banner />
       </Route>
     </Switch>
 
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/2020fintech/">
         <LandingPage />
       </Route>
-      <Route path="/home">
+      <Route path="/2020fintech/home">
         <HomePage />
       </Route>     
-      <Route path="/register">
+      <Route path="/2020fintech/register">
         <Register />
       </Route>
       
@@ -109,21 +110,17 @@ return (
         <ProjectDemo />
       </Route> */}
       
-      <Route path="/fillInfo">
-      <FillInfo />
-          {/* {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/" /> } */}
+      <Route path="/2020fintech/fillInfo">
+      {/* <FillInfo /> */}
+          {currentGlobalUser && !isSignin ? <FillInfo /> : <Redirect to="/2020fintech/" /> }
       </Route>
 
-      <Route path="/admin/userlist">
-        {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <UserList /> : <Redirect to="/" />}
+      <Route path="/2020fintech/admin/userlist">
+        {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <UserList /> : <Redirect to="/2020fintech/" />}
       </Route>
-      {
-        
-
-      }
 
       <Route>
-        <Redirect to="/"></Redirect>
+        <Redirect to="/2020fintech/"></Redirect>
       </Route>
 
     </Switch>
