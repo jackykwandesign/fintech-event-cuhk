@@ -6,7 +6,7 @@ import moment from 'moment'
 // var db = firebase.firestore();
 import ConfitFirebase from '../../config/firebaseConfig'
 import { getAllWebinar } from '../../service/webinar'
-import { useHistory } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
 let pastEventList = [
@@ -307,4 +307,4 @@ const Webinar = (props:any)=>{
     )
 }
 
-export default Webinar
+export default withRouter(Webinar)

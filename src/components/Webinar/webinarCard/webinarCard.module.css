@@ -5,7 +5,7 @@
     justify-content: center;
     margin-top: 20px;
     /* width:100%, */
-    width:70%;
+    width:90%;
 }
 .titleContainer{
     display: flex;
@@ -27,7 +27,7 @@
     flex-wrap: nowrap;
 }
 @media screen and (max-width: 600px) {
-.webinarCard{
-    width:300px;
-}
+    .webinarCard{
+        width:300px;
+    }
 }

@@ -29,7 +29,7 @@ const LandingPage = () =>{
   const {isSignin} = useContext(AppContext)
   const history = useHistory()
   return (
-    <div className={styles.hero_container + " " + styles.backdrop}>
+    <div className={styles.hero_container}>
       <img className = {styles.bgimg} src = "/images/backdrop.png"></img>
       <div className={styles.hero_btns}>
        

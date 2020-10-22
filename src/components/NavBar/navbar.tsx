@@ -57,7 +57,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
         <div className='navbar-container'>
           <Link to='/2020fintech/' className='navbar-logo' onClick={closeMobileMenu}>
           {/* 2020 CUHK CONFERENCE ON FINANCIAL TECHNOLOGY */}
-          2020 CUHK FinTech Conference
+          <span style={{ marginLeft:"1vw"}}>2020 CUHK FinTech Conference</span>
           {/* <i className='fab fa-typo3' /> */}
           </Link>
           

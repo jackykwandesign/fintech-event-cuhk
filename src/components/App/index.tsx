@@ -83,6 +83,9 @@ return (
 
   <Router>
   <Navbar />
+  <div className="content-container">
+
+    <div style={{maxWidth:"1400px"}}>
     <Switch>
       <Route exact path="/2020fintech/"></Route>
       <Route path="/2020fintech/admin/"></Route>
@@ -90,7 +93,9 @@ return (
         <Banner />
       </Route>
     </Switch>
+    </div>
 
+    <div className="content-container">
     <Switch>
 
       <Route exact path="/2020fintech/">
@@ -101,6 +106,7 @@ return (
         <LandingPage />
       </Route>
 
+      
       <Route path="/2020fintech/home">
         <HomePage />
       </Route>     
@@ -136,8 +142,11 @@ return (
       <Route>
         <Redirect to="/2020fintech/"></Redirect>
       </Route>
-
+      
     </Switch>
+    </div>
+    </div>
+
   </Router>
 </div>
 
