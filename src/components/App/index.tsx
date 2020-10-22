@@ -21,6 +21,7 @@ import { validateUser } from "../../service/auth";
 // import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
+import ProjectDemoDetail from "../ProjectDemo/projectDemoDetail/projectDemoDetail";
 // import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
@@ -118,6 +119,9 @@ return (
 
       <Route path="/2020fintech/projectDemo">
         <ProjectDemo />
+      </Route>
+      <Route path="/2020fintech/projectDemoDetail">
+        <ProjectDemoDetail />
       </Route>
       
       <Route path="/2020fintech/fillInfo">

@@ -68,7 +68,7 @@ export function Democard({
 }) {
 
  const classes = useStyles();
-  const theme = useTheme();
+//   const theme = useTheme();
 
   return (
     <Card className={classes.root}>

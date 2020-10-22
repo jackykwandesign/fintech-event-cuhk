@@ -2,9 +2,10 @@
 import React, { useEffect } from 'react'
 import { Democard, DemoData } from './demoCard/demoCard'
 import styles from './demoCard.module.css'
+import { ProjectButton } from './projectButton/projectButton'
 // import ConfigAxio from '../../config/axioConfig'
 
-const demoList: DemoData[] = [
+export const DemoList: DemoData[] = [
     {
         name:`Demo Test 1 `,
         investigator: "By Chan Siu Ming, Collaborating Organizations: IT Tester Demo",
@@ -120,22 +121,26 @@ export function ProjectDemo(props: any) {
     },[])
 
     return (
-        <div className={styles.demoListContainer}>
-            <h1>Project Demo</h1>
-            <br/>
-            {
-                demoList.map(demo=>{
-                    return (
-                        <>
-                            <Democard
-                                demoData = {demo}
-                            />
-                            <br/>
-                            <br/>
-                        </>
-                    )
-                })
-            }
+        <div className={styles.projectButtonContainer}>
+            <ProjectButton/>
         </div>
+        
+        // <div className={styles.demoListContainer}>
+        //     <ProjectButton/>
+        //     <br/>
+        //     {/* {
+        //         demoList.map(demo=>{
+        //             return (
+        //                 <>
+        //                     <Democard
+        //                         demoData = {demo}
+        //                     />
+        //                     <br/>
+        //                     <br/>
+        //                 </>
+        //             )
+        //         })
+        //     } */}
+        // </div>
     )
 }

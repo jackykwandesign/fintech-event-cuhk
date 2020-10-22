@@ -1,0 +1,34 @@
+.img_container{
+    margin-top: 10px;
+    /* height: 500px;
+    width: 300px; */
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* align-content: center; */
+    flex-wrap: nowrap;
+}
+
+
+.img_button{
+  height: 420px;
+  width: 300px;
+}
+.img_button:hover{
+cursor: pointer;
+box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+}
+
+.icon_container{
+  height: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+
