@@ -6,6 +6,7 @@ import moment from 'moment'
 // var db = firebase.firestore();
 import ConfitFirebase from '../../config/firebaseConfig'
 import { getAllWebinar } from '../../service/webinar'
+import { useHistory } from 'react-router-dom'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
 let pastEventList = [
@@ -143,48 +144,6 @@ function AddMinutes(oldDate:Date, minutes:number){
     return new Date(oldDate.getTime() + minutes * 60000)
 }
 
-async function initWebinar(){
-    for(let i = 0; i < eventList.length; i++){
-        db.collection("Webinar").add({
-            name:   eventList[i].name,
-            description:  eventList[i].description,
-            zoomURL:     eventList[i].zoomURL,
-            replayURL:  eventList[i].replayURL,
-            startTime:  eventList[i].startTime.toISOString(),
-            endTime:    eventList[i].endTime.toISOString(),
-            status:"OPEN"
-        })
-    }
-}
-
-async function initPastWebinar(){
-    for(let i = 0; i < pastEventList.length; i++){
-        db.collection("Webinar").add({
-            name:   pastEventList[i].name,
-            description:  pastEventList[i].description,
-            zoomURL:     pastEventList[i].zoomURL,
-            replayURL:  pastEventList[i].replayURL,
-            startTime:  pastEventList[i].startTime.toISOString(),
-            endTime:    pastEventList[i].endTime.toISOString(),
-            status:"CLOSE"
-        })
-    }
-}
-
-async function addLiveEvent(){
-    let timeNow = new Date()
-    db.collection("Webinar").add({
-        name:   "Live event",
-        description:  [
-            "This is a Live event \n by IT tester"
-        ],
-        zoomURL:     "https://cuhk.zoom.us/j/93105948706",
-        replayURL:  "https://youtube.com",
-        startTime:  AddMinutes(timeNow, -30).toISOString(),
-        endTime:    AddMinutes(timeNow, +30).toISOString(),
-        status:"OPEN"
-    })
-}
 
 let currentTime = new Date()
 
@@ -240,6 +199,52 @@ let currentTime = new Date()
 
 
 const Webinar = (props:any)=>{
+    let history = useHistory()
+    async function initWebinar(){
+        for(let i = 0; i < eventList.length; i++){
+            db.collection("Webinar").add({
+                name:   eventList[i].name,
+                description:  eventList[i].description,
+                zoomURL:     eventList[i].zoomURL,
+                replayURL:  eventList[i].replayURL,
+                startTime:  eventList[i].startTime.toISOString(),
+                endTime:    eventList[i].endTime.toISOString(),
+                status:"OPEN"
+            })
+        }
+    }
+    
+    async function initPastWebinar(){
+        for(let i = 0; i < pastEventList.length; i++){
+            db.collection("Webinar").add({
+                name:   pastEventList[i].name,
+                description:  pastEventList[i].description,
+                zoomURL:     pastEventList[i].zoomURL,
+                replayURL:  pastEventList[i].replayURL,
+                startTime:  pastEventList[i].startTime.toISOString(),
+                endTime:    pastEventList[i].endTime.toISOString(),
+                status:"CLOSE"
+            })
+        }
+    }
+    
+    async function addLiveEvent(){
+        let timeNow = new Date()
+        db.collection("Webinar").add({
+            name:   "Live event",
+            description:  [
+                "This is a Live event \n by IT tester"
+            ],
+            zoomURL:     "https://cuhk.zoom.us/j/93105948706",
+            replayURL:  "https://youtube.com",
+            startTime:  AddMinutes(timeNow, -30).toISOString(),
+            endTime:    AddMinutes(timeNow, +30).toISOString(),
+            status:"OPEN"
+        }).then(res=>{
+            history.go(0)
+        })
+        
+    }
     
     // let tempData: WebinarInfo[] = []
     const [webinarList, setWebinarList] = useState<WebinarInfo[] | undefined>(undefined)
@@ -270,7 +275,8 @@ const Webinar = (props:any)=>{
                 {/* <div className={styles.sameRow}><h1>Upcoming Webinar</h1><Divider style={{width:"250px"}}/></div> */}
                 
                 <h1>Upcoming Webinar</h1>
-                {/* <button onClick = {initWebinar}>Add test Event</button><button onClick = {addLiveEvent}>Add Live Event</button> */}
+                <button onClick = {addLiveEvent}>Add Live Event</button>
+                {/* <button onClick = {initWebinar}>Add test Event</button> */}
                 {
                     webinarList && webinarList?.map((event, index)=>{
                         // console.log("check event", event)

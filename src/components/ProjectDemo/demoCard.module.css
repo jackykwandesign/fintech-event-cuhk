@@ -1,0 +1,29 @@
+/* .sameRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+} */
+.demoButton{
+    margin-right: 10px;
+}
+
+.demoListContainer{
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* height: 700px;  */
+    height: 100%;
+    /* overflow-y: scroll; */
+}
+
+.timeContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

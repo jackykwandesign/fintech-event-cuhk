@@ -71,9 +71,9 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
             
                 <AccessTimeOutlinedIcon fontSize="small"/>
             
-            <Typography variant="subtitle1" color="initial" component="p">
-                {moment(webinarInfo.startTime).format('DD MMMM YYYY') + " " + moment(webinarInfo.startTime).format('HH:mm')+ " - " + moment(webinarInfo.endTime).format('HH:mm')}
-            </Typography>
+                <Typography variant="subtitle1" color="initial" component="p">
+                    {moment(webinarInfo.startTime).format('DD MMMM YYYY') + " " + moment(webinarInfo.startTime).format('HH:mm')+ " - " + moment(webinarInfo.endTime).format('HH:mm')}
+                </Typography>
             </div>
             {/* <Typography variant="subtitle1" color="textSecondary" component="p">
                 <div className={styles.timeContainer}>

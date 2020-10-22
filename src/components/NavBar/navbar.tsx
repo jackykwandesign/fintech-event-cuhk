@@ -97,7 +97,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                   </li>
                   <li className='nav-item'>
                     <Link to='/2020fintech/projectDemo' className='nav-links' onClick={closeMobileMenu}>
-                    Project Demo
+                    Demo
                     </Link>
                   </li>
                   <li className='nav-item'>
