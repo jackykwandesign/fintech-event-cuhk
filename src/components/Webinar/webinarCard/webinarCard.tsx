@@ -14,7 +14,7 @@ import moment from 'moment';
 import { AppContext } from '../../../contexts/firebaseContext/firebaseContext';
 export interface WebinarInfo{
     name: string; 
-    description?: string;
+    description: string[];
     zoomURL: string; 
     replayURL: string; 
     startTime: Date; 
@@ -22,6 +22,7 @@ export interface WebinarInfo{
     // status:string ;
 }
 export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:WebinarInfo, replay:boolean, currentTime:Date}) =>{
+    
     const { isSignin } = useContext(AppContext)
     const useStyles = makeStyles({
         root: {
@@ -42,7 +43,8 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
     //     console.log("startTime: ",webinarInfo.startTime)
     //     console.log("endTime: ",webinarInfo.endTime)
     //   }
-
+    // let descriptionsArray = webinarInfo.description ? webinarInfo.description.split("\n") : []
+    // console.log("descriptionsArray",descriptionsArray)
     return (
         
         <div className={styles.webinarCard}>
@@ -70,7 +72,7 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
                 <AccessTimeOutlinedIcon fontSize="small"/>
             
             <Typography variant="subtitle1" color="initial" component="p">
-            {moment(webinarInfo.startTime).format('HH:mm')+ " - " + moment(webinarInfo.endTime).format('HH:mm')}
+                {moment(webinarInfo.startTime).format('DD MMMM YYYY') + " " + moment(webinarInfo.startTime).format('HH:mm')+ " - " + moment(webinarInfo.endTime).format('HH:mm')}
             </Typography>
             </div>
             {/* <Typography variant="subtitle1" color="textSecondary" component="p">
@@ -78,10 +80,52 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
                     <AccessTimeOutlinedIcon fontSize="small"/> {moment(webinarInfo.startTime).format('HH:mm')+ " - " + moment(webinarInfo.endTime).format('HH:mm')}
                 </div>
             </Typography> */}
+            {
+                webinarInfo.description.length === 0 ? 
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {"Join Webinar to get more Information !"}
+                </Typography>
+                :
+                webinarInfo.description.map((description, index)=>{
+                    let dataArray = description.split('\n')
+                    if(dataArray.length === 1){
+                        return (
+                            <>
+                                <Typography variant="body2" color="textSecondary" component="p" key = {`${webinarInfo.name}-desc-${index}`}>
+                                    <b>{dataArray[0]}</b>
+                                </Typography>
+                                {webinarInfo.description.length !== index + 1 && <br/>}
+                            </>
+                        ) 
+                    }else{
+                        return (
+                            <>
+                            <Typography variant="body2" color="textSecondary" component="p" key = {`${webinarInfo.name}-desc-${index}-0`}>
+                        
+                                <b>{dataArray[0]}</b>
+                                <br/>
+                                {dataArray[1]}
+                                <br/>
+                                
+                            </Typography>
+                            {webinarInfo.description.length !== index + 1 && <br/>}
+                            </>
+                        )
+                        // dataArray.map((data, dataIndex)=>{
+                        //     return (
+                        //         <Typography variant="body2" color="textSecondary" component="p" key = {`${webinarInfo.name}-desc-${index}-0`}>
+                        //             {dataArray[0]}<br/>
+                        //         </Typography>
+                        //     )
+                        // })
+                    }
+                })
+            }
 
-            <Typography variant="body2" color="textSecondary" component="p">
+            {/* <Typography variant="body2" color="textSecondary" component="p">
                 {webinarInfo.description ? webinarInfo.description : "Join Webinar to get more Information !"}
-            </Typography>
+            </Typography> */}
+
 
           </CardContent>
         </CardActionArea>

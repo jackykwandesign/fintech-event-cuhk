@@ -7,13 +7,187 @@ import moment from 'moment'
 import ConfitFirebase from '../../config/firebaseConfig'
 import { getAllWebinar } from '../../service/webinar'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
-// const db = ConfitFirebase.firestore()
+const db = ConfitFirebase.firestore()
+let pastEventList = [
+    {
+        name:`Test past webinar 0 with replay url`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for testing webinar with replay URL and past \n by Jacky Kwan"
+        ],
+        replayURL:"https://youtube.com",
+        startTime: new Date('October 1, 2020 10:00:00 GMT+8:00'),
+        endTime:    new Date('October 1, 2020 12:00:00 GMT+8:00'),
+    },
+    {
+        name:`Test past webinar 1 with no replay url`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for testing webinar with no replay URL and past \n by Jacky Kwan"
+        ],
+        replayURL:"",
+        startTime: new Date('October 10, 2020 10:00:00 GMT+8:00'),
+        endTime:    new Date('October 10, 2020 12:00:00 GMT+8:00'),
+    },
+    {
+        name:`Test past webinar 2 with no replay url`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for testing webinar with no replay URL and past \n by Jacky Kwan"
+        ],
+        replayURL:"",
+        startTime: new Date('October 10, 2020 13:00:00 GMT+8:00'),
+        endTime:    new Date('October 10, 2020 14:56:00 GMT+8:00'),
+    },
+]
+let eventList = [
+    {
+        name:`ZOOM Webinar Rehearsal`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for speakers doing rehearsal to connect to ZOOM Webinar and give the speech."
+        ],
+        replayURL:"",
+        startTime: new Date('October 23, 2020 10:00:00 GMT+8:00'),
+        endTime:    new Date('October 23, 2020 12:00:00 GMT+8:00'),
+    },
+    {
+        name:`ZOOM Webinar Rehearsal - On-site`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for Contractor testing the ZOOM Webinar connectivity after the Live Broadcast site setup."
+        ],
+        replayURL:"",
+        startTime: new Date('October 29, 2020 14:30:00 GMT+8:00'),
+        endTime:    new Date('October 29, 2020 16:30:00 GMT+8:00'),
+    },
+    {
+        name:`ZOOM Webinar Rehearsal - On-site`,
+        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        description: [
+            "This is for Committee testing the ZOOM Webinar connectivity after the Live Broadcast site setup.\nby Professor ABC",
+            "This is for Event 2.\nby Professor DEF"
+        ],
+        replayURL:"",
+        startTime: new Date('October 30, 2020 10:30:00 GMT+8:00'),
+        endTime:    new Date('October 30, 2020 12:30:00 GMT+8:00'),
+    },
 
+    {
+        name:`Session 1`,
+        zoomURL:"https://cuhk.zoom.us/j/99104129354",
+        description: [
+            "Welcome Speeches & “Photo Session”",
+            "Anomaly Detection for E-Payment Activities via Scalable Graph Representation Learning \nby Prof LAU Wing-Cheong, CUHK",
+            "When Banks Meet DeFi (Decentralised Finance) – Chance or Challenges? \nby Ms Frankie TAM, Eversheds Sutherland",
+            "Security Token Offering – New Way of Financing in the Digital Era \nby Prof Seen-Meng CHEW, CUHK & Dr Florian SPIEGL, FinFabrik",
+        ],
+        replayURL:"",
+        startTime: new Date('November 2, 2020 9:30:00 GMT+8:00'),
+        endTime:    new Date('November 2, 2020 11:15:00 GMT+8:00'),
+    },
+
+    {
+        name:`Session 2`,
+        zoomURL:"https://cuhk.zoom.us/j/93457562147",
+        description: [
+            "FinTech Reshaping the Future of Wealth Management \n by Mr Herman CHENG & Ms Rosita LEE, Hang Seng Bank",
+            "Panel Discussion: Digitization of Financial Services in Asia",
+        ],
+        replayURL:"",
+        startTime: new Date('November 2, 2020 11:30:00 GMT+8:00'),
+        endTime:    new Date('November 2, 2020 12:35:00 GMT+8:00'),
+    },
+
+    {
+        name:`Session 3`,
+        zoomURL:"https://cuhk.zoom.us/j/96465995903",
+        description: [
+            "Alpha Go Everywhere: Machine Learning and International Stock Returns \n by Prof Darwin CHOI & Prof Griffin JIANG, CUHK",
+            "FinTech @ HKEX (TBD) \n by Mr Adam WIELOWIEYSKI, HKEX",
+        ],
+        replayURL:"",
+        startTime: new Date('November 2, 2020 13:20:00 GMT+8:00'),
+        endTime:    new Date('November 2, 2020 14:10:00 GMT+8:00'),
+    },
+
+    {
+        name:`Session 4`,
+        zoomURL:"https://cuhk.zoom.us/j/97829441537",
+        description: [
+            "Can We Securely Outsource Big Data Analytics with Lightweight Cryptography? \n by Prof Sherman CHOW, CUHK",
+            "See & Understand Data with Agility \n by Mr Philip YU, Tableau",
+            "How FinTech Transforms Organizations \n by Mr Nike KONG & Ms May WONG, Hang Seng Bank",
+        ],
+        replayURL:"",
+        startTime: new Date('November 2, 2020 14:25:00 GMT+8:00'),
+        endTime:    new Date('November 2, 2020 15:40:00 GMT+8:00'),
+    },
+ 
+    {
+        name:`Session 5`,
+        zoomURL:"https://cuhk.zoom.us/j/93105948706",
+        description: [
+            "AI-powered Recruitment \n by Mr Chris LEUNG, IBM Services",
+            "Advanced Technology to Support FinTech and Smart City \n by Dr Lucas HUI, ASTRI",
+            "Panel Discussion: Is Open API Going to Open Up the Banking Habitat in Hong Kong?",
+            "Closing Remarks",
+        ],
+        replayURL:"",
+        startTime: new Date('November 2, 2020 15:55:00 GMT+8:00'),
+        endTime:    new Date('November 2, 2020 17:30:00 GMT+8:00'),
+    },   
+ 
+]
+function AddMinutes(oldDate:Date, minutes:number){
+    return new Date(oldDate.getTime() + minutes * 60000)
+}
+
+async function initWebinar(){
+    for(let i = 0; i < eventList.length; i++){
+        db.collection("Webinar").add({
+            name:   eventList[i].name,
+            description:  eventList[i].description,
+            zoomURL:     eventList[i].zoomURL,
+            replayURL:  eventList[i].replayURL,
+            startTime:  eventList[i].startTime.toISOString(),
+            endTime:    eventList[i].endTime.toISOString(),
+            status:"OPEN"
+        })
+    }
+}
+
+async function initPastWebinar(){
+    for(let i = 0; i < pastEventList.length; i++){
+        db.collection("Webinar").add({
+            name:   pastEventList[i].name,
+            description:  pastEventList[i].description,
+            zoomURL:     pastEventList[i].zoomURL,
+            replayURL:  pastEventList[i].replayURL,
+            startTime:  pastEventList[i].startTime.toISOString(),
+            endTime:    pastEventList[i].endTime.toISOString(),
+            status:"CLOSE"
+        })
+    }
+}
+
+async function addLiveEvent(){
+    let timeNow = new Date()
+    db.collection("Webinar").add({
+        name:   "Live event",
+        description:  [
+            "This is a Live event \n by IT tester"
+        ],
+        zoomURL:     "https://cuhk.zoom.us/j/93105948706",
+        replayURL:  "https://youtube.com",
+        startTime:  AddMinutes(timeNow, -30).toISOString(),
+        endTime:    AddMinutes(timeNow, +30).toISOString(),
+        status:"OPEN"
+    })
+}
 
 let currentTime = new Date()
-// function AddMinutes(oldDate:Date, minutes:number){
-//     return new Date(oldDate.getTime() + minutes * 60000)
-// }
+
 // for(let i = 0; i < 3; i++){
 //     // tempData.push({
 //     //     name:`Hello to webinar # ${i+1}`,
@@ -91,10 +265,12 @@ const Webinar = (props:any)=>{
 
     return (
         <div className={styles.webinarContainer}>
-
+            
             <div className={styles.webinarSubContainer}>
                 {/* <div className={styles.sameRow}><h1>Upcoming Webinar</h1><Divider style={{width:"250px"}}/></div> */}
+                
                 <h1>Upcoming Webinar</h1>
+                {/* <button onClick = {initWebinar}>Add test Event</button><button onClick = {addLiveEvent}>Add Live Event</button> */}
                 {
                     webinarList && webinarList?.map((event, index)=>{
                         // console.log("check event", event)
@@ -108,9 +284,11 @@ const Webinar = (props:any)=>{
             </div>
             <div className={styles.webinarSubContainer}>
                 <h1>Webinar Replay</h1>
+                {/* <button onClick = {initPastWebinar}>Add Past Event</button> */}
                 {
                     webinarList && webinarList?.map((event, index)=>{
-                        if(currentTime >= event.endTime){
+                        
+                        if(event.endTime && currentTime >= event.endTime){
                             return (
                                 <WebinarCard webinarInfo={event} replay={true} currentTime = {currentTime} key={"Replay" + index}/>
                             )
