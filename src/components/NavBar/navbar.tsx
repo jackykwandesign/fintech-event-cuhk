@@ -57,7 +57,8 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
         <div className='navbar-container'>
           <Link to='/2020fintech/' className='navbar-logo' onClick={closeMobileMenu}>
           {/* 2020 CUHK CONFERENCE ON FINANCIAL TECHNOLOGY */}
-          <span style={{ marginLeft:"1vw"}}>2020 CUHK FinTech Conference</span>
+          {/* style={{ marginLeft:"1vw"}}></Link> */}
+          <span className={"nav-title"}>2020 CUHK FinTech Conference</span>
           {/* <i className='fab fa-typo3' /> */}
           </Link>
           
@@ -75,6 +76,11 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                   <li className='nav-item'>
                     <Link to='/2020fintech/admin/userlist' className='nav-links' onClick={closeMobileMenu}>
                       UserList
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
+                      SignOut
                     </Link>
                   </li>
                 </>
@@ -105,23 +111,26 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                     Meet Other Participants
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
+                      SignOut
+                    </Link>
+                  </li>
                 </>
               }
-              {
-                !isSignin ? 
-                <li>
-                  <Link to='/2020fintech/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                  Login / Sign Up
-                  </Link>
-                </li>
-                :
-                <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
-                  SignOut
-                </Link>
-              }
-
-
             </ul>
+          }
+          {
+            !isSignin && 
+            <ul className={click ? 'nav-menu active' : 'nav-menu' }>
+              <li className='nav-item'>
+                <Link to='/2020fintech/register' className='nav-links-mobile' onClick={closeMobileMenu}>
+                  Login / Sign Up
+                </Link>
+              </li>
+            </ul>
+ 
+
           }
           {
             button && !isSignin &&

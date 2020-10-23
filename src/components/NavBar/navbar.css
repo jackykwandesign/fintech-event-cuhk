@@ -91,6 +91,11 @@
   .menu-icon {
     display: none;
   }
+
+  .nav-title{
+    margin-left: 1vw;
+    font-size: 1.5rem;
+  }
   
   @media screen and (max-width: 1024px) {
     .NavbarItems {
