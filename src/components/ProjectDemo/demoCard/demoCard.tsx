@@ -33,23 +33,40 @@ export interface DemoData {
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        height:420,
-        width: '90%',
+        flexDirection: 'row',
+        
+        // flexWrap:'wrap',
+        minHeight:500,
+        maxWidth: 1400,
+        width: "100%",
+        marginTop: "3vh",
         boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.3), 0px 1px 1px 0px rgba(0,0,0,0.3), 0px 1px 3px 0px rgba(0,0,0,0.3)",
         
+        '@media (max-width:1024px)': {
+            flexWrap:'wrap',
+            // height:"1000px"
+            justifyContent:'center',
+            minHeight:1300,
+            // height:"100%"
+        },
+    },
+    cover: {
+        // flex: '1 0 auto',
+      width: 300,
+      height:420
+    //   maxWidth: 300
     },
     details: {
+        maxWidth:1100,
+        width: "100%",
       display: 'flex',
       flexDirection: 'column',
     },
+
     content: {
       flex: 'auto',
     },
-    cover: {
-        flex: '1 0 auto',
-      width: 300,
-      maxWidth: 300
-    },
+
     controls: {
       display: 'flex',
       alignItems: 'center',
@@ -74,7 +91,8 @@ export function Democard({
   return (
     <Card className={classes.root}>
         <CardMedia className={classes.cover} image={demoData.poster ? demoData.poster : "/images/demo/poster/poster-default.jpg"}
-            title="Live from space album cover" />
+            title="Live from space album cover" 
+        />
         <div className={classes.details}>
             <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
