@@ -13,9 +13,9 @@
   /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
   /* background: url('/images/backdrop.png') center center/cover no-repeat;; */
   height: 91.7vh;
-  width: 100%;
+  /* width: 100%; */
   /* height: 90vw; */
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,13 +24,25 @@
   /* object-fit: contain; */
   /* overflow: hidden; */
 }
+
 .hero_btns{
   margin-top: 70vh;
   overflow: visible;
   z-index: 999;
   position: fixed;
+  /* width: 20%; */
 
 }
+@media screen and (max-width: 1024px) {
+  .hero_btns{
+    margin-top: 60vh;
+  }
+  .hero_container{
+    width: 100%;
+    height: 87vh;
+  }
+}
+
 .bgimg{
   height: 100%;
   width: 100%;
