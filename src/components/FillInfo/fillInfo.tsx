@@ -76,7 +76,7 @@ export function FillInfo(props:any) {
             }
         }else{
             let itemIndex = newData.indexOf(valueName)
-            if(itemIndex != -1){
+            if(itemIndex !== -1){
                 if(valueName === "Others"){
                     setIsOtherInterest(false)
                 }

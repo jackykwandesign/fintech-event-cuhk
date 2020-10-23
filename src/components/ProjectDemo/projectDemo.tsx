@@ -1,6 +1,6 @@
 // import Axios from 'axios'
 import React, { useEffect } from 'react'
-import { Democard, DemoData } from './demoCard/demoCard'
+import { DemoData } from './demoCard/demoCard'
 import styles from './demoCard.module.css'
 import { ProjectButton } from './projectButton/projectButton'
 // import ConfigAxio from '../../config/axioConfig'
