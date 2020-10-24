@@ -101,11 +101,6 @@ return (
       <Route exact path="/2020fintech/">
         <LandingPage />
       </Route>
-
-      <Route exact path="/2020fintech">
-        <LandingPage />
-      </Route>
-
       
       <Route path="/2020fintech/home">
         <HomePage />
@@ -137,6 +132,10 @@ return (
 
       <Route path="/2020fintech/admin/userlist">
         {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <UserList /> : <Redirect to="/2020fintech/" />}
+      </Route>
+
+      <Route path="/2020fintech">
+        <Redirect to="/2020fintech/"></Redirect>
       </Route>
 
       <Route>
