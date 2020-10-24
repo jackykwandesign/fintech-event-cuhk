@@ -86,7 +86,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                 </>
               :
                 <>
-                  {/* <li className='nav-item'>
+                  <li className='nav-item'>
                     <Link to='/2020fintech/home' className='nav-links' onClick={closeMobileMenu}>
                     Home
                     </Link>
@@ -110,7 +110,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                     <Link to='/2020fintech/chatroom' className='nav-links' onClick={closeMobileMenu}>
                     Meet Other Participants
                     </Link>
-                  </li> */}
+                  </li>
                   <li>
                     <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
                       SignOut

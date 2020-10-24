@@ -40,6 +40,85 @@
     <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+
+    <!-- mibew button -->
+<!--     
+    <a id="mibew-agent-button" href="http://conference.cintec.cuhk.edu.hk/mibew/index.php/chat?locale=en" target="_blank" onclick="Mibew.Objects.ChatPopups['5f9484dbc06ede63'].open();return false;">
+      <img src="http://conference.cintec.cuhk.edu.hk/mibew/index.php/b?i=simple&amp;lang=en" border="0" alt="" />
+    </a>
+    <script type="text/javascript" src="http://conference.cintec.cuhk.edu.hk/mibew/js/compiled/chat_popup.js"></script>
+    <script type="text/javascript">Mibew.ChatPopup.init({
+      "id":"5f9484dbc06ede63",
+      "url":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/index.php\/chat?locale=en",
+      "preferIFrame":true,
+      "modSecurity":false,
+      "forceSecure":false,
+      "style":"",
+      "width":640,
+      "height":480,
+      "resizable":true,
+      "styleLoader":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/index.php\/chat\/style\/popup"
+      });
+    </script>
+    <div id="mibew-invitation"></div>
+    <script type="text/javascript" src="http://conference.cintec.cuhk.edu.hk/mibew/js/compiled/widget.js"></script>
+
+    <script type="text/javascript">Mibew.Widget.init({"inviteStyle":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/styles\/invitations\/default\/invite.css","requestTimeout":10000,"requestURL":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/index.php\/widget","locale":"en","visitorCookieName":"MIBEW_VisitorID"})</script>
+     -->
+    <!-- / mibew button -->
+    
+    
+    
+    <!-- mibew button -->
+    <!-- <a id="mibew-agent-button" href="http://conference.cintec.cuhk.edu.hk/mibew/index.php/chat?locale=en" target="_blank" onclick="Mibew.Objects.ChatPopups['5f945f00dbca991b'].open();return false;">
+      <img src="http://conference.cintec.cuhk.edu.hk/mibew/index.php/b?i=simple&amp;lang=en" border="0" alt="" />
+    </a> -->
+    
+    <!-- <script type="text/javascript" src="http://conference.cintec.cuhk.edu.hk/mibew/js/compiled/chat_popup.js"></script> -->
+    <!-- <script type="text/javascript">Mibew.ChatPopup.init({"id":"5f945f00dbca991b","url":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/index.php\/chat?locale=en","preferIFrame":true,"modSecurity":true,"forceSecure":false,"style":"","width":640,"height":480,"resizable":true,"styleLoader":"http:\/\/conference.cintec.cuhk.edu.hk\/mibew\/index.php\/chat\/style\/popup"});</script> -->
+    
+    <!-- / mibew button -->
+    
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/5f9489e2194f2c4cbeb8b4f8/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  
+  })();
+  Tawk_API.onLoad = function(){
+    Tawk_API.minimize();
+  };
+  function updateChatInfo(name,email){
+    // console.log("name",name)
+    Tawk_API.setAttributes({
+        'name' : name,
+        'email': email,
+        'hash' : email
+    }, function (error) {
+      console.log("error here")
+      console.error(error)
+    });
+  }
+  function toogleChat(){
+    console.log("close chat")
+    Tawk_API.toggleVisibility();
+  }
+
+  function OpenCSChat(){
+    console.log("OpenCSChat")
+    Tawk_API.maximize();
+  }
+  </script>
+  <!--End of Tawk.to Script-->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

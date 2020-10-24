@@ -22,6 +22,7 @@ import { validateUser } from "../../service/auth";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
 import ProjectDemoDetail from "../ProjectDemo/projectDemoDetail/projectDemoDetail";
+import { initChat, toogleChat } from "./test";
 // import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
@@ -33,11 +34,14 @@ const WithContextApp =() =>{
   )
 }
 
-function App() {
 
+function App() {
+  
+  
   // auto login if token valid
   const { setCurrentGlobalUser, setSignin, isSignin, currentGlobalUser} = useContext(AppContext)
   const [oldLink, setOldLink] = useState<string>("")
+  const [startChat, setStartChat] = useState<boolean>(false)
   useEffect(()=>{
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
@@ -61,7 +65,10 @@ function App() {
                 return setSignin(true)
               }else if(res.finishInfo){
                 // console.log("IS USER, FINISH INFO")
+                
                 return setSignin(true)
+                // return reInitChatFunction()
+                 
               }else{
                 // console.log("IS USER, NOT FINISH INFO")
               }
@@ -78,6 +85,13 @@ function App() {
   //   setOldLink(window.location.pathname)
   //   console.log("oldLink", oldLink)
   // },[])
+  useEffect(()=>{
+    // console.log("init chat")
+    
+    isSignin && initChat(`${currentGlobalUser?.name}, ${currentGlobalUser?.kycData.jobTitle}@${currentGlobalUser?.kycData.organization}`,currentGlobalUser?.email) && setStartChat(true)
+    // startChat && !isSignin && toogleChat()
+    
+  },[isSignin])
 return (
 <div className="app-container">
 
