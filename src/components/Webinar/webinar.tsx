@@ -271,10 +271,13 @@ const Webinar = (props:any)=>{
     return (
         <div className={styles.webinarContainer}>
             
-            <div className={styles.webinarSubContainer}>
+            <div className={styles.webinarSubContainer1}>
                 {/* <div className={styles.sameRow}><h1>Upcoming Webinar</h1><Divider style={{width:"250px"}}/></div> */}
-                
+                {/* <div className={styles.sameRow}>
+                <img src="/images/icon-webinar.png" width="250" height="250" />
                 <h1>Upcoming Webinar</h1>
+                </div> */}
+                 <h1>Upcoming Webinar</h1>
                 <button onClick = {addLiveEvent}>Add Live Event</button>
                 {/* <button onClick = {initWebinar}>Add test Event</button> */}
                 {
@@ -288,7 +291,7 @@ const Webinar = (props:any)=>{
                     })
                 }
             </div>
-            <div className={styles.webinarSubContainer}>
+            <div className={styles.webinarSubContainer2}>
                 <h1>Webinar Replay</h1>
                 {/* <button onClick = {initPastWebinar}>Add Past Event</button> */}
                 {

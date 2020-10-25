@@ -140,6 +140,8 @@ export function ProjectDemo(props: any) {
 
     return (
         <div className={styles.projectButtonContainer}>
+            <h1>Demo Session</h1>
+            {/* <img src="/images/icon-projectDemo.png" width="250" height="250" /> */}
             <ProjectButton/>
         </div>
         

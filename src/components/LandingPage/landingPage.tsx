@@ -54,7 +54,7 @@ const LandingPage = () =>{
           // </StyledButton >  
         :
           <StyledButton  variant="outlined" size="large"  color="primary" onClick={()=>history.push("/2020fintech/register")}>
-            LOGIN / SIGNUP
+            Register / Login
           </StyledButton >   
       }
     

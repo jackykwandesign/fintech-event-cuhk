@@ -113,7 +113,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                   </li>
                   <li>
                     <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
-                      SignOut
+                      SIGNOUT
                     </Link>
                   </li>
                 </>
@@ -125,7 +125,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
             <ul className={click ? 'nav-menu active' : 'nav-menu' }>
               <li className='nav-item'>
                 <Link to='/2020fintech/register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                  Login / Sign Up
+                  REGISTER / LOGIN
                 </Link>
               </li>
             </ul>
@@ -137,7 +137,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
             <div className="nav-button-container">
             <Link to="/2020fintech/register" className="nav-buttons">
               <ColorButton variant="outlined" className={classes.margin}>
-                Login / Sign Up
+              REGISTER / LOGIN
               </ColorButton>
             </Link>
             </div>
@@ -150,7 +150,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
               <span>{currentGlobalUser?.name ? currentGlobalUser.name : "Guest"}</span>
               <Link to="/2020fintech/" className="nav-buttons">
                 <ColorButton variant="outlined" className={classes.margin} onClick={signOut}>
-                  SignOut
+                  SIGNOUT
                 </ColorButton>
               </Link>
             </div>

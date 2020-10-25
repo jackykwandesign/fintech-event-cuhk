@@ -23,10 +23,22 @@
     }
 }
 
-.webinarSubContainer{
+.webinarSubContainer1{
     margin-top: 2vh;
     flex: 1;
-    min-width: 700px;
+    min-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* height: 700px;  */
+    height: 100%;
+    /* overflow-y: scroll; */
+}
+.webinarSubContainer2{
+    margin-top: 2vh;
+    flex: 1;
+    min-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

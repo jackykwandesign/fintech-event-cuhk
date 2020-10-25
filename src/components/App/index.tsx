@@ -108,8 +108,8 @@ return (
       </Route>
     </Switch>
     </div>
-
-    <div className="content-container">
+    {/* style={{borderLeft:"1px solid black",maxWidth:"1400px"}} */}
+    <div className="content-container" >
     <Switch>
 
       <Route exact path="/2020fintech/">
