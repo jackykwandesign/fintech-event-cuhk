@@ -5,6 +5,8 @@ import { DemoList } from '../projectDemo'
 import styles from './projectDemoDetail.module.css'
 import * as qs from 'query-string'
 import Typography from '@material-ui/core/Typography'
+import moment from 'moment'
+import Button from '@material-ui/core/Button'
 
 interface Params {
     gp?: number;
@@ -112,7 +114,7 @@ const Projectdemodetail = (prop:any) => {
                                     </p>
                                     <br/>
                                     <p>
-                                        <a href={currentDemo?.poster ? currentDemo?.poster : "/images/demo/poster/poster-default.jpg"} target="_black" rel="noopener noreferrer">
+                                        <a href={currentDemo?.posterBig ? currentDemo?.posterBig : "/images/demo/poster/poster-default.jpg"} target="_black" rel="noopener noreferrer">
                                             <img src={currentDemo?.poster ? currentDemo?.poster : "/images/demo/poster/poster-default.jpg"} className={styles.demoPoster} alt={`${currentDemo?.name}-poster`} />
                                         </a>
                                     </p>
@@ -123,10 +125,31 @@ const Projectdemodetail = (prop:any) => {
                     <td valign="top" className={styles.demoMeetingMenu}>
                         <br/>
                         <div className={styles.circleBase}><b>Online Meeting: </b></div>
-                        <p><img src="/images/demo/asset/Online Meeting-01.jpg" width="200" height="300" style={{border:"thick"}} /></p>
+                        <Typography variant="subtitle1" color="initial" component="p">
+                        
+                        {
+                            currentDemo?.startTime ?
+                            <>
+                                {moment(currentDemo?.startTime).format('DD MMMM YYYY')}
+                                <br/>
+                                {moment(currentDemo?.startTime).format('HH:mm')+ " - " + moment(currentDemo?.endTime).format('HH:mm')}
+                                <br/>
+                                <Button size="small" variant="contained" color="primary" href={currentDemo?.zoomURL} target="_black" rel="noopener noreferrer">
+                                    Live Demo in Zoom
+                                </Button>
+                            </>
+
+                            :
+                            "TBC"
+                        }
+                        </Typography>
+                        <p><img src="/images/demo/asset/chair.png" width="200" height="200" style={{border:"thick"}} /></p>
                         {/* <p><img src="/images/demo/asset/Demo Video-01.jpg" alt="" width="200" height="300" style={{border:"thick"}} /></p> */}
+                        <br/>
+                        <br/>
                         <div className={styles.circleBase}><b>Demo Video: </b></div>
                         <br/>
+                        
                         {
                             currentDemo?.youtubeURL ? 
                             

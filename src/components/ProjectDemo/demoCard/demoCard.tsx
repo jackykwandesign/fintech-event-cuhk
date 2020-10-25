@@ -26,6 +26,7 @@ export interface DemoData {
     description: DemoDataDescription[];
     websiteURL: string;
     poster: string;
+    posterBig: string;
     youtubeURL: string;
     zoomURL: string;
     startTime?: Date;
