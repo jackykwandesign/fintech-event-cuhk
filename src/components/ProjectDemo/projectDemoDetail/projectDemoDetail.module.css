@@ -1,0 +1,72 @@
+.demoTitle{
+    background-color: #AEE4F7;
+}
+/* .demoDetailContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px; 
+} */
+
+.demoDetailContainer{
+    width: 100%;
+    max-width: 1400px;
+}
+
+.demoMenu{
+    border-right: 1px solid black;
+    width: 17.8%;
+    
+}
+.demoMenuItem:hover{
+    cursor: pointer; 
+}
+
+.demoMeetingMenu{
+    /* width: 17.8%; */
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.demoPoster{
+    width: 100%;
+    max-width: 900px;
+}
+
+.demoContent{
+    text-align:justify;
+    /* text-align-last:justify; */
+}
+
+.circleBase{
+    border:1px #20b8ea solid;   
+    /* padding:10px; */
+    background-color:#20b8ea;
+
+    -webkit-border-radius:40px;
+    -moz-border-radius:40px;
+    border-radius:40px;
+    
+    height: 30px;
+    width: 170px;
+
+    text-align: center;
+    font-size: 21px;
+}
+@media screen and (max-width: 1024px) {
+    /* .webinarContainer{
+        width:700px;
+    } */
+    .demoMeetingMenu{
+        display: none;
+    }
+    .demoMenu{
+        display: none;
+    }
+}

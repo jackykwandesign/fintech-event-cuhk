@@ -19,8 +19,10 @@ export interface DemoDataDescription{
     title?: string;
 }
 export interface DemoData {
+    group: number;
     name: string;
     investigator: string;
+    investigatorShort: string;
     description: DemoDataDescription[];
     websiteURL: string;
     poster: string;

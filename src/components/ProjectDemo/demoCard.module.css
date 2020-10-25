@@ -15,14 +15,14 @@
     /* overflow-y: scroll; */
 }
 
-.demoDetailContainer{
+/* .demoDetailContainer{
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 500px; 
-}
+} */
 
 .timeContainer{
     display: flex;

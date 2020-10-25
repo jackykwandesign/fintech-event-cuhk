@@ -7,8 +7,10 @@ import { ProjectButton } from './projectButton/projectButton'
 
 export const DemoList: DemoData[] = [
     {
+        group:0,
         name:`Demo Test 1 `,
         investigator: "By Chan Siu Ming, Collaborating Organizations: IT Tester Demo",
+        investigatorShort:"Chan Siu Ming, IT Tester",
         description: [
             {
                 title: "test title",
@@ -21,14 +23,16 @@ export const DemoList: DemoData[] = [
         ],
         websiteURL:"https://www.facebook.com/",
         poster:"/images/demo/poster/poster-gp3.jpg",
-        youtubeURL:"https://youtube.com",
+        youtubeURL:"https://www.youtube.com/embed/b7qOwYioxnI",
         zoomURL:"https://cuhk.zoom.us/j/98163565145",
         startTime: new Date('October 20, 2020 10:00:00 GMT+8:00'),
         endTime:    new Date('November 2, 2020 12:00:00 GMT+8:00'),
     },
     {
+        group:1,
         name:`An Overview of FinTecubator`,
         investigator: "Hang Seng Bank Limited",
+        investigatorShort:"Hang Seng Bank Limited",
         description: [
             {
                 content:"FinTecubator is an entity level Fintech incubator programme within Hang Seng Bank. The programme helps to nurture internal start-up companies, creates business values, and grows the innovation & technology ecosystem via co-creation and strategic partnerships with Fintech communities. We also collaborate with universities to discover and retain young talents to be our future leaders.",
@@ -44,8 +48,10 @@ export const DemoList: DemoData[] = [
         zoomURL:"",
     },
     {
+        group:2,
         name:`Ecosystem with Trustless Trust`,
         investigator: "By LI Junya, MSc FinTech Student, Collaborating Organizations: HASE",
+        investigatorShort:"LI Junya, MSc FinTech Student",
         description: [
             {
                 content:"As the increasingly popular trend of online traveling shopping, in order to cope with trustless issue between customer and merchant in online payment, a technical solution will be illustrated, customer journey with trustless payment. This solution is to design an open API to connect HASE Trustless Payment to some travel platforms to make the travel experience more secure. When customers choose this payment, they can experience risk assessment model based on machine learning algorithms from HASE, “BANK HOLD MONEY” mechanism to money flow more secure, feedback mechanism between customers and merchant, etc.",
@@ -53,12 +59,14 @@ export const DemoList: DemoData[] = [
         ],
         websiteURL:"https://www.fintecubator.com/",
         poster:"",
-        youtubeURL:"https://youtu.be/RB-IzbVamHY",
+        youtubeURL:"https://www.youtube.com/embed/RB-IzbVamHY",
         zoomURL:"",
     },
     {
+        group:3,
         name:`Fintech Integrated Training Platform and Synthetic Data Sandbox`,
         investigator: "Simnectz Technology Services Limited",
+        investigatorShort:"Simnectz Technology Services Limited",
         description: [
             {
                 content:"SIMNECTZ is a technology company located in Cyberport, especially focusing on financial technology. It provides and implements different solutions for major banks and third-party companies. The company’s concentrated solution products include lightweight core banking systems and API layout Platform and synthetic data sandbox.",
@@ -75,14 +83,16 @@ export const DemoList: DemoData[] = [
                 bold:false
             },
         ],
-        websiteURL:"Simnectz.com",
+        websiteURL:"https://Simnectz.com",
         poster:"/images/demo/poster/poster-gp3.jpg",
         youtubeURL:"",
         zoomURL:"",
     },
     {
+        group:4,
         name:`Gamifications – Financial Management with Customer Behavioral Analysis`,
         investigator: "By SHEN Yan, MSc FinTech Student, Academic Supervisor: Professor CHAN Chun Kwong, Industrial Supervisor: Mr. Stephen S Y LEUNG, Ms Angela O K CHONG, Chris, Sharon and Jacky",
+        investigatorShort:"SHEN Yan, MSc FinTech Student",
         description: [
             {
                 content:"Based on the research on the game market and wealth management market in Mainland China and Hong Kong, determine the future development prospects of wealth management games and players’ preferences and needs for wealth management games. An evaluation model can be used to distinguish whether the game can be successful is obtained, and the game design and testing are carried out according to the model elements.",
@@ -91,13 +101,15 @@ export const DemoList: DemoData[] = [
         ],
         websiteURL:"",
         poster:"/images/demo/poster/poster-gp4.jpg",
-        youtubeURL:"https://youtu.be/b7qOwYioxnI",
+        youtubeURL:"https://www.youtube.com/embed/b7qOwYioxnI",
         zoomURL:"",
     },
 
     {
+        group:5,
         name:`P2P Loan Default Prediction by A.I.`,
         investigator: "By Jessica Liu, Dicky Chandra, Centre for Financial Engineering, Supervisor: Dr Keith WONG, and Prof. Raymond TSANG (by courtesy), Centre for Financial Engineering",
+        investigatorShort:"Jessica Liu, Dicky Chandra, Centre for Financial Engineering",
         description: [
             {
                 content:"P2P lending is of a growing interest nowadays. Accurate prediction of the default risk is crucial to the business’ profitability and the automation of prediction boosts the efficiency by saving more costs as well as facilitating the matching of investors and borrowers. Financial technologies play an important role here thanks to the availability of historical datasets. In this project, we independently validated a two-phase loan default prediction model from an academic paper, in which machine learning methods are applied to a loan data set for the prediction and worked out some improvements. We will share our conclusions both in the business and model implementation aspects, accompanied by a prototype illustrating the online loan application process.",
