@@ -71,7 +71,7 @@ const Projectdemodetail = (prop:any) => {
                                             <b>{currentDemo?.name}</b>
                                         </Typography>
                                         <Typography variant="h6" >
-                                            {currentDemo?.investigator}
+                                            {currentDemo?.investigatorShort}
                                         </Typography>
                                         {/* <strong></strong><br /> */}
                                         
@@ -81,6 +81,11 @@ const Projectdemodetail = (prop:any) => {
                             <tr>
                                 <td valign="top">
                                     <br/>
+                                    <Typography variant="subtitle1" color="initial">
+                                        Investigator: {currentDemo?.investigator}
+                                    </Typography>
+                                    <br/>
+
                                 {
                                     currentDemo?.description.length === 0 ? 
 
@@ -91,6 +96,7 @@ const Projectdemodetail = (prop:any) => {
                                     currentDemo?.description.map((description, index)=>{
                                         return (
                                             <>
+                                            
                                                 <Typography variant="subtitle1" color="initial" className = {styles.demoContent}key = {`${currentDemo?.name}-desc-${index}`}>
                                                     {
                                                         description.title && <><b>{description.title}</b><br/></>
