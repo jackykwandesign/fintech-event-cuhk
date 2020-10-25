@@ -35,7 +35,7 @@ export function Information(props) {
         <>
          <div className={styles.infoContainer}>
             <h1>Information</h1>
-            <a href="/files/booklet.pdf" target="_blank" rel="noreferrer noopener">
+            <a href="/files/info-booklet-2.pdf" target="_blank" rel="noreferrer noopener">
               <span>Info Booklet</span>
             </a>
             <button onClick={OpenCSChat}>Live CS</button>
