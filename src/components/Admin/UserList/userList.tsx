@@ -215,7 +215,7 @@ const columns: ProColumns<DBUser>[] = [
         )
       }
     },
-    //   { id: 'contactEmail', numeric: false, disablePadding: false, label: 'Contact Email' },
+//   { id: 'contactEmail', numeric: false, disablePadding: false, label: 'Contact Email' },
 //   { id: 'contactNumber', numeric: false, disablePadding: false, label: 'Contact Number' },
 //   { id: 'areaCode', numeric: false, disablePadding: false, label: 'Area Code' },
 //   { id: 'knowOfConference', numeric: false, disablePadding: false, label: 'Know Of Conference' },
