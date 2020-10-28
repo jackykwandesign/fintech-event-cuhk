@@ -115,7 +115,7 @@ const ParticipantDetail = (props:any) =>{
     const getDataAsync = async() =>{
         const res = await getAllShareParticipant()
         res?.sort(compare)
-        console.log(res)
+        // console.log(res)
         res?.map(user=>{
             for(let i = 0; i < 5; i++){
                 if(user.kycData.interestCheckbox.includes(interestList[i])){
@@ -155,7 +155,7 @@ const ParticipantDetail = (props:any) =>{
                     <td valign="top"  style={{padding:"1vw", width:"100%", minWidth:"1150px"}}>
                     <IntlProvider value={{ intl: enUSIntl}}>
                         <ProTable<DBUser> 
-                            rowKey="key"
+                            rowKey="name"
                             pagination={{
                                 showQuickJumper: true,
                             }}
