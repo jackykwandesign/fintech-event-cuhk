@@ -111,6 +111,11 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                     Meet Other Participants
                     </Link>
                   </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/chatroom' className='nav-links' onClick={closeMobileMenu}>
+                    Chatroom
+                    </Link>
+                  </li>
                   <li>
                     <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
                       SIGNOUT

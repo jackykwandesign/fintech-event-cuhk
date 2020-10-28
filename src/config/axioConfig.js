@@ -4,7 +4,7 @@ import axios from 'axios';
 // import 'antd/dist/antd.css'; 
 
 axios.interceptors.request.use(async(req) => {
-
+    console.log("req.baseURL", req.baseURL)
     const token = await localStorage.getItem('firebaseToken');
     // console.log("firebase Token", token)
     req.headers = {
