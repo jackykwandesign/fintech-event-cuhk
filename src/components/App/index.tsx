@@ -21,6 +21,7 @@ import { validateUser } from "../../service/auth";
 // import Axios from "axios";
 import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
+import WebinarList from "../Admin/WebinarList/webinarList"
 import ProjectDemoDetail from "../ProjectDemo/projectDemoDetail/projectDemoDetail";
 import { initChat, toogleChat } from "./test";
 import ParticipantDetail from "../MeetOtherParticipant/participantDetail";
@@ -156,6 +157,9 @@ return (
 
       <Route path="/2020fintech/admin/userlist">
         {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <UserList /> : <Redirect to="/2020fintech/" />}
+      </Route>
+      <Route path="/2020fintech/admin/webinarList">
+        {currentGlobalUser && isSignin && (currentGlobalUser.role === UserRole.ADMIN || currentGlobalUser.role === UserRole.HELPER) ?  <WebinarList /> : <Redirect to="/2020fintech/" />}
       </Route>
 
       <Route path="/2020fintech">

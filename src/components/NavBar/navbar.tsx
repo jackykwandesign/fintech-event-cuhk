@@ -78,6 +78,11 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                       UserList
                     </Link>
                   </li>
+                  <li className='nav-item'>
+                    <Link to='/2020fintech/admin/webinarList' className='nav-links' onClick={closeMobileMenu}>
+                      WebinarList
+                    </Link>
+                  </li>
                   <li>
                     <Link to="/2020fintech/" className='nav-links-mobile' onClick={handleMobileSignOut}>
                       SignOut

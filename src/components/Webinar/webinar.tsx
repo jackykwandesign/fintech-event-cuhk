@@ -9,7 +9,7 @@ import { getAllWebinar } from '../../service/webinar'
 import { useHistory, withRouter } from 'react-router-dom'
 // import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 const db = ConfitFirebase.firestore()
-let pastEventList = [
+export let WebinarList = [
     {
         name:`Test past webinar 0 with replay url`,
         zoomURL:"https://cuhk.zoom.us/j/98163565145",
@@ -215,14 +215,14 @@ const Webinar = (props:any)=>{
     }
     
     async function initPastWebinar(){
-        for(let i = 0; i < pastEventList.length; i++){
+        for(let i = 0; i < WebinarList.length; i++){
             db.collection("Webinar").add({
-                name:   pastEventList[i].name,
-                description:  pastEventList[i].description,
-                zoomURL:     pastEventList[i].zoomURL,
-                replayURL:  pastEventList[i].replayURL,
-                startTime:  pastEventList[i].startTime.toISOString(),
-                endTime:    pastEventList[i].endTime.toISOString(),
+                name:   WebinarList[i].name,
+                description:  WebinarList[i].description,
+                zoomURL:     WebinarList[i].zoomURL,
+                replayURL:  WebinarList[i].replayURL,
+                startTime:  WebinarList[i].startTime.toISOString(),
+                endTime:    WebinarList[i].endTime.toISOString(),
                 status:"CLOSE"
             })
         }

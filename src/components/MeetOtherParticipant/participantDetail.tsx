@@ -51,6 +51,9 @@ import en_US from 'antd/lib/locale/en_US';
 //       return 1;
 //    return 0;
 // }
+const mailToFunction = (email:string)=>{
+    window.open(`mailto:${email}`)
+}
 const interestParticipantList:(DBUser[])[] = [[],[],[],[],[]]
 const columns: ProColumns<DBUser>[] = [
     {
@@ -89,7 +92,8 @@ const columns: ProColumns<DBUser>[] = [
         dataIndex:'email',
         render: (text, row, index, action) => {
             return(
-                <a  href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">Send Email</a>
+                <a onClick={()=>mailToFunction(text as string)} target="_blank" rel="noopener noreferrer">Send Email</a>
+                // <a  href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">Send Email</a>
             )
         }
     }
@@ -98,7 +102,7 @@ const ParticipantDetail = (props:any) =>{
     const [currentInterest, setcurrentInterest] = useState<string | undefined>("Big Data Analytics")
     const [currentParticipantList, setCurrentParticipantList] = useState<DBUser[]>([])
     const interestList = ["Big Data Analytics","FinTech in the Banking/Virtual Banking","AI and Machine Learning","STO/Tokenization/Virtual Assets","Cybersecurity"]
-    
+
     const handleChangeInterest = async(index:number) =>{
         await setcurrentInterest(interestList[index])
         // console.log("Current:", interestList[index])
