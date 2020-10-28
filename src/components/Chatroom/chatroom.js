@@ -15,7 +15,11 @@ export function Chatroom(props) {
         <>
         <h1>Chatroom</h1>
         {/* <div dangerouslySetInnerHTML={getChatroomHTML()}/> */}
-        <div id="tlkio" data-channel="2020CUHKFintechConference-AI" data-nickname={isSignin && currentGlobalUser.name} data-theme="theme--day" style={{width:"100%",height:"1000px"}}></div>
+        <div  style={{width:"100%",height:"1000px"}}>
+      <iframe class="tlkio" src="http://embed.tlk.io/2020CUHKFintechConference-AI" style={{width:"100%",height:"1000px", border:"none"}}></iframe>
+      <script>/*JS*/</script>
+    </div>
+        {/* <div id="tlkio" data-channel="2020CUHKFintechConference-AI" data-nickname={isSignin && currentGlobalUser.name} data-theme="theme--day" style={{width:"100%",height:"1000px"}}></div> */}
             
             {/* {
                 isSignin && currentGlobalUser && currentGlobalUser.name != "" &&
