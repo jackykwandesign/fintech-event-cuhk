@@ -7,6 +7,7 @@ export function Chatroom(props) {
     return (
         // data-nickname={currentGlobalUser.name} 
         <>
+        <h1>Chatroom</h1>
         <div id="tlkio" data-channel="2020CUHKFintechConference-AI" data-nickname={isSignin && currentGlobalUser.name} data-theme="theme--day" style={{width:"100%",height:"1000px"}}></div>
             
             {/* {
