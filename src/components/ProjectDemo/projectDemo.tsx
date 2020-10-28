@@ -6,29 +6,29 @@ import { ProjectButton } from './projectButton/projectButton'
 // import ConfigAxio from '../../config/axioConfig'
 
 export const DemoList: DemoData[] = [
-    {
-        group:0,
-        name:`Demo Test 1 `,
-        investigator: "By Chan Siu Ming, Collaborating Organizations: IT Tester Demo",
-        investigatorShort:"Chan Siu Ming, IT Tester",
-        description: [
-            {
-                title: "test title",
-                content:"test description test description test description test description test description test description test description test description test description test description test description test description test description test description test description test description ",
-            },
-            {
-                content:"test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 ",
-            },
+    // {
+    //     group:0,
+    //     name:`Demo Test 1 `,
+    //     investigator: "By Chan Siu Ming, Collaborating Organizations: IT Tester Demo",
+    //     investigatorShort:"Chan Siu Ming, IT Tester",
+    //     description: [
+    //         {
+    //             title: "test title",
+    //             content:"test description test description test description test description test description test description test description test description test description test description test description test description test description test description test description test description ",
+    //         },
+    //         {
+    //             content:"test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 test paragraph 2 ",
+    //         },
     
-        ],
-        websiteURL:"https://www.facebook.com/",
-        poster:"/images/demo/poster/poster-gp3.jpg",
-        posterBig:"/images/demo/poster/poster-gp3-big.jpg",
-        youtubeURL:"https://www.youtube.com/embed/b7qOwYioxnI",
-        zoomURL:"https://cuhk.zoom.us/j/98163565145",
-        startTime: new Date('October 20, 2020 10:00:00 GMT+8:00'),
-        endTime:    new Date('November 2, 2020 12:00:00 GMT+8:00'),
-    },
+    //     ],
+    //     websiteURL:"https://www.facebook.com/",
+    //     poster:"/images/demo/poster/poster-gp3.jpg",
+    //     posterBig:"/images/demo/poster/poster-gp3-big.jpg",
+    //     youtubeURL:"https://www.youtube.com/embed/b7qOwYioxnI",
+    //     zoomURL:"https://cuhk.zoom.us/j/98163565145",
+    //     startTime: new Date('October 20, 2020 10:00:00 GMT+8:00'),
+    //     endTime:    new Date('November 2, 2020 12:00:00 GMT+8:00'),
+    // },
     {
         group:1,
         name:`An Overview of FinTecubator`,
@@ -140,7 +140,7 @@ export function ProjectDemo(props: any) {
 
     return (
         <div className={styles.projectButtonContainer}>
-            <h1>Demo Session</h1>
+            <h1>Demo Sessions</h1>
             {/* <img src="/images/icon-projectDemo.png" width="250" height="250" /> */}
             <ProjectButton/>
         </div>
