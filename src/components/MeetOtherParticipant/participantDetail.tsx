@@ -38,7 +38,7 @@ const ParticipantDetail = (prop:any) => {
                 }
             }
         })
-        console.log("interestParticipantList", interestParticipantList)
+        // console.log("interestParticipantList", interestParticipantList)
         handleChangeInterest(0)
     }
 
