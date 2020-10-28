@@ -23,6 +23,7 @@ import { FillInfo } from "../FillInfo/fillInfo";
 import UserList from "../Admin/UserList/userList";
 import ProjectDemoDetail from "../ProjectDemo/projectDemoDetail/projectDemoDetail";
 import { initChat, toogleChat } from "./test";
+import ParticipantDetail from "../MeetOtherParticipant/participantDetail";
 // import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
@@ -138,6 +139,10 @@ return (
       <Route path="/2020fintech/projectDemoDetail">
         <ProjectDemoDetail />
       </Route>
+
+      <Route path="/2020fintech/meetOtherParticipant">
+        <ParticipantDetail />
+      </Route>     
       
       <Route path="/2020fintech/fillInfo">
       {/* <FillInfo /> */}

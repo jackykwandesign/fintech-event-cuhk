@@ -107,7 +107,7 @@ if (window.innerWidth <= 1024) { setButton(false); } else { setButton(true); } }
                     </Link>
                   </li>
                   <li className='nav-item'>
-                    <Link to='/2020fintech/chatroom' className='nav-links' onClick={closeMobileMenu}>
+                    <Link to='/2020fintech/meetOtherParticipant' className='nav-links' onClick={closeMobileMenu}>
                     Meet Other Participants
                     </Link>
                   </li>
