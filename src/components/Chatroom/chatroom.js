@@ -11,14 +11,23 @@ export function Chatroom(props) {
     // console.log(getChatroomHTML())
     // return <div dangerouslySetInnerHTML={getChatroomHTML()}/>
     return (
-        // data-nickname={currentGlobalUser.name} 
         <>
-        <h1>Chatroom</h1>
-        {/* <div dangerouslySetInnerHTML={getChatroomHTML()}/> */}
-        <div  style={{width:"100%",height:"1000px"}}>
+            <h1>Chatroom</h1>
+            <iframe src={`https://minnit.chat/FintechConference?embed&&language=en&nickname=${isSignin && currentGlobalUser.name}`} style={{border:"none", width:1400, height:500}} allowTransparency="true"></iframe>
+            <br/>
+            {/* <a href="https://minnit.chat/FintechConference" target="_blank">Free HTML5 Chatroom powered by Minnit Chat</a> */}
+        </>
+  
+            
+        
+    )
+}
+
+
+      {/* <div dangerouslySetInnerHTML={getChatroomHTML()}/> */}
+    {/* <div  style={{width:"100%",height:"1000px"}}>
       <iframe class="tlkio" src="http://embed.tlk.io/2020CUHKFintechConference-AI" style={{width:"100%",height:"1000px", border:"none"}}></iframe>
-      <script>/*JS*/</script>
-    </div>
+    </div> */}
         {/* <div id="tlkio" data-channel="2020CUHKFintechConference-AI" data-nickname={isSignin && currentGlobalUser.name} data-theme="theme--day" style={{width:"100%",height:"1000px"}}></div> */}
             
             {/* {
@@ -27,7 +36,3 @@ export function Chatroom(props) {
                 // currentGlobalUser && 
                 // <div id="tlkio" data-channel="2020CUHKFintechConference-AI" data-theme="theme--day" style={{width:"100%",height:"1000px"}}></div>
             } */}
-            
-        </>
-    )
-}
