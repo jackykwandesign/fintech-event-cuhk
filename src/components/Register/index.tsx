@@ -36,7 +36,7 @@ const SignInScreen = (props:any) => {
     },
   }));
   const classes = useStyles();
-  const successUrl = '/2020fintech/'
+  const successUrl = '/2020fintech/home'
 
   let history = useHistory()
   async function checkUserRedirect(authResult: any){
@@ -55,7 +55,7 @@ const SignInScreen = (props:any) => {
       }
 
       if(user?.role === UserRole.ADMIN){
-        history.push(successUrl)
+        history.push('/2020fintech')
       }else{
         if(user?.finishInfo === false){
           setCurrentGlobalUser(user)

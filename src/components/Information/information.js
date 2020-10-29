@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
+import Book from './book';
 import styles from './information.module.css'
 export function Information(props) {
     // const [isInit, setIsInit] = useState(false)
@@ -35,10 +36,30 @@ export function Information(props) {
         <>
          <div className={styles.infoContainer}>
             <h1>Information</h1>
-            <a href="/files/info-booklet-2.pdf" target="_blank" rel="noreferrer noopener">
-              <span>Info Booklet</span>
-            </a>
-            <button onClick={OpenCSChat}>Live CS</button>
+            {/* <Link to={`/2020fintech/projectDemoDetail?gp=${i+1}`}>
+              <div className={styles.img_container}>
+                <img src={ demo.poster ? demo.poster : "/images/demo/poster/poster-default.jpg"} key={`projectButton-${i+1}`}className={styles.img_button} alt={`poster-gp${i+1}`}/>
+                <h3>{demo.name}</h3>
+              </div>
+            </Link> */}
+            <div className={styles.iconContainer}>
+                <a href="/files/info-booklet-2.pdf" target="_blank" rel="noreferrer noopener">
+                    <div className={styles.img_container}>
+                        <img src={"/images/booklet/2020 conference booklet (28Oct)-01.jpg"} className={styles.img_button} alt={`booklet`}/>
+                        <h3>Info Booklet</h3>
+                    </div>
+                </a>
+                <a href="https://forms.gle/bpqw2icT1FRsn7Lk8" target="_blank" rel="noreferrer noopener">
+                    <div className={styles.img_container}>
+                        <img src={"/images/icon-evaluation.jpg"} className={styles.img_button} alt={`evaluation`}/>
+                        <h3>Evaluation Form</h3>
+                    </div>
+                </a>
+            </div>
+            {/* <Book /> */}
+            {/* icon-evaluation.jpg */}
+            {/* https://forms.gle/bpqw2icT1FRsn7Lk8 */}
+            {/* <button onClick={OpenCSChat}>Live CS</button> */}
             {/* <a id="mibew-agent-button" href="http://conference.cintec.cuhk.edu.hk/mibew/index.php/chat?locale=en" target="_blank" onClick={runFunction()}>
                 <img src="http://conference.cintec.cuhk.edu.hk/mibew/index.php/b?i=simple&amp;lang=en" border="0" alt="" />
             </a> */}

@@ -64,13 +64,13 @@ let eventList = [
     },
     {
         name:`ZOOM Webinar Rehearsal - On-site`,
-        zoomURL:"https://cuhk.zoom.us/j/98163565145",
+        zoomURL:"https://cuhk.zoom.us/j/91890928056",
         description: [
             "This is for Committee testing the ZOOM Webinar connectivity after the Live Broadcast site setup.\nby Professor ABC",
             "This is for Event 2.\nby Professor DEF"
         ],
         replayURL:"",
-        startTime: new Date('October 30, 2020 10:30:00 GMT+8:00'),
+        startTime: new Date('October 30, 2020 09:00:00 GMT+8:00'),
         endTime:    new Date('October 30, 2020 12:30:00 GMT+8:00'),
     },
 
