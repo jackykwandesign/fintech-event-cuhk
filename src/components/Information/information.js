@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../../contexts/firebaseContext/firebaseContext';
-import Book from './book';
 import styles from './information.module.css'
 export function Information(props) {
     // const [isInit, setIsInit] = useState(false)
@@ -43,7 +42,7 @@ export function Information(props) {
               </div>
             </Link> */}
             <div className={styles.iconContainer}>
-                <a href="/files/info-booklet-2.pdf" target="_blank" rel="noreferrer noopener">
+                <a href="/files/booklet_compressed.pdf" target="_blank" rel="noreferrer noopener">
                     <div className={styles.img_container}>
                         <img src={"/images/booklet/2020 conference booklet (28Oct)-01.jpg"} className={styles.img_button} alt={`booklet`}/>
                         <h3>Info Booklet</h3>
