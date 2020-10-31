@@ -27,7 +27,7 @@ export interface DemoData {
     websiteURL: string;
     poster: string;
     posterBig: string;
-    youtubeURL: string;
+    youtubeURL: string[];
     zoomURL: string;
     startTime?: Date;
     endTime?: Date;
@@ -167,11 +167,20 @@ export function Democard({
                 }
                 {
                     demoData.youtubeURL && 
-                    <div className={styles.demoButton}>
-                    <Button size="small" variant="contained" color="primary" href={demoData.youtubeURL} target="_black" rel="noopener noreferrer">
-                        Demo Video in Youtube
-                    </Button>
-                    </div>
+                    <>
+                        {
+                            demoData.youtubeURL.map((url, index)=>{
+                                return(
+                                    <div className={styles.demoButton}>
+                                    <Button size="small" variant="contained" color="primary" href={url} target="_black" rel="noopener noreferrer">
+                                        Demo Video in Youtube
+                                    </Button>
+                                    </div>
+                                )
+                            })
+                        }
+                    </>
+
                 }
 
                 {

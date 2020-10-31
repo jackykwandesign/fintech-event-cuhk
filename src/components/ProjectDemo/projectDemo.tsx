@@ -46,8 +46,14 @@ export const DemoList: DemoData[] = [
         websiteURL:"https://www.fintecubator.com/",
         poster:"/images/demo/poster/poster-gp1.jpg",
         posterBig:"/images/demo/poster/poster-gp1-big.jpg",
-        youtubeURL:"",
-        zoomURL:"",
+        youtubeURL:[
+            "https://www.youtube.com/embed/x672BdFLpPs",
+            "https://www.youtube.com/embed/qAH5UHnMogo",
+            "https://www.youtube.com/embed/ybKotdaGPqY"
+        ],
+        zoomURL:"https://cuhk.zoom.us/j/98624070471",
+        startTime: new Date('November 2, 2020 15:40:00 GMT+8:00'),
+        endTime: new Date('November 2, 2020 15:55:00 GMT+8:00'),
     },
     {
         group:2,
@@ -62,8 +68,12 @@ export const DemoList: DemoData[] = [
         websiteURL:"https://www.fintecubator.com/",
         poster:"/images/demo/poster/poster-gp2.jpg",
         posterBig:"/images/demo/poster/poster-gp2-big.jpg",
-        youtubeURL:"https://www.youtube.com/embed/RB-IzbVamHY",
-        zoomURL:"",
+        youtubeURL:[
+            "https://www.youtube.com/embed/RB-IzbVamHY"
+        ],
+        zoomURL:"https://cuhk.zoom.us/j/95589246385",
+        startTime: new Date('November 2, 2020 14:15:00 GMT+8:00'),
+        endTime: new Date('November 2, 2020 14:30:00 GMT+8:00'),
     },
     {
         group:3,
@@ -89,8 +99,12 @@ export const DemoList: DemoData[] = [
         websiteURL:"https://Simnectz.com",
         poster:"/images/demo/poster/poster-gp3.jpg",
         posterBig:"/images/demo/poster/poster-gp3-big.jpg",
-        youtubeURL:"",
-        zoomURL:"",
+        youtubeURL:[
+            "https://www.youtube.com/embed/U6RZpIxPkFw"
+        ],
+        zoomURL:"https://cuhk.zoom.us/j/96693639770",
+        startTime: new Date('November 2, 2020 14:15:00 GMT+8:00'),
+        endTime: new Date('November 2, 2020 14:30:00 GMT+8:00'),
     },
     {
         group:4,
@@ -106,8 +120,12 @@ export const DemoList: DemoData[] = [
         websiteURL:"",
         poster:"/images/demo/poster/poster-gp4.jpg",
         posterBig:"/images/demo/poster/poster-gp4-big.jpg",
-        youtubeURL:"https://www.youtube.com/embed/b7qOwYioxnI",
-        zoomURL:"",
+        youtubeURL:[
+            "https://www.youtube.com/embed/b7qOwYioxnI"
+        ],
+        zoomURL:"https://cuhk.zoom.us/j/93346375396",
+        startTime: new Date('November 2, 2020 11:15:00 GMT+8:00'),
+        endTime: new Date('November 2, 2020 11:30:00 GMT+8:00'),
     },
 
     {
@@ -124,8 +142,12 @@ export const DemoList: DemoData[] = [
         websiteURL:"https://www.linkedin.com/feed/update/urn:li:activity:6724167761792266241",
         poster:"/images/demo/poster/poster-gp5.jpg",
         posterBig:"/images/demo/poster/poster-gp5-big.jpg",
-        youtubeURL:"",
-        zoomURL:"",
+        youtubeURL:[
+            "https://www.youtube.com/embed/cQkNsFdCVQQ"
+        ],
+        zoomURL:"https://cuhk.zoom.us/j/99515183510",
+        startTime: new Date('November 2, 2020 11:15:00 GMT+8:00'),
+        endTime: new Date('November 2, 2020 11:30:00 GMT+8:00'),
     },
 ]
 

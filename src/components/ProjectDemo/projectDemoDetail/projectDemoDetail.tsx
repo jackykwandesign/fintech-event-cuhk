@@ -158,16 +158,24 @@ const Projectdemodetail = (prop:any) => {
                         
                         {
                             currentDemo?.youtubeURL ? 
-                            
-                                <iframe 
-                                    width="200" 
-                                    height="200" 
-                                    src={currentDemo?.youtubeURL}
-                                    frameBorder={0}
-                                    allow={"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"}
-                                    allowFullScreen={true}
-                                    
-                                />
+                                currentDemo?.youtubeURL.map((url, urlIndex)=>{
+                                    return (
+                                        <>
+                                        <iframe 
+                                            width="200" 
+                                            height="200" 
+                                            src={url}
+                                            frameBorder={0}
+                                            allow={"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"}
+                                            allowFullScreen={true}
+                                        />
+                                        {
+                                            (currentDemo.youtubeURL.length - urlIndex !== 1) && <br/>
+                                        }
+                                        </>
+                                    )
+                                })
+
                             
                             : "N/A"}
 
