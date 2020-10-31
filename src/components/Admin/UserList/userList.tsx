@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import en_US from 'antd/lib/locale/en_US';
 import { DBUser, KYCData } from '../../../contexts/firebaseContext/firebaseContext';
 import { adminGetAllUser } from '../../../service/admin';
+import Longtext from '../../LongText';
 
 const handleKnowOfConference = (values:KYCData) =>{
         let knowOfConference = ""
@@ -52,7 +53,10 @@ const columns: ProColumns<DBUser>[] = [
       dataIndex: 'email',
       sorter: (a:DBUser, b:DBUser) => {
           return a.email.localeCompare(b.email);
-      }
+      },
+      render: (text, row, index, action) => {
+        return <Longtext text={text as string}/>
+      },
     },
     {
       title: 'FinishInfo',
@@ -163,7 +167,10 @@ const columns: ProColumns<DBUser>[] = [
           return -1
         }
         return a.kycData.contactEmail.localeCompare(b.kycData.contactEmail);
-      }
+      },
+      render: (text, row, index, action) => {
+        return <Longtext text={text as string}/>
+      },
     },
     {
       title: 'ContactNumber',

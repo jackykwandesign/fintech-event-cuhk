@@ -1,0 +1,18 @@
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    width: 200px;
+  }
+  .descriptionAll {
+    word-wrap: break-word;
+    display: inline-block;
+    width: 200px;
+  }
+  .showAllButton {
+    overflow: hidden;
+    display: inline-block;
+  
+    margin-left: 20px;
+  }
