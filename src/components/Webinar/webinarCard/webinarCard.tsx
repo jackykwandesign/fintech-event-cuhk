@@ -13,10 +13,12 @@ import styles from './webinarCard.module.css'
 import moment from 'moment';
 import { AppContext } from '../../../contexts/firebaseContext/firebaseContext';
 export interface WebinarInfo{
+    id:string;
     name: string; 
     description: string[];
     zoomURL: string; 
     replayURL: string; 
+    replayPassword: string;
     startTime: Date; 
     endTime: Date;
     // status:string ;
@@ -133,9 +135,12 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
             {
                 !replay ? 
                     isSignin ? 
-                    <Button size="small" variant="contained" color="primary" href={webinarInfo.zoomURL} target="_black" rel="noopener noreferrer">
-                        Enter Webinar
-                    </Button>
+                    <>
+                        <Button size="small" variant="contained" color="primary" href={webinarInfo.zoomURL} target="_black" rel="noopener noreferrer">
+                            Enter Webinar
+                        </Button>
+                        {/* <Typography>Replay Password: {webinarInfo.replayPassword}</Typography> */}
+                    </>
                     :
                     <Button size="small" variant="contained" color="primary" href="/register">
                         Login in to Enter Webinar
@@ -143,9 +148,12 @@ export const WebinarCard = ({webinarInfo, replay, currentTime}:{webinarInfo:Webi
                 :
                 webinarInfo.replayURL ? 
                     isSignin ? 
-                        <Button size="small" variant="contained" color="secondary" href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
-                            Replay
-                        </Button>
+                        <>
+                            <Button size="small" variant="contained" color="secondary" href={webinarInfo.replayURL} target="_black" rel="noopener noreferrer">
+                                Replay
+                            </Button>
+                            <Typography>Replay Password: {webinarInfo.replayPassword}</Typography>
+                        </>
                         :
                         <Button size="small" variant="contained" color="secondary" href="/register">
                             Login in to watch Replay

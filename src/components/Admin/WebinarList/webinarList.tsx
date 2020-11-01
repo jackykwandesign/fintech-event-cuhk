@@ -7,47 +7,85 @@ import { DBUser, KYCData } from '../../../contexts/firebaseContext/firebaseConte
 import { adminGetAllUser } from '../../../service/admin';
 import { WebinarInfo } from '../../Webinar/webinarCard/webinarCard';
 import { WebinarList } from '../../Webinar/webinar';
-import { getAllWebinar } from '../../../service/webinar';
+import { getAllWebinar, updateWebinarDetail } from '../../../service/webinar';
 import moment from 'moment';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import TextField from '@material-ui/core/TextField';
+import DialogContent from '@material-ui/core/DialogContent';
+import { Controller, useForm} from "react-hook-form";
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // name: string; 
 // description: string[];
 // zoomURL: string; 
 // replayURL: string; 
 // startTime: Date; 
 // endTime: Date;
-const columns: ProColumns<WebinarInfo>[] = [
-  {
-      title: 'Name',
-      dataIndex: 'name',
-      sorter: (a:WebinarInfo, b:WebinarInfo) => {
-          return a.name.localeCompare(b.name);
-      }
-  },
-  // {
-  //   title: 'Description',
-  //   dataIndex: 'description',
-  // },
-  {
-    title: 'ZoomURL',
-    dataIndex: 'zoomURL',
-  },
-  {
-    title: 'ReplayURL',
-    dataIndex: 'replayURL',
-  },
-  {
-    title: 'StartTime',
-    dataIndex: 'startTime',
-    valueType: 'date',
-  },
-  {
-    title: 'EndTime',
-    dataIndex: 'endTime',
-    valueType: 'date',
-  },
 
-]
+
+interface FillInforField {
+  replayURL: string;
+  zoomURL: string;
+  replayPassword: string;
+}
+
 const ParticipantDetail = (props:any) =>{
+  const columns: ProColumns<WebinarInfo>[] = [
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        sorter: (a:WebinarInfo, b:WebinarInfo) => {
+            return a.name.localeCompare(b.name);
+        }
+    },
+    {
+      title: 'ZoomURL',
+      dataIndex: 'zoomURL',
+    },
+    {
+      title: 'ReplayURL',
+      dataIndex: 'replayURL',
+    },
+    {
+      title: 'ReplayPassword',
+      dataIndex: 'replayPassword',
+    },
+    {
+      title: 'StartTime',
+      dataIndex: 'startTime',
+      render: (text, row, index, action) => {
+        return(
+          moment(text as string).format("YYYY-MM-DD hh:m A")
+        )
+      }
+    },
+    {
+      title: 'EndTime',
+      dataIndex: 'endTime',
+      render: (text, row, index, action) => {
+        return(
+          moment(text as string).format("YYYY-MM-DD hh:m A")
+        )
+      }
+    },
+    {
+      title:"Update Webinar",
+      dataIndex:'id',
+      render: (text, row, index, action) => {
+          return(
+              // <a onClick={()=>mailToFunction(text as string)} target="_blank" rel="noopener noreferrer">Send Email</a>
+              <Button variant="outlined" color="primary" onClick={() => handleClickOpen(text as string)}>
+                  Update Webinar
+              </Button>
+              // <a  href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">Send Email</a>
+          )
+      }
+    }
+  
+  ]
     const [webinarList, setWebinarList] = useState<WebinarInfo[]>([])
     
     const getDataAsync = async() =>{
@@ -62,19 +100,77 @@ const ParticipantDetail = (props:any) =>{
           // smaller time first
           return (secondTime - firstTime)
       })
+      // console.log("webinars", webinars)
       webinars && setWebinarList(webinars)
     }
+
+    const defaultValues:FillInforField = {
+      replayURL:"",
+      zoomURL:"",
+      replayPassword: ""
+    }
+
+  const [open, setOpen] = React.useState(false);
+  const [isSending, setIsSening] = React.useState(false);
+  const { register, handleSubmit, watch, setValue, control  } = useForm({defaultValues});
+  const [currentWebinar, setCurrentWebinar] = useState<WebinarInfo | undefined>(undefined)
+  const handleClickOpen = (id:string) => {
+      // setReceiverEmail(email)
+    setOpen(true);
+    setTimeout(()=>{
+      let index = webinarList.findIndex(e=>e.id === id)
+      if(index !== -1){
+        setCurrentWebinar(webinarList[index])
+        // console.log("currentWebinar", webinarList[index])
+        setValue('zoomURL', webinarList[index].zoomURL, { shouldDirty: true })
+        setValue('replayURL', webinarList[index].replayURL, { shouldDirty: true })
+        setValue('replayPassword', webinarList[index].replayPassword, { shouldDirty: true })
+  
+        let zoomURL = watch("zoomURL")
+        let replayURL = watch("replayURL")
+        let replayPassword = watch("replayPassword")
+  
+        // console.log("zoomURL", zoomURL)
+        // console.log("replayURL", replayURL)
+        // console.log("replayPassword", replayPassword)
+      }
+    },200)
+    // console.log("webinarID", id)
+
+    
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+  const updateWebinar = async() =>{
+      let zoomURL = watch("zoomURL")
+      let replayURL = watch("replayURL")
+      let replayPassword = watch("replayPassword")
+      // console.log("message", message)
+      setIsSening(true)
+      currentWebinar && await updateWebinarDetail(currentWebinar?.id as string, zoomURL as string, replayURL as string, replayPassword as string)
+      // let res = await updateWebinarToParticipant(message as string, email)
+      setIsSening(false)
+      handleClose()
+      getDataAsync()
+  }
 
     useEffect(()=>{
         getDataAsync()
     },[])
+
+  //   useEffect(()=>{
+  //     console.log("zoomURL", watch("zoomURL"))
+  // },[watch("zoomURL")])
 
     
     return (
         <div >
           <IntlProvider value={{ intl: enUSIntl}}>
               <ProTable<WebinarInfo> 
-                  rowKey="key"
+                  rowKey="id"
                   pagination={{
                       showQuickJumper: true,
                   }}
@@ -86,6 +182,81 @@ const ParticipantDetail = (props:any) =>{
                   toolBarRender={false}
               />
           </IntlProvider>
+          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Send Message</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    To update zoomURL, please enter your zoomURL here. To update replayURL, please enter your replayURL and replayPassword here.
+                </DialogContentText>
+                <Controller as={
+                  <TextField
+                    fullWidth
+                    label="ZoomURL"
+                    // inputProps={{ name: "zoomURL", id: "outlined-age-simple" }}
+                  />
+                } control={control} name='zoomURL' />
+
+                <Controller as={
+                  <TextField
+                    fullWidth
+                    label="ReplayURL"
+                    // inputProps={{ name: "replayURL", id: "outlined-age-simple" }}
+                  />
+                } control={control} name='replayURL' />
+
+                <Controller as={
+                  <TextField
+                    fullWidth
+                    label="ReplayPassword"
+                    // inputProps={{ name: "replayPassword", id: "outlined-age-simple" }}
+                  />
+                } control={control} name='replayPassword' />
+                {/* <TextField
+                    variant="outlined"
+                    // required
+                    fullWidth
+                    id="zoomURL"
+                    label="zoomURL"
+                    name="zoomURL"
+                    inputRef={register()}
+                /> */}
+                {/* <TextField
+                    fullWidth
+                    id="replayURL"
+                    label="replayURL"
+                    name="replayURL"
+                    inputRef={register()}
+                />
+                <TextField
+                    fullWidth
+                    id="replayPassword"
+                    label="replayPassword"
+                    name="replayPassword"
+                    inputRef={register()}
+                /> */}
+                {/* <TextField
+                    autoFocus
+                    margin="dense"
+                    id="message"
+                    label="Message"
+                    // type="email"
+                    fullWidth
+                /> */}
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Cancel
+                </Button>
+                {
+                    isSending ? 
+                    <CircularProgress size={30}/> : 
+                    <Button onClick={() => updateWebinar()} color="primary">
+                        Send
+                    </Button>
+                }
+
+                </DialogActions>
+            </Dialog>
         </div>
 
     )

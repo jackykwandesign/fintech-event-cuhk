@@ -12,3 +12,18 @@ export const getAllWebinar = async() =>{
     }
 }
 
+export const updateWebinarDetail = async(id:string, zoomURL:string, replayURL:string, replayPassword:string,) =>{
+    try {
+
+
+        const res = await ConfigAxio.patch('/api/webinar/updateWebinar',{
+            id,
+            zoomURL,
+            replayURL,
+            replayPassword,
+        })
+        return res
+    } catch (error) {
+        return undefined
+    }
+}
