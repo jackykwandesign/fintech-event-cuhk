@@ -278,7 +278,7 @@ const Webinar = (props:any)=>{
                 <h1>Upcoming Webinar</h1>
                 </div> */}
                  <h1>Upcoming Webinar</h1>
-                <button onClick = {addLiveEvent}>Add Live Event</button>
+                {/* <button onClick = {addLiveEvent}>Add Live Event</button> */}
                 {/* <button onClick = {initWebinar}>Add test Event</button> */}
                 {
                     webinarList && webinarList?.map((event, index)=>{
