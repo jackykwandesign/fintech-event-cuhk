@@ -26,6 +26,7 @@ import ProjectDemoDetail from "../ProjectDemo/projectDemoDetail/projectDemoDetai
 import { initChat, toogleChat } from "./test";
 import ParticipantDetail from "../MeetOtherParticipant/participantDetail";
 import { Chatroom } from "../Chatroom/chatroom";
+import { updateLastLoginTime } from "../../service/participant";
 // import { FillinfoResult } from "../FillInfo/fillInfo-result";
 
 const WithContextApp =() =>{
@@ -45,12 +46,13 @@ function App() {
   const { setCurrentGlobalUser, setSignin, isSignin, currentGlobalUser} = useContext(AppContext)
   const [oldLink, setOldLink] = useState<string>("")
   const [startChat, setStartChat] = useState<boolean>(false)
+  const [firstTime, setFirstTime]= useState<boolean>(true)
   useEffect(()=>{
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(
       
       async(user) => {
         setOldLink(window.location.pathname)
-        console.log("oldLink", oldLink)
+        // console.log("oldLink", oldLink)
         if(user){
           
           user.getIdToken(/* forceRefresh */ true)
@@ -95,6 +97,28 @@ function App() {
     // startChat && !isSignin && toogleChat()
     
   },[isSignin])
+
+  const updateLoginTime = async()=>{
+    const intervalId = setInterval(async () => { 
+      const res = await updateLastLoginTime()
+    },5000)
+    
+  }
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      await updateLastLoginTime()
+      console.log("update per 600 sec")
+    }, 600000);
+    return () => clearInterval(interval);
+  }, []);
+  // useEffect(()=>{
+  //   console.log("per 5 sec")
+  //   const intervalId = setInterval(async () => { 
+  //     // const res = await updateLastLoginTime()
+  //     console.log("per 5 sec")
+  //   },5000)
+  //   return clearInterval(intervalId);
+  // },[])
 return (
 <div className="app-container">
 

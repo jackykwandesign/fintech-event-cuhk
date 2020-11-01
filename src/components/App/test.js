@@ -1,7 +1,7 @@
 export function initChat(name,email){
-    console.log("init chat start")
-    window["updateChatInfo"](name, email);
-    console.log("init chat end")
+    // console.log("init chat start")
+    // window["updateChatInfo"](name, email);
+    // console.log("init chat end")
     // var Tawk_API=Tawk_API||{};
     // Tawk_API.setAttributes({
     //     'name' : 'visitor',

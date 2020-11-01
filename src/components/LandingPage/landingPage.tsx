@@ -33,7 +33,7 @@ const LandingPage = () =>{
   const {isSignin} = useContext(AppContext)
   const history = useHistory()
   const { height, width } = useWindowDimensions();
-  console.log(`height: ${height}, width: ${width}`)
+  // console.log(`height: ${height}, width: ${width}`)
   return (
     
     <div className={styles.hero_container}>

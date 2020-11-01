@@ -204,7 +204,7 @@ const columns: ProColumns<DBUser>[] = [
       title: 'KnowOfConference',
       dataIndex: ['kycData','knowOfConference'],
       render: (text, row, index, action) => {
-        console.log("row", row)
+        // console.log("row", row)
         return(
           (row as DBUser).finishInfo ? handleKnowOfConference((row as DBUser).kycData) : "N/A"
 
@@ -215,7 +215,7 @@ const columns: ProColumns<DBUser>[] = [
       title: 'Interest',
       dataIndex: ['kycData','interest'],
       render: (text, row, index, action) => {
-        console.log("row", row)
+        // console.log("row", row)
         return(
           (row as DBUser).finishInfo ? handleInterest((row as DBUser).kycData) : "N/A"
 

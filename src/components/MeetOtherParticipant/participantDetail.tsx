@@ -1,104 +1,97 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Tooltip } from 'antd';
 import { DownOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ProTable, { IntlProvider, ProColumns, enUSIntl  } from '@ant-design/pro-table';
 import { DBUser } from '../../contexts/firebaseContext/firebaseContext';
-import { getAllShareParticipant } from '../../service/participant';
+import { getAllShareParticipant, sendMessageToParticipant } from '../../service/participant';
 import styles from './participantDetail.module.css'
 import Typography from '@material-ui/core/Typography'
 import 'antd/dist/antd.css';
 import en_US from 'antd/lib/locale/en_US';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Button from '@material-ui/core/Button';
+import { Controller, useForm } from "react-hook-form";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Link } from 'react-router-dom';
 
-// const enLocale = {
-//     tableFrom: {
-//       search: 'Query',
-//       reset: 'Reset',
-//       submit: 'Submit',
-//       collapsed: 'Expand',
-//       expand: 'Collapse',
-//       inputPlaceholder: 'Please enter',
-//       selectPlaceholder: 'Please select',
-//     },
-//     alert: {
-//       clear: 'Clear',
-//     },
-//     tableToolBar: {
-//       leftPin: 'Pin to left',
-//       rightPin: 'Pin to right',
-//       noPin: 'Unpinned',
-//       leftFixedTitle: 'Fixed the left',
-//       rightFixedTitle: 'Fixed the right',
-//       noFixedTitle: 'Not Fixed',
-//       reset: 'Reset',
-//       columnDisplay: 'Column Display',
-//       columnSetting: 'Settings',
-//       fullScreen: 'Full Screen',
-//       exitFullScreen: 'Exit Full Screen',
-//       reload: 'Refresh',
-//       density: 'Density',
-//       densityDefault: 'Default',
-//       densityLarger: 'Larger',
-//       densityMiddle: 'Middle',
-//       densitySmall: 'Compact',
-//     },
-//   };
-//   // 生成 intl 对象
-//   const enUSIntl = createIntl('en_US', en_US);
-// function compare(first, second) {
-//     if (first.last_nom < second.last_nom)
-//         return -1;
-//     if (first.last_nom > second.last_nom)
-//       return 1;
-//    return 0;
+// const mailToFunction = (email:string)=>{
+//     window.open(`mailto:${email}`)
 // }
-const mailToFunction = (email:string)=>{
-    window.open(`mailto:${email}`)
+
+
+interface FillInforField {
+    message: string;
 }
+
 const interestParticipantList:(DBUser[])[] = [[],[],[],[],[]]
-const columns: ProColumns<DBUser>[] = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        sorter: (a:DBUser, b:DBUser) => {
-            return a.name.localeCompare(b.name);
-        }
-        // sorter: (a:DBUser, b:DBUser) => {
-        //     if(a.name < b.name){
-        //         return -1;
-        //     }
-        //     if(b.name > a.name)
-        //     {
-        //         return 1
-        //     }
-        //     return 0
-        // },
-    },
-    {
-        title: 'Job Title',
-        dataIndex: ['kycData','jobTitle'],
-        sorter: (a:DBUser, b:DBUser) => {
-            return a.kycData.jobTitle.localeCompare(b.kycData.jobTitle);
-        }
-    },
-    {
-        title: 'Organization',
-        dataIndex: ['kycData','organization'],
-        sorter: (a:DBUser, b:DBUser) => {
-            return a.kycData.organization.localeCompare(b.kycData.organization);
-        }
-    },
-    {
-        title:"Send Email",
-        dataIndex:'email',
-        render: (text, row, index, action) => {
-            return(
-                <a onClick={()=>mailToFunction(text as string)} target="_blank" rel="noopener noreferrer">Send Email</a>
-                // <a  href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">Send Email</a>
-            )
-        }
-    }
-]
+
 const ParticipantDetail = (props:any) =>{
+    const columns: ProColumns<DBUser>[] = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            sorter: (a:DBUser, b:DBUser) => {
+                return a.name.localeCompare(b.name);
+            }
+        },
+        {
+            title: 'Job Title',
+            dataIndex: ['kycData','jobTitle'],
+            sorter: (a:DBUser, b:DBUser) => {
+                return a.kycData.jobTitle.localeCompare(b.kycData.jobTitle);
+            }
+        },
+        {
+            title: 'Organization',
+            dataIndex: ['kycData','organization'],
+            sorter: (a:DBUser, b:DBUser) => {
+                return a.kycData.organization.localeCompare(b.kycData.organization);
+            }
+        },
+        {
+            title:"Send Email",
+            dataIndex:'email',
+            render: (text, row, index, action) => {
+                return(
+                    // <a onClick={()=>mailToFunction(text as string)} target="_blank" rel="noopener noreferrer">Send Email</a>
+                    <Button variant="outlined" color="primary" onClick={() => handleClickOpen(text as string)}>
+                        Message
+                    </Button>
+                    // <a  href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">Send Email</a>
+                )
+            }
+        }
+    ]
+    const [open, setOpen] = React.useState(false);
+    const [isSending, setIsSening] = React.useState(false);
+    const [receiverEmail, setReceiverEmail] = useState<string>("")
+    const defaultValues:FillInforField = {
+        message:""
+    }
+
+    const { register, handleSubmit, watch, control } = useForm({defaultValues});
+    const handleClickOpen = (email:string) => {
+        setReceiverEmail(email)
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+    
+    const sendMessage = async(email:string) =>{
+        let message = watch("message")
+        // console.log("message", message)
+        setIsSening(true)
+        let res = await sendMessageToParticipant(message as string, email)
+        setIsSening(false)
+        handleClose()
+    }
+
     const [currentInterest, setcurrentInterest] = useState<string | undefined>("Big Data Analytics")
     const [currentParticipantList, setCurrentParticipantList] = useState<DBUser[]>([])
     const interestList = ["Big Data Analytics","FinTech in the Banking/Virtual Banking","AI and Machine Learning","STO/Tokenization/Virtual Assets","Cybersecurity"]
@@ -135,15 +128,22 @@ const ParticipantDetail = (props:any) =>{
     return (
         <div >
             <table className={styles.demoDetailContainer} cellSpacing="0" cellPadding="0">
+                <tbody>
                 <tr>
                     <td valign="top" className={styles.demoMenu}>
                         <p><img src="/images/icon-chatroom.png" width="250" height="250" /></p>
+                        <div>
+                            <Typography variant="h6" >
+                                <b>List of Participants by area of Interests: </b>
+                            </Typography>
+                        </div>
+                        <br/>
                         {
                             interestList.map((interest, index)=>{
                                 return(
                                     <div onClick={()=>handleChangeInterest(index)} className={styles.demoMenuItem} key={"interest-"+index}>
                                         
-                                        <Typography variant="body1" >
+                                        <Typography variant="subtitle2" >
                                             <b>{interest}</b>
                                         </Typography>
                                         {interestList.length !== index + 1 && <br/>}
@@ -151,11 +151,18 @@ const ParticipantDetail = (props:any) =>{
                                 )
                             })
                         }
+                        <br/>
+                        <Link to="/2020fintech/chatroom">
+                            <Button size="small" variant="contained" color="primary">
+                                Chatroom
+                            </Button>
+                        </Link>
+
                     </td>
                     <td valign="top"  style={{padding:"1vw", width:"100%", minWidth:"1150px"}}>
                     <IntlProvider value={{ intl: enUSIntl}}>
                         <ProTable<DBUser> 
-                            rowKey="name"
+                            rowKey="email"
                             pagination={{
                                 showQuickJumper: true,
                             }}
@@ -183,7 +190,46 @@ const ParticipantDetail = (props:any) =>{
                     </td>
                    
                 </tr>
+                </tbody>
             </table>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Send Message</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    To send message, please enter your message here.
+                </DialogContentText>
+                <TextField
+                    // variant="outlined"
+                    required
+                    fullWidth
+                    id="message"
+                    label="Message"
+                    name="message"
+                    inputRef={register({ required: true, maxLength: 50 })}
+                />
+                {/* <TextField
+                    autoFocus
+                    margin="dense"
+                    id="message"
+                    label="Message"
+                    // type="email"
+                    fullWidth
+                /> */}
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Cancel
+                </Button>
+                {
+                    isSending ? 
+                    <CircularProgress size={30}/> : 
+                    <Button onClick={() => sendMessage(receiverEmail)} color="primary">
+                        Send
+                    </Button>
+                }
+
+                </DialogActions>
+            </Dialog>
         </div>
 
     )
